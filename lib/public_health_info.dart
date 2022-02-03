@@ -8,7 +8,7 @@ import 'start.dart';
 import 'theme/theme.dart';
 
 class PublicHealthInfo extends StatelessWidget {
-  const PublicHealthInfo({Key? key}) : super(key: key);
+  const PublicHealthInfo({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,13 +16,40 @@ class PublicHealthInfo extends StatelessWidget {
       designSize: const Size(390, 844),
       builder: ()=> GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: '/',
+        initialRoute: '/',  
         initialBinding: InitBinding(),
         getPages: AppPages.routes,
-        title: 'PHI',
+        title: 'PHI',  
+        builder: (context, child) {
+          // ScreenUtil.setContext(context);
+          return MediaQuery(
+            child: child!,
+            data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+          );
+        },
         theme: AppTheme.lightThemeData,
         home: const Start(),
       ),
     );
   }
 }
+
+// class PublicHealthInfo extends StatelessWidget {
+//   const PublicHealthInfo({Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return ScreenUtilInit(
+//       designSize: const Size(390, 844),
+//       builder: ()=> GetMaterialApp(
+//         debugShowCheckedModeBanner: false,
+//         initialRoute: '/',
+//         initialBinding: InitBinding(),
+//         getPages: AppPages.routes,
+//         title: 'PHI',
+//         theme: AppTheme.lightThemeData,
+//         home: const Start(),
+//       ),
+//     );
+//   }
+// }
