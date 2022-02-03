@@ -1,60 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/route_manager.dart';
-import 'package:hem_capstone_app/routes/app_pages.dart';
+import 'package:get/get.dart';
 
 import 'binding/init_binding.dart';
+import 'routes/app_pages.dart';
+import 'screens/splash.dart';
+import 'theme/theme.dart';
 
 class PublicHealthInfo extends StatelessWidget {
   const PublicHealthInfo({Key? key}) : super(key: key);
 
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(428, 926),
-      builder: () => GetMaterialApp(
+      designSize: const Size(390, 844),
+      builder: ()=> GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        initialBinding: InitBinding(),
         initialRoute: '/',
+        initialBinding: InitBinding(),
         getPages: AppPages.routes,
-        title: 'Public Health Info',
-        // theme: AppTheme.lightThemeData,
-        home: Scaffold(
-          body: Center(
-            child: Container(
-              width: Get.width * 0.3,
-              height: Get.width * 0.3,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(20),
-                ),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: const [
-                  CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                      Color.fromARGB(255, 0, 61, 165),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  Text(
-                    'Loading',
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.black,
-                      decoration: TextDecoration.none,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
+        title: 'PHI',
+        theme: AppTheme.lightThemeData,
+        home: const SplashScreen(),
       ),
     );
   }
