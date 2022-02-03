@@ -4,13 +4,12 @@ import 'package:get/get.dart';
 
 import 'binding/init_binding.dart';
 import 'routes/app_pages.dart';
-import 'screens/splash.dart';
+import 'start.dart';
 import 'theme/theme.dart';
 
 class PublicHealthInfo extends StatelessWidget {
   const PublicHealthInfo({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -22,7 +21,7 @@ class PublicHealthInfo extends StatelessWidget {
         getPages: AppPages.routes,
         title: 'PHI',
         theme: AppTheme.lightThemeData,
-        home: const SplashScreen(),
+        home: const Start(),
       ),
     );
   }
