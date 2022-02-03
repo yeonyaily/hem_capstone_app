@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:hem_capstone_app/binding/init_binding.dart';
+import 'package:hem_capstone_app/start.dart';
 
-import '../start.dart';
 
 part 'app_routes.dart';
 
@@ -13,7 +13,7 @@ class AppPages {
   static final routes = [
     GetPage(
       name: START,
-      page: () => const StartView(),
+      page: () => const Start(),
       binding: InitBinding(),
     ),
   ];
