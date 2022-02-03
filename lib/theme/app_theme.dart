@@ -47,22 +47,22 @@ class AppTheme {
     headline1: TextStyle(
       fontFamily: 'NotoSansKR', 
       fontWeight: _bold, 
-      fontSize: 64,
+      fontSize: 64.sp,
     ),
     headline2: TextStyle(
       fontFamily: 'NotoSansKR', 
       fontWeight: _bold, 
-      fontSize: 40,
+      fontSize: 40.sp,
     ),
     headline3: TextStyle(
       fontFamily: 'NotoSansKR', 
       fontWeight: _bold, 
-      fontSize: 24,
+      fontSize: 24.sp,
     ),
     subtitle1: TextStyle(
       fontFamily: 'NotoSansKR', 
       fontWeight: _medium, 
-      fontSize: 20,
+      fontSize: 20.sp,
     ),
     subtitle2: const TextStyle(
       fontFamily: 'NotoSansKR', 
@@ -72,22 +72,22 @@ class AppTheme {
     bodyText1: TextStyle(
       fontFamily: 'NotoSansKR', 
       fontWeight: _medium, 
-      fontSize: 16,
+      fontSize: 16.sp,
     ),
     bodyText2: TextStyle(
       fontFamily: 'NotoSansKR', 
       fontWeight: _medium, 
-      fontSize: 14,
+      fontSize: 14.sp,
     ),
     caption: TextStyle(
       fontFamily: 'NotoSansKR',
       fontWeight: _medium,
-      fontSize: 12,
+      fontSize: 12.sp,
     ),
     button: TextStyle(
       fontFamily: 'NotoSansKR', 
       fontWeight: _bold, 
-      fontSize: 16,
+      fontSize: 16.sp,
     ),
   );
 

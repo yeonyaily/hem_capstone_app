@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:hem_capstone_app/constant/constant.dart';
-import 'package:hem_capstone_app/routes/app_pages.dart';
+
 
 class AuthController extends GetxController {
   static AuthController get to => Get.find();
@@ -14,7 +14,7 @@ class AuthController extends GetxController {
   void onInit() {
     _user = Rxn<User?>(auth.currentUser);
     _user.bindStream(auth.userChanges());
-    ever(_user, (_) => Get.toNamed(Routes.START));
+    // ever(_user, (_) => Get.toNamed(Routes.START));
     super.onInit();
   }
 }
