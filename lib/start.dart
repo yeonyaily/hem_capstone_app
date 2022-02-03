@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hem_capstone_app/constant/constant.dart';
 
 class Start extends StatelessWidget {
   const Start({ Key? key }) : super(key: key);
@@ -22,13 +23,13 @@ class Start extends StatelessWidget {
                       SvgPicture.asset(
                         'assets/logo/logo.svg',
                         // color: theme.colorScheme.primary,
-                        height: 232,
-                        width: 232,
+                        height: 232.w,
+                        width: 232.w,
                       ),
                       Text(
                         '당신의 하나뿐인\n약 알림메이트',
                         style: theme.textTheme.headline2!.copyWith(
-                          fontSize: 36,
+                          fontSize: 36.sp,
                         ),
                         textAlign: TextAlign.center,
                       )
@@ -55,9 +56,7 @@ class Start extends StatelessWidget {
                         ),                  
                       ),
                     ),
-                    SizedBox(
-                      height: 16,
-                    ),
+                    space(height: 16.h),
                     SizedBox(
                       width: double.infinity,
                       height: 54,
@@ -73,9 +72,7 @@ class Start extends StatelessWidget {
                         ),                  
                       ),
                     ),
-                    SizedBox(
-                      height: 24,
-                    ),
+                    space(height: 24.h),
                   ],
                 ),
               )
