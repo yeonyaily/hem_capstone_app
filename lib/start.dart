@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:hem_capstone_app/constant/constant.dart';
+import 'package:get/get.dart';
+
+import 'constant/constant.dart';
+import 'routes/app_pages.dart';
 
 class Start extends StatelessWidget {
-  const Start({ Key? key }) : super(key: key);
+  const Start({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,14 +49,15 @@ class Start extends StatelessWidget {
                       height: 54,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          )
-                        ),
-                        onPressed: ()=> null,
+                            shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        )),
+                        onPressed: () {
+                          Get.toNamed(Routes.DASHBOARD);
+                        },
                         child: const Text(
                           '시작하기',
-                        ),                  
+                        ),
                       ),
                     ),
                     space(height: 16.h),
@@ -62,14 +66,13 @@ class Start extends StatelessWidget {
                       height: 54,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          )
-                        ),
-                        onPressed: ()=> null,
+                            shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        )),
+                        onPressed: () => null,
                         child: const Text(
                           '테스트모드',
-                        ),                  
+                        ),
                       ),
                     ),
                     space(height: 24.h),
@@ -79,7 +82,7 @@ class Start extends StatelessWidget {
             ],
           ),
         ),
-      )
+      ),
     );
   }
 }
