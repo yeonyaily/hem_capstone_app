@@ -77,7 +77,7 @@ class DashBoard extends GetView<NavigationController> {
                                     ? Colors.black
                                     : Color(0xff898a8d),
                                 fontFamily: 'Roboto',
-                                fontWeight: FontWeight.w500,
+                                fontWeight: FontWeight.bold,
                                 fontSize: 12,
                               ),
                             )

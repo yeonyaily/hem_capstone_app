@@ -10,19 +10,19 @@ class NavigationController extends GetxController {
       'text': '홈',
     },
     {
-      'icon': Icons.grid_view,
+      'icon': Icons.history,
       'text': '진료 내역',
     },
     {
-      'icon': Icons.settings_rounded,
+      'icon': Icons.medical_services_outlined,
       'text': '약먹자',
     },
     {
-      'icon': Icons.home_rounded,
+      'icon': Icons.checklist,
       'text': '건강검진',
     },
     {
-      'icon': Icons.home_rounded,
+      'icon': Icons.person,
       'text': '마이페이지',
     },
   ];
