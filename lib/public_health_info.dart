@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:hem_capstone_app/screens/splash.dart';
 
 import 'binding/init_binding.dart';
 import 'routes/app_pages.dart';
-import 'start.dart';
 import 'theme/theme.dart';
 
 class PublicHealthInfo extends StatelessWidget {
@@ -28,7 +28,7 @@ class PublicHealthInfo extends StatelessWidget {
           );
         },
         theme: AppTheme.lightThemeData,
-        home: const Start(),
+        home: const SplashScreen(),
       ),
     );
   }
