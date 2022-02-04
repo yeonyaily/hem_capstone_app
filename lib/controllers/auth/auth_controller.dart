@@ -95,7 +95,8 @@ class AuthController extends GetxController {
   Future<UserCredential> signInWithPhoneNumber() async {
     PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.credential(
       verificationId: signup.verificationId!,
-      smsCode: signup.phoneAuthNumberController.text);
+      smsCode: signup.phoneAuthNumberController.text
+    );
     final userCredential = await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
     try {
       if (userCredential.user != null) {
@@ -106,9 +107,9 @@ class AuthController extends GetxController {
     } on FirebaseAuthException catch (e) {
       signup.isLoading.value = false;
       print('인증실패..\n${e.code}');
-      Get.defaultDialog(
-        content: Text('인증 실패'),
-        textConfirm: "확인",
+      CustomDialog.showDialog(
+        title: '인증실패',
+        content: '올바른 인증번호를 입력해주새요.',
       );
     }
     return userCredential;
