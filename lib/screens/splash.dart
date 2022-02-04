@@ -20,10 +20,10 @@ class SplashScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: const [
+            children: [
               CircularProgressIndicator(
                 valueColor: AlwaysStoppedAnimation<Color>(
-                  Color.fromARGB(255, 0, 61, 165),
+                  Theme.of(context).primaryColor,
                 ),
               ),
               SizedBox(height: 16),
