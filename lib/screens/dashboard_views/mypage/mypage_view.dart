@@ -20,6 +20,7 @@ class MypageView extends StatelessWidget {
       ),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               UserUtil.getUser()!.phoneNumber!,
@@ -32,7 +33,7 @@ class MypageView extends StatelessWidget {
                 title: '테스팅',
                 content: '테스트입니다.',
               ),
-              child: const Text('테스트모드'),
+              child: const Text('테스트 커스텀 다이얼로그'),
             ),
           ],
         ),
