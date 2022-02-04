@@ -46,9 +46,11 @@ class AuthController extends GetxController {
           uid: uid, 
           phoneNumber: auth.currentUser!.phoneNumber
         );
-        firebase.collection('user').doc(uid).set(
+        _userCollection.doc(uid).set(
           userModel!.toMap()
-        );
+        )
+        .then((value) => print('Set User'))
+        .catchError((e)=> print(e));
       }
       UserUtil.setUser(userModel!);
     } else {
