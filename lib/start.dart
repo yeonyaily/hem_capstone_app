@@ -49,12 +49,11 @@ class Start extends StatelessWidget {
                       height: 54,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        )),
-                        onPressed: () {
-                          Get.toNamed(Routes.DASHBOARD);
-                        },
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          )
+                        ),
+                        onPressed: ()=> Get.toNamed(Routes.SIGNUP),
                         child: const Text(
                           '시작하기',
                         ),
@@ -69,7 +68,7 @@ class Start extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         )),
-                        onPressed: () => null,
+                        onPressed: () => Get.toNamed(Routes.DASHBOARD),
                         child: const Text(
                           '테스트모드',
                         ),
