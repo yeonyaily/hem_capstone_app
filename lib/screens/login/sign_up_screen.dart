@@ -4,7 +4,10 @@ import 'package:get/get.dart';
 import 'package:hem_capstone_app/constant/constant.dart';
 import 'package:hem_capstone_app/controllers/auth/auth_controller.dart';
 import 'package:hem_capstone_app/controllers/signup/signup_controller.dart';
+import 'package:hem_capstone_app/controllers/widgets/timer_controller.dart';
+import 'package:hem_capstone_app/routes/app_pages.dart';
 import 'package:hem_capstone_app/theme/theme.dart';
+import 'package:hem_capstone_app/widgets/custom/custom_snack_bar/custom_snack_bar.dart';
 
 class SignUpScreen extends GetView<SignUpController> {
   const SignUpScreen({ Key? key }) : super(key: key);
@@ -158,6 +161,17 @@ class SignUpScreen extends GetView<SignUpController> {
                                         color: basicBlack,
                                       ),
                                     ),
+                                    suffix: TimerController.to.isTimeOut.value 
+                                      ? Text(
+                                          '시간초과',
+                                          style: theme.textTheme.caption!.copyWith(
+                                            color: theme.errorColor,
+                                          ),
+                                        )
+                                      : Text(
+                                        '${TimerController.to.sec.value} : ' + '${TimerController.to.time % 60}'.padLeft(2, '0'),
+                                        style: theme.textTheme.caption!
+                                      ),
                                   ),
                                   onChanged: (value) {
                                     if (value.length == 6) {
@@ -186,7 +200,15 @@ class SignUpScreen extends GetView<SignUpController> {
                                     ),
                                     SizedBox(width: 10,),
                                     GestureDetector(
-                                      onTap: ()=> _signInwithPhoneNumber(),
+                                      onTap: (){
+                                        TimerController.to.reset();
+                                        CustomSnackBar.showSnackBar(
+                                          title: '알림',
+                                          message: '인증번호를 재전송하였습니다.',
+                                          backgroundColor: Color(0xffDBDBDB),                                          
+                                        );
+                                        _requestAuthNumber(context);
+                                      },
                                       child: Text(
                                         '재전송',
                                         style: theme.textTheme.caption!.copyWith(
@@ -204,7 +226,7 @@ class SignUpScreen extends GetView<SignUpController> {
                       space(height: 32),
                       Center(
                         child: GestureDetector(
-                          onTap: ()=> print('도움'),
+                          onTap: ()=> Get.toNamed(Routes.HELP),
                           child: Text(
                             '도움이 필요하신가요?',
                             style: theme.textTheme.caption,
