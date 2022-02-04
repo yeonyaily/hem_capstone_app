@@ -1,12 +1,22 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:hem_capstone_app/constant/constant.dart';
+import 'package:hem_capstone_app/controllers/signup/signup_controller.dart';
+import 'package:hem_capstone_app/models/user_model.dart';
+import 'package:hem_capstone_app/repository/auth_repository.dart';
+import 'package:hem_capstone_app/routes/app_pages.dart';
+import 'package:hem_capstone_app/utils/user/user_util.dart';
+import 'package:flutter/material.dart';
+import 'package:hem_capstone_app/widgets/custom/custom_dialog/custom_dialog.dart';
 
 
 class AuthController extends GetxController {
   static AuthController get to => Get.find();
 
   final _userCollection = firebase.collection('users');
+  final signup = SignUpController.to;
+
+  UserModel? userModel;
 
   late Rxn<User?> _user;
 
@@ -14,7 +24,97 @@ class AuthController extends GetxController {
   void onInit() {
     _user = Rxn<User?>(auth.currentUser);
     _user.bindStream(auth.userChanges());
-    // ever(_user, (_) => Get.toNamed(Routes.START));
+    ever(_user, _setInitialView);
     super.onInit();
+  }
+
+  _setInitialView(User? user) async {
+
+    await getUserInfo();
+
+    user == null 
+      ? Get.offAllNamed(Routes.START)
+      : Get.offAllNamed(Routes.DASHBOARD);
+  }
+
+  Future<void> getUserInfo() async {
+    if(auth.currentUser != null){
+      var uid = auth.currentUser!.uid;
+      userModel = await AuthRepositroy().findUserByUid(uid);
+      if(userModel == null){
+        userModel = UserModel(
+          uid: uid, 
+          phoneNumber: auth.currentUser!.phoneNumber
+        );
+        firebase.collection('user').doc(uid).set(
+          userModel!.toMap()
+        );
+      }
+      UserUtil.setUser(userModel!);
+    } else {
+      return;
+    }
+  }
+
+  Future<void> sendOTPNumber() async {
+    print('8210 ${signup.phoneNumberController.text.trim().substring(3, 7)} ${signup.phoneNumberController.text.trim().substring(7)}');
+    await FirebaseAuth.instance.verifyPhoneNumber(
+      phoneNumber: "+8210" 
+        + signup.phoneNumberController.text.substring(3, 7) 
+        + signup.phoneNumberController.text.substring(7),
+      verificationCompleted: (phoneAuthCredential) async {
+        print("OTP 문자 도착");
+      },
+      verificationFailed: (FirebaseAuthException e) {
+        if (e.code == 'invalid-phone-number') {
+          print('the provided phone number is not valid');
+        } else {
+          print(e.code);
+        }
+      },
+      codeSent: (String verificationId, int? resendToken) async {
+        print('코드 전송완료');
+        signup.verificationId = verificationId;
+        CustomDialog.showDialog(
+          title: '알림',
+          content: '인증코드가 전송되었습니다.\n2분 이내에 입력해주세요.',
+        );
+        signup.isSendAuthNumber.value = true;
+        signup.isLoading.value = false;
+      },
+      codeAutoRetrievalTimeout: (String verificationId) {
+        // Auto-resolution
+        signup.verificationId = verificationId;
+      },
+      timeout: const Duration(seconds: 120),
+    );
+  }
+
+  Future<UserCredential> signInWithPhoneNumber() async {
+    PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.credential(
+      verificationId: signup.verificationId!,
+      smsCode: signup.phoneAuthNumberController.text);
+    final userCredential = await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
+    try {
+      if (userCredential.user != null) {
+        signup.isLoading.value = false;
+        print("인증완료");
+      }
+      return userCredential;
+    } on FirebaseAuthException catch (e) {
+      signup.isLoading.value = false;
+      print('인증실패..\n${e.code}');
+      Get.defaultDialog(
+        content: Text('인증 실패'),
+        textConfirm: "확인",
+      );
+    }
+    return userCredential;
+  }
+
+  void logout() {
+    auth.signOut();
+    signup.clear();
+    userModel == null;
   }
 }
