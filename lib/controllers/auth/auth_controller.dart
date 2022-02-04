@@ -2,11 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:hem_capstone_app/constant/constant.dart';
 import 'package:hem_capstone_app/controllers/signup/signup_controller.dart';
+import 'package:hem_capstone_app/controllers/widgets/timer_controller.dart';
 import 'package:hem_capstone_app/models/user_model.dart';
 import 'package:hem_capstone_app/repository/auth_repository.dart';
 import 'package:hem_capstone_app/routes/app_pages.dart';
 import 'package:hem_capstone_app/utils/user/user_util.dart';
-import 'package:flutter/material.dart';
 import 'package:hem_capstone_app/widgets/custom/custom_dialog/custom_dialog.dart';
 
 
@@ -83,6 +83,7 @@ class AuthController extends GetxController {
         );
         signup.isSendAuthNumber.value = true;
         signup.isLoading.value = false;
+        TimerController.to.start();
       },
       codeAutoRetrievalTimeout: (String verificationId) {
         // Auto-resolution
