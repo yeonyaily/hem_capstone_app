@@ -2,11 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:hem_capstone_app/constant/constant.dart';
 import 'package:hem_capstone_app/controllers/signup/signup_controller.dart';
+import 'package:hem_capstone_app/controllers/widgets/timer_controller.dart';
 import 'package:hem_capstone_app/models/user_model.dart';
 import 'package:hem_capstone_app/repository/auth_repository.dart';
 import 'package:hem_capstone_app/routes/app_pages.dart';
 import 'package:hem_capstone_app/utils/user/user_util.dart';
-import 'package:flutter/material.dart';
 import 'package:hem_capstone_app/widgets/custom/custom_dialog/custom_dialog.dart';
 import 'package:tilko_plugin/tilko_plugin.dart';
 
@@ -44,7 +44,11 @@ class AuthController extends GetxController {
       if (userModel == null) {
         userModel =
             UserModel(uid: uid, phoneNumber: auth.currentUser!.phoneNumber);
-        firebase.collection('user').doc(uid).set(userModel!.toMap());
+        _userCollection
+            .doc(uid)
+            .set(userModel!.toMap())
+            .then((value) => print('Set User'))
+            .catchError((e) => print(e));
       }
       UserUtil.setUser(userModel!);
     } else {
@@ -78,6 +82,7 @@ class AuthController extends GetxController {
         );
         signup.isSendAuthNumber.value = true;
         signup.isLoading.value = false;
+        TimerController.to.start();
       },
       codeAutoRetrievalTimeout: (String verificationId) {
         // Auto-resolution
@@ -102,9 +107,9 @@ class AuthController extends GetxController {
     } on FirebaseAuthException catch (e) {
       signup.isLoading.value = false;
       print('인증실패..\n${e.code}');
-      Get.defaultDialog(
-        content: Text('인증 실패'),
-        textConfirm: "확인",
+      CustomDialog.showDialog(
+        title: '인증실패',
+        content: '올바른 인증번호를 입력해주새요.',
       );
     }
     return userCredential;
