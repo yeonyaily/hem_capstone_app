@@ -1,8 +1,11 @@
 import 'package:get/get.dart';
+import 'package:hem_capstone_app/binding/cert_copy_binding.dart';
 import 'package:hem_capstone_app/binding/dashboard_binding.dart';
 import 'package:hem_capstone_app/binding/init_binding.dart';
 import 'package:hem_capstone_app/binding/signup_binding.dart';
 import 'package:hem_capstone_app/screens/dashboard_views/dashboard.dart';
+import 'package:hem_capstone_app/screens/dashboard_views/home/cert_copy.dart';
+import 'package:hem_capstone_app/screens/dashboard_views/home/cert_on_page.dart';
 import 'package:hem_capstone_app/screens/login/sign_up_screen.dart';
 import 'package:hem_capstone_app/start.dart';
 
@@ -14,6 +17,8 @@ class AppPages {
   static const START = Routes.START;
   static const DASHBOARD = Routes.DASHBOARD;
   static const SIGNUP = Routes.SIGNUP;
+  static const CERTCOPY = Routes.CERTCOPY;
+  static const CERTON = Routes.CERTON;
 
   static final routes = [
     GetPage(
@@ -31,5 +36,15 @@ class AppPages {
       page: () => const SignUpScreen(),
       binding: SignUpBinding(),
     ),
+    GetPage(
+      name: CERTCOPY,
+      page: () => CertCopyPage(),
+      binding: CertCopyBinding(),
+    ),
+    GetPage(
+      name: CERTON,
+      page: () => CertOnPage(),
+      binding: CertCopyBinding(),
+    )
   ];
 }
