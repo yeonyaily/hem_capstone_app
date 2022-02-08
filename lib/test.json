@@ -1,0 +1,307 @@
+{
+    "Status": "OK",
+    "StatusSeq": 1,
+    "Message": "Hello yxxnsu",
+    "ResultList": [
+      {
+        "Year": "2022",
+        "CheckUpDate": "2022 01 21",
+        "Code": "101",
+        "Location": "Seoul",
+        "Inspections": [
+          {
+            "Gubun": "치명적인 병",
+            "Illnesses": [
+              {
+                "Name": "암",
+                "Items": [
+                  {
+                    "Name": "암1",
+                    "Value": "셈플2",
+                    "ItemReferences": [
+                      {
+                        "Name": "샘플1",
+                        "Value": "샘플2"
+                      },
+                      {
+                        "Name": "샘플1",
+                        "Value": "샘플2"
+                      }
+                    ]
+                  },
+                  {
+                    "Name": "당뇨",
+                    "Value": "샘플1",
+                    "ItemReferences": [
+                      {
+                        "Name": "샘플1",
+                        "Value": "샘플2"
+                      },
+                      {
+                        "Name": "샘플1",
+                        "Value": "샘플2"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "Name": "암",
+                "Items": [
+                  {
+                    "Name": "암1",
+                    "Value": "셈플2",
+                    "ItemReferences": [
+                      {
+                        "Name": "샘플1",
+                        "Value": "샘플2"
+                      },
+                      {
+                        "Name": "샘플1",
+                        "Value": "샘플2"
+                      }
+                    ]
+                  },
+                  {
+                    "Name": "당뇨",
+                    "Value": "샘플1",
+                    "ItemReferences": [
+                      {
+                        "Name": "샘플1",
+                        "Value": "샘플2"
+                      },
+                      {
+                        "Name": "샘플1",
+                        "Value": "샘플2"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "Gubun": "덜 치명적인 병",
+            "Illnesses": [
+              {
+                "Name": "감기",
+                "Items": [
+                  {
+                    "Name": "코로나19",
+                    "Value": "셈플2",
+                    "ItemReferences": [
+                      {
+                        "Name": "샘플1",
+                        "Value": "샘플2"
+                      },
+                      {
+                        "Name": "샘플1",
+                        "Value": "샘플2"
+                      }
+                    ]
+                  },
+                  {
+                    "Name": "독감",
+                    "Value": "샘플1",
+                    "ItemReferences": [
+                      {
+                        "Name": "샘플1",
+                        "Value": "샘플2"
+                      },
+                      {
+                        "Name": "샘플1",
+                        "Value": "샘플2"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "Name": "간질",
+                "Items": [
+                  {
+                    "Name": "발작",
+                    "Value": "셈플2",
+                    "ItemReferences": [
+                      {
+                        "Name": "샘플1",
+                        "Value": "샘플2"
+                      },
+                      {
+                        "Name": "샘플1",
+                        "Value": "샘플2"
+                      }
+                    ]
+                  },
+                  {
+                    "Name": "발작2",
+                    "Value": "샘플1",
+                    "ItemReferences": [
+                      {
+                        "Name": "샘플1",
+                        "Value": "샘플2"
+                      },
+                      {
+                        "Name": "샘플1",
+                        "Value": "샘플2"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Year": "2000",
+        "CheckUpDate": "2000 03 25",
+        "Code": "101",
+        "Location": "북한 아우지",
+        "Inspections": [
+          {
+            "Gubun": "치명적인 병",
+            "Illnesses": [
+              {
+                "Name": "암",
+                "Items": [
+                  {
+                    "Name": "암1",
+                    "Value": "셈플2",
+                    "ItemReferences": [
+                      {
+                        "Name": "샘플1",
+                        "Value": "샘플2"
+                      },
+                      {
+                        "Name": "샘플1",
+                        "Value": "샘플2"
+                      }
+                    ]
+                  },
+                  {
+                    "Name": "당뇨",
+                    "Value": "샘플1",
+                    "ItemReferences": [
+                      {
+                        "Name": "샘플1",
+                        "Value": "샘플2"
+                      },
+                      {
+                        "Name": "샘플1",
+                        "Value": "샘플2"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "Name": "암",
+                "Items": [
+                  {
+                    "Name": "암1",
+                    "Value": "셈플2",
+                    "ItemReferences": [
+                      {
+                        "Name": "샘플1",
+                        "Value": "샘플2"
+                      },
+                      {
+                        "Name": "샘플1",
+                        "Value": "샘플2"
+                      }
+                    ]
+                  },
+                  {
+                    "Name": "당뇨",
+                    "Value": "샘플1",
+                    "ItemReferences": [
+                      {
+                        "Name": "샘플1",
+                        "Value": "샘플2"
+                      },
+                      {
+                        "Name": "샘플1",
+                        "Value": "샘플2"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "Gubun": "덜 치명적인 병",
+            "Illnesses": [
+              {
+                "Name": "감기",
+                "Items": [
+                  {
+                    "Name": "코로나19",
+                    "Value": "셈플2",
+                    "ItemReferences": [
+                      {
+                        "Name": "샘플1",
+                        "Value": "샘플2"
+                      },
+                      {
+                        "Name": "샘플1",
+                        "Value": "샘플2"
+                      }
+                    ]
+                  },
+                  {
+                    "Name": "독감",
+                    "Value": "샘플1",
+                    "ItemReferences": [
+                      {
+                        "Name": "샘플1",
+                        "Value": "샘플2"
+                      },
+                      {
+                        "Name": "샘플1",
+                        "Value": "샘플2"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "Name": "간질",
+                "Items": [
+                  {
+                    "Name": "발작",
+                    "Value": "셈플2",
+                    "ItemReferences": [
+                      {
+                        "Name": "샘플1",
+                        "Value": "샘플2"
+                      },
+                      {
+                        "Name": "샘플1",
+                        "Value": "샘플2"
+                      }
+                    ]
+                  },
+                  {
+                    "Name": "발작2",
+                    "Value": "샘플1",
+                    "ItemReferences": [
+                      {
+                        "Name": "샘플1",
+                        "Value": "샘플2"
+                      },
+                      {
+                        "Name": "샘플1",
+                        "Value": "샘플2"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
