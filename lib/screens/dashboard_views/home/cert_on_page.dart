@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:hem_capstone_app/controllers/dashboard/cert_copy/cert_copy_controller.dart';
+import 'package:hem_capstone_app/routes/app_pages.dart';
 
 class CertOnPage extends GetView {
   CertOnPage({Key? key}) : super(key: key);
@@ -96,7 +97,9 @@ class CertOnPage extends GetView {
                 width: 342.w,
                 height: 48.h,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.toNamed(Routes.ENTERBIRTH);
+                  },
                   child: Text(
                     '건강 정보 불러오기',
                     style: theme.textTheme.bodyText1!

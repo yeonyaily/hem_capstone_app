@@ -9,6 +9,8 @@ abstract class Routes {
   static const CERTCOPY = _Paths.CERTCOPY;
   static const CERTON = _Paths.CERTON;
   static const HELP = _Paths.HELP;
+  static const ENTERBIRTH = _Paths.ENTERBIRTH;
+  static const ENTERPWD = _Paths.ENTERPWD;
 }
 
 abstract class _Paths {
@@ -19,4 +21,6 @@ abstract class _Paths {
   static const CERTCOPY = '/certcopy';
   static const CERTON = '/certon';
   static const HELP = '/help';
+  static const ENTERBIRTH = '/enterbirth';
+  static const ENTERPWD = '/enterpwd';
 }

@@ -42,8 +42,11 @@ class AuthController extends GetxController {
       var uid = auth.currentUser!.uid;
       userModel = await AuthRepositroy().findUserByUid(uid);
       if (userModel == null) {
-        userModel =
-            UserModel(uid: uid, phoneNumber: auth.currentUser!.phoneNumber);
+        userModel = UserModel(
+          uid: uid,
+          phoneNumber: auth.currentUser!.phoneNumber,
+          birth: DateTime.now(),
+        );
         _userCollection
             .doc(uid)
             .set(userModel!.toMap())

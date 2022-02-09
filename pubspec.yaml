@@ -29,6 +29,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
   tilko_plugin:
     git: https://github.com/yeonyaily/tilko_plugin_capstone.git
