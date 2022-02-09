@@ -98,7 +98,7 @@ class CertOnPage extends GetView {
                 height: 48.h,
                 child: ElevatedButton(
                   onPressed: () {
-                    Get.toNamed(Routes.PERSONINFO);
+                    Get.toNamed(Routes.ENTERBIRTH);
                   },
                   child: Text(
                     '건강 정보 불러오기',

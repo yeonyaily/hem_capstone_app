@@ -5,18 +5,19 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:hem_capstone_app/constant/constant.dart';
 import 'package:hem_capstone_app/controllers/widgets/datetimepicker_controller.dart';
+import 'package:hem_capstone_app/routes/app_pages.dart';
 
 class EnterBirthPage extends GetView<DatetimePickerController> {
   EnterBirthPage({Key? key}) : super(key: key);
 
-  DatetimePickerController _controller = Get.put(DatetimePickerController());
+  // DatetimePickerController _controller = Get.put(DatetimePickerController());
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(16),
+          padding: EdgeInsets.symmetric(horizontal: 20),
           child: ListView(
             children: [
               space(height: 48.h),
@@ -50,7 +51,7 @@ class EnterBirthPage extends GetView<DatetimePickerController> {
                   ),
                   GetBuilder<DatetimePickerController>(
                     builder: (_) {
-                      return Text("${_controller.selectedDate.toString()}");
+                      return Text("${controller.selectedDate.toString()}");
                     },
                   ),
                   Row(
@@ -80,7 +81,8 @@ class EnterBirthPage extends GetView<DatetimePickerController> {
                             BoxConstraints.tightFor(height: 48.h, width: 155.w),
                         child: ElevatedButton(
                           onPressed: () {
-                            _controller.addBirthInfo();
+                            controller.addBirthInfo();
+                            Get.toNamed(Routes.ENTERPWD);
                           },
                           child: Text(
                             '다음',
