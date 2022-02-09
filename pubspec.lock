@@ -331,6 +331,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.4"
+  public_health_model:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: master
+      resolved-ref: "1621688e6125df054b01479c0ef8709d7080d21c"
+      url: "https://github.com/Yxxnsu/public_health_model.git"
+    source: git
+    version: "0.0.1"
   sky_engine:
     dependency: transitive
     description: flutter
