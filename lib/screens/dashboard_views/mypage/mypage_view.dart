@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hem_capstone_app/constant/constant.dart';
 import 'package:hem_capstone_app/controllers/controller.dart';
 import 'package:hem_capstone_app/controllers/widgets/timer_controller.dart';
 import 'package:hem_capstone_app/routes/app_pages.dart';
@@ -16,45 +17,66 @@ class MypageView extends StatelessWidget {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('마이페이지'),
+        title: Text(
+          '내 정보',
+          style: theme.textTheme.bodyText1!.copyWith(
+            fontSize: 18,
+            color: Colors.white,
+          )
+        ),
         centerTitle: true,
         actions: [
-          IconButton(
-            onPressed: () => AuthController.to.logout(),
-            icon: Icon(Icons.exit_to_app),
-          ),
+          SizedBox(
+            width: 54,
+            height: 24,
+            child: ElevatedButton.icon(
+              onPressed: ()=> null, 
+              icon: Image.asset(
+                'assets/phi/setting.png',
+              ), 
+              label: Text(
+                'text',
+                style: theme.textTheme.bodyText1!.copyWith(
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              style: ElevatedButton.styleFrom(
+                primary: theme.primaryColor,
+                onPrimary: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+              ),
+            ),
+          )
         ],
       ),
       body: Column(
-        mainAxisSize: MainAxisSize.max,
         children: [
-          // Text(
-          //   UserUtil.getUser()!.phoneNumber!,
-          //   style: theme.textTheme.headline3!.copyWith(
-          //     color: theme.primaryColor,
-          //   ),
-          // ),
           Expanded(
-            child: Center(
-              child: ElevatedButton(
-                onPressed: () => CustomDialog.showDialog(
-                  title: '테스팅',
-                  content: '테스트입니다.',
-                ),
-                child: const Text('테스트 커스텀 다이얼로그'),
+            flex: 3,
+            child: Container(
+              color: theme.primaryColor,
+            ),
+          ),
+          Expanded(
+            child: Container(
+              child: Column(
+                children: <Widget>[
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: InkWell(
+                      onTap: ()=> Get.to(()=> HiddenTestMode()),
+                      child: Container(
+                        width: 32,
+                        height: 32,           
+                      ),
+                    )
+                  )
+                ],
               ),
             ),
           ),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: InkWell(
-              onTap: ()=> Get.to(()=> HiddenTestMode()),
-              child: Container(
-                width: 32,
-                height: 32,           
-              ),
-            )
-          )
         ],
       )
     );
