@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hem_capstone_app/constant/constant.dart';
-import 'package:hem_capstone_app/models/drug_model.dart';
-import 'package:hem_capstone_app/models/health_model.dart';
 import 'package:hem_capstone_app/widgets/custom/custom_dialog/custom_dialog.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:logger/logger.dart';
+import 'package:public_health_model/public_health_model.dart';
 
 class HiddenTestMode extends StatelessWidget {
   const HiddenTestMode({ Key? key }) : super(key: key);
@@ -43,9 +42,9 @@ class ModelTestingScreen extends StatefulWidget {
 
 class _ModelTestingScreenState extends State<ModelTestingScreen> {
 
-  // Future<HelathModel>? healthModel;
+  // Future<InspectionModel>? healthModel;
   // Future<DrugModel>? drugModel;
-  Future<HelathModel>? healthModel;
+  Future<InspectionModel>? healthModel;
   Future<DrugModel>? drugModel;
   bool isGetHealth = false;
   bool isGetDrug = false;
@@ -77,7 +76,7 @@ class _ModelTestingScreenState extends State<ModelTestingScreen> {
               ),
               space(height: 10),
               isGetHealth 
-                ? FutureBuilder<HelathModel>(
+                ? FutureBuilder<InspectionModel>(
                     future: healthModel,
                     builder: (context, snapshot){
                       return snapshot.hasData 
@@ -119,7 +118,7 @@ class _ModelTestingScreenState extends State<ModelTestingScreen> {
     // print(response.body);
   }
 
-  Future<HelathModel> getDummyInspections() async {
+  Future<InspectionModel> getDummyInspections() async {
     final String url = 'https://my.api.mockaroo.com/capstone_inspections.json?key=cdedf730';
     final logger = Logger();
     
@@ -128,7 +127,7 @@ class _ModelTestingScreenState extends State<ModelTestingScreen> {
     if(response.statusCode == 200){
       Map<String,dynamic> body = json.decode(response.body);
       logger.d(body);
-      return HelathModel.fromJson(body);
+      return InspectionModel.fromJson(body);
     } else {
       CustomDialog.showDialog(
         title: 'Error',
