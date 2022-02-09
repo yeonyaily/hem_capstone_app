@@ -8,7 +8,7 @@ import 'package:hem_capstone_app/repository/auth_repository.dart';
 import 'package:hem_capstone_app/routes/app_pages.dart';
 import 'package:hem_capstone_app/utils/user/user_util.dart';
 import 'package:hem_capstone_app/widgets/custom/custom_dialog/custom_dialog.dart';
-
+import 'package:tilko_plugin/tilko_plugin.dart';
 
 class AuthController extends GetxController {
   static AuthController get to => Get.find();
@@ -22,6 +22,7 @@ class AuthController extends GetxController {
 
   @override
   void onInit() {
+    TilkoPlugin.requestPermission();
     _user = Rxn<User?>(auth.currentUser);
     _user.bindStream(auth.userChanges());
     ever(_user, _setInitialView);
@@ -29,28 +30,25 @@ class AuthController extends GetxController {
   }
 
   _setInitialView(User? user) async {
-
     await getUserInfo();
 
-    user == null 
-      ? Get.offAllNamed(Routes.START)
-      : Get.offAllNamed(Routes.DASHBOARD);
+    user == null
+        ? Get.offAllNamed(Routes.START)
+        : Get.offAllNamed(Routes.DASHBOARD);
   }
 
   Future<void> getUserInfo() async {
-    if(auth.currentUser != null){
+    if (auth.currentUser != null) {
       var uid = auth.currentUser!.uid;
       userModel = await AuthRepositroy().findUserByUid(uid);
-      if(userModel == null){
-        userModel = UserModel(
-          uid: uid, 
-          phoneNumber: auth.currentUser!.phoneNumber
-        );
-        _userCollection.doc(uid).set(
-          userModel!.toMap()
-        )
-        .then((value) => print('Set User'))
-        .catchError((e)=> print(e));
+      if (userModel == null) {
+        userModel =
+            UserModel(uid: uid, phoneNumber: auth.currentUser!.phoneNumber);
+        _userCollection
+            .doc(uid)
+            .set(userModel!.toMap())
+            .then((value) => print('Set User'))
+            .catchError((e) => print(e));
       }
       UserUtil.setUser(userModel!);
     } else {
@@ -59,11 +57,12 @@ class AuthController extends GetxController {
   }
 
   Future<void> sendOTPNumber() async {
-    print('8210 ${signup.phoneNumberController.text.trim().substring(3, 7)} ${signup.phoneNumberController.text.trim().substring(7)}');
+    print(
+        '8210 ${signup.phoneNumberController.text.trim().substring(3, 7)} ${signup.phoneNumberController.text.trim().substring(7)}');
     await FirebaseAuth.instance.verifyPhoneNumber(
-      phoneNumber: "+8210" 
-        + signup.phoneNumberController.text.substring(3, 7) 
-        + signup.phoneNumberController.text.substring(7),
+      phoneNumber: "+8210" +
+          signup.phoneNumberController.text.substring(3, 7) +
+          signup.phoneNumberController.text.substring(7),
       verificationCompleted: (phoneAuthCredential) async {
         print("OTP 문자 도착");
       },
@@ -95,10 +94,10 @@ class AuthController extends GetxController {
 
   Future<UserCredential> signInWithPhoneNumber() async {
     PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.credential(
-      verificationId: signup.verificationId!,
-      smsCode: signup.phoneAuthNumberController.text
-    );
-    final userCredential = await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
+        verificationId: signup.verificationId!,
+        smsCode: signup.phoneAuthNumberController.text);
+    final userCredential =
+        await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
     try {
       if (userCredential.user != null) {
         signup.isLoading.value = false;

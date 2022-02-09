@@ -7,20 +7,19 @@ class AppTheme {
   static final ThemeData lightThemeData = themeData(lightColorScheme);
 
   static ThemeData themeData(ColorScheme colorScheme) => ThemeData(
-    colorScheme: colorScheme,
-    textTheme: textTheme.apply(
-       displayColor: basicBlack,
-       bodyColor: basicBlack,
-    ),
-    primaryColor: colorScheme.primary,
-    //appBarTheme:
-    //iconTheme:
-    elevatedButtonTheme: buttonTheme,
-    canvasColor: colorScheme.background,
-    scaffoldBackgroundColor: colorScheme.background,
-    disabledColor: disableColor,
-  );
-
+        colorScheme: colorScheme,
+        textTheme: textTheme.apply(
+          displayColor: basicBlack,
+          bodyColor: basicBlack,
+        ),
+        primaryColor: colorScheme.primary,
+        //appBarTheme:
+        //iconTheme:
+        elevatedButtonTheme: buttonTheme,
+        canvasColor: colorScheme.background,
+        scaffoldBackgroundColor: colorScheme.background,
+        disabledColor: disableColor,
+      );
 
   static const ColorScheme lightColorScheme = ColorScheme(
     primary: primaryColor,
@@ -45,38 +44,38 @@ class AppTheme {
 
   static TextTheme textTheme = TextTheme(
     headline1: TextStyle(
-      fontFamily: 'NotoSansKR', 
-      fontWeight: _bold, 
+      fontFamily: 'NotoSansKR',
+      fontWeight: _bold,
       fontSize: 64.sp,
     ),
     headline2: TextStyle(
-      fontFamily: 'NotoSansKR', 
-      fontWeight: _bold, 
+      fontFamily: 'NotoSansKR',
+      fontWeight: _bold,
       fontSize: 40.sp,
     ),
     headline3: TextStyle(
-      fontFamily: 'NotoSansKR', 
-      fontWeight: _bold, 
+      fontFamily: 'NotoSansKR',
+      fontWeight: _bold,
       fontSize: 24.sp,
     ),
     subtitle1: TextStyle(
-      fontFamily: 'NotoSansKR', 
-      fontWeight: _medium, 
+      fontFamily: 'NotoSansKR',
+      fontWeight: _medium,
       fontSize: 20.sp,
     ),
     subtitle2: const TextStyle(
-      fontFamily: 'NotoSansKR', 
-      fontWeight: _medium, 
+      fontFamily: 'NotoSansKR',
+      fontWeight: _medium,
       fontSize: 14.0,
     ),
     bodyText1: TextStyle(
-      fontFamily: 'NotoSansKR', 
-      fontWeight: _medium, 
+      fontFamily: 'NotoSansKR',
+      fontWeight: _medium,
       fontSize: 16.sp,
     ),
     bodyText2: TextStyle(
-      fontFamily: 'NotoSansKR', 
-      fontWeight: _medium, 
+      fontFamily: 'NotoSansKR',
+      fontWeight: _medium,
       fontSize: 14.sp,
     ),
     caption: TextStyle(
@@ -85,8 +84,8 @@ class AppTheme {
       fontSize: 12.sp,
     ),
     button: TextStyle(
-      fontFamily: 'NotoSansKR', 
-      fontWeight: _bold, 
+      fontFamily: 'NotoSansKR',
+      fontWeight: _bold,
       fontSize: 16.sp,
     ),
   );
