@@ -56,7 +56,7 @@ class AppPages {
     ),
     GetPage(
       name: PERSONINFO,
-      page: () => PersonalInfoPage(),
+      page: () => EnterBirthPage(),
     ),
   ];
 }

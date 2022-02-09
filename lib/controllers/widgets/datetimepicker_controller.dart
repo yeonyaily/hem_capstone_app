@@ -8,7 +8,7 @@ class DatetimePickerController extends GetxController {
   static DatetimePickerController get to => Get.find();
 
   DateTime selectedDate = DateTime.now();
-  final _userCollection = FirebaseFirestore.instance.collection('user');
+  final _userCollection = FirebaseFirestore.instance.collection('users');
   var uid = auth.currentUser!.uid;
 
   void onDateTimeChanged(DateTime value) {

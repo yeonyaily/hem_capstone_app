@@ -6,8 +6,8 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:hem_capstone_app/constant/constant.dart';
 import 'package:hem_capstone_app/controllers/widgets/datetimepicker_controller.dart';
 
-class PersonalInfoPage extends GetView<DatetimePickerController> {
-  PersonalInfoPage({Key? key}) : super(key: key);
+class EnterBirthPage extends GetView<DatetimePickerController> {
+  EnterBirthPage({Key? key}) : super(key: key);
 
   DatetimePickerController _controller = Get.put(DatetimePickerController());
   @override
