@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hem_capstone_app/constant/constant.dart';
 
 class DatetimePickerController extends GetxController {
