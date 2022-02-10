@@ -5,10 +5,10 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:hem_capstone_app/controllers/dashboard/cert_copy/cert_copy_controller.dart';
 import 'package:hem_capstone_app/routes/app_pages.dart';
 
-class CertOnPage extends GetView {
+class CertOnPage extends GetView<CertCopyController> {
   CertOnPage({Key? key}) : super(key: key);
 
-  CertCopyController _controller2 = Get.put(CertCopyController());
+  // CertCopyController _controller2 = Get.put(CertCopyController());
 
   @override
   Widget build(BuildContext context) {
@@ -30,66 +30,65 @@ class CertOnPage extends GetView {
               SizedBox(
                 height: 44.h,
               ),
-              Obx(() => SizedBox(
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                        side: BorderSide(
-                          color: theme.colorScheme.primary,
-                          width: 1,
+              SizedBox(
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                      color: theme.colorScheme.primary,
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Container(
+                    height: 90.h,
+                    width: 310.w,
+                    // margin: EdgeInsets.all(4),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: 60.h,
+                          child: Image.asset(
+                            'assets/images/cert.png',
+                            fit: BoxFit.fitHeight,
+                          ),
                         ),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Container(
-                        height: 90.h,
-                        width: 310.w,
-                        // margin: EdgeInsets.all(4),
-                        child: Row(
+                        SizedBox(
+                          width: 20.w,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Container(
-                              height: 60.h,
-                              child: Image.asset(
-                                'assets/images/cert.png',
-                                fit: BoxFit.fitHeight,
-                              ),
+                            Text(
+                              '${controller.certMap['name']![0]}' + '님의 공동인증서',
+                              style: theme.textTheme.bodyText1,
                             ),
                             SizedBox(
-                              width: 20.w,
+                              height: 4.h,
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
+                            Row(
                               children: [
                                 Text(
-                                  '${_controller2.certMap['name']![0]}' +
-                                      '님의 공동인증서',
-                                  style: theme.textTheme.bodyText1,
+                                  '사용기간 : ',
+                                  style: theme.textTheme.caption!
+                                      .copyWith(color: Colors.black26),
                                 ),
-                                SizedBox(
-                                  height: 4.h,
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      '사용기간 : ',
-                                      style: theme.textTheme.caption!
-                                          .copyWith(color: Colors.black26),
-                                    ),
-                                    Text(
-                                      '${_controller2.certMap['valid']![0]}',
-                                      style: theme.textTheme.caption!.copyWith(
-                                        color: theme.colorScheme.primary,
-                                      ),
-                                    )
-                                  ],
-                                ),
+                                Text(
+                                  '${controller.certMap['valid']![0]}',
+                                  style: theme.textTheme.caption!.copyWith(
+                                    color: theme.colorScheme.primary,
+                                  ),
+                                )
                               ],
-                            )
+                            ),
                           ],
                         ),
-                      ),
+                      ],
                     ),
-                  )),
+                  ),
+                ),
+              ),
               SizedBox(
                 height: 244.h,
               ),

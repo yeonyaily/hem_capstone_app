@@ -6,6 +6,7 @@ class CertPwdController extends GetxController {
   static CertPwdController get to => Get.find();
 
   RxBool isPwd = false.obs;
+  RxBool isLoading = false.obs;
 
   late TextEditingController certPwdController;
 
@@ -21,5 +22,9 @@ class CertPwdController extends GetxController {
 
   void disapprovePwd() {
     isPwd(false);
+  }
+
+  void switchLoading() {
+    isLoading(!isLoading.value);
   }
 }
