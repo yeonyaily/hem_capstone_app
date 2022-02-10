@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:hem_capstone_app/routes/app_pages.dart';
 import 'package:tilko_plugin/tilko_plugin.dart';
 
@@ -38,7 +37,7 @@ class CertCopyController extends GetxController {
 
   _setNextView(RxInt certLength) {
     certLength == 0
-        ? print('Impossibble is nothing')
-        : Get.toNamed(Routes.CERTON);
+      ? print('Impossibble is nothing')
+      : Get.toNamed(Routes.CERTON);
   }
 }

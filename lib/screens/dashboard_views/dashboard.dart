@@ -55,36 +55,38 @@ class DashBoard extends GetView<NavigationController> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: List.generate(
-                5,
-                (index) => InkWell(
-                      onTap: () => _.changeTabIndex(index),
-                      child: Container(
-                        width: Get.width / 5,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              item[index]['icon'],
-                              color: _.tabIndex == index
-                                  ? Colors.black
-                                  : Color(0xff898a8d),
-                            ),
-                            Text(
-                              item[index]['text'],
-                              style: TextStyle(
-                                color: _.tabIndex == index
-                                    ? Colors.black
-                                    : Color(0xff898a8d),
-                                fontFamily: 'Roboto',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12,
-                              ),
-                            )
-                          ],
+              5,
+              (index) => 
+                InkWell( 
+                  onTap: () => _.changeTabIndex(index),
+                  child: Container(
+                    width: Get.width / 5,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          item[index]['icon'],
+                          color: _.tabIndex == index
+                            ? Colors.black
+                            : Color(0xff898a8d),
                         ),
-                      ),
-                    )),
+                        Text(
+                          item[index]['text'],
+                          style: TextStyle(
+                            color: _.tabIndex == index
+                              ? Colors.black
+                              : Color(0xff898a8d),
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                )
+              ),
           ),
         ),
       ),

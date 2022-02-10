@@ -51,11 +51,13 @@ class MembershipWithdrawScreen extends StatelessWidget {
               ],
             ),
             decoration: BoxDecoration(
-                border: Border(
-                    bottom: BorderSide(
-              color: Color(0xffE3E3E3),
-              width: 1,
-            ))),
+              border: Border(
+                bottom: BorderSide(
+                  color: Color(0xffE3E3E3),
+                  width: 1,
+                ),
+              ),
+            ),
           ),
         ),
       ),
@@ -72,11 +74,13 @@ class MembershipWithdrawScreen extends StatelessWidget {
               style: theme.textTheme.bodyText2,
             ),
             decoration: BoxDecoration(
-                border: Border(
-                    bottom: BorderSide(
-              color: Color(0xffE3E3E3),
-              width: 1,
-            ))),
+              border: Border(
+                bottom: BorderSide(
+                  color: Color(0xffE3E3E3),
+                  width: 1,
+                ),
+              ),
+            ),
           ),
           space(height: 16),
           Obx(
@@ -212,7 +216,7 @@ class MembershipWithdrawScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   InkWell(
-                    onTap: ()=> print('취소'),
+                    onTap: ()=> Get.back(),
                     child: Container(
                       width: MediaQuery.of(context).size.width / 2 - 2.5,
                       height: 40,
@@ -225,7 +229,7 @@ class MembershipWithdrawScreen extends StatelessWidget {
                     ),
                   ),
                   InkWell(
-                    onTap: ()=> print('확인'),
+                    onTap: ()=> [Get.back(),print('확인')],
                     child: Container(
                       width: MediaQuery.of(context).size.width / 2 - 2.5,
                       height: 40,
