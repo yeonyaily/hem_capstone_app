@@ -9,9 +9,14 @@ import 'package:tilko_plugin/tilko_plugin.dart';
 class CertCopyController extends GetxController {
   static CertCopyController get to => Get.find();
 
+  RxBool isLoading = false.obs;
   RxString frontKey = "    ".obs;
   RxString backKey = "    ".obs;
   var certMap = Map<String, List<String>>();
+
+  Timer? _timer;
+  final _time = 0.obs;
+  final _sec = 1.obs;
 
   Future<void> getKey() async {
     String key;
@@ -34,11 +39,24 @@ class CertCopyController extends GetxController {
 
   @override
   void onInit() {
+    // start();
+
     getKey();
+
+    // ever(_time, (_) => getCertificates());
+
     super.onInit();
   }
 
-  // final logger = Logger();
+  // void start() {
+  //   _timer = Timer.periodic(const Duration(seconds: 7), (timer) {
+  //     _sec.value = _time.value ~/ 60;
+  //     _time.value++;
+  //   });
+  // }
+}
+
+// final logger = Logger();
 
   // RxString frontKey = "    ".obs;
   // RxString backKey = "    ".obs;
@@ -138,4 +156,3 @@ class CertCopyController extends GetxController {
   //   logger.d('공동인증서가 인식되었습니다');
   //   Get.toNamed(Routes.CERTON);
   // }
-}
