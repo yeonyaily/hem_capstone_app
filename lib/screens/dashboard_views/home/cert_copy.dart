@@ -177,9 +177,8 @@ class CertCopyPage extends GetView<CertCopyController> {
                             controller.getCertificates().then((value) {
                               controller.isLoading.value = false;
                               controller.certMap.values.first.length == 0
-                                  ? logger
-                                      .d(controller.certMap.values.first.length)
-                                  : Get.toNamed(Routes.CERTON);
+                                ? logger.d(controller.certMap.values.first.length)
+                                : Get.toNamed(Routes.CERTON);
                             });
                           },
                         ),

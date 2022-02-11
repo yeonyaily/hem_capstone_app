@@ -58,8 +58,7 @@ class EnterCertPwdPage extends GetView<CertPwdController> {
                           ),
                           TextFormField(
                             obscureText: true,
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
                             controller: controller.certPwdController,
                             style: theme.textTheme.bodyText1,
                             maxLength: 30,
@@ -87,13 +86,13 @@ class EnterCertPwdPage extends GetView<CertPwdController> {
                             onChanged: (value) {
                               if (value.length >= 10 &&
                                   (value.contains('!') ||
-                                      value.contains('@') ||
-                                      value.contains('#') ||
-                                      value.contains('\$') ||
-                                      value.contains('%') ||
-                                      value.contains('^') ||
-                                      value.contains('&') ||
-                                      value.contains('*'))) {
+                                     value.contains('@') ||
+                                     value.contains('#') ||
+                                     value.contains('\$') ||
+                                     value.contains('%') ||
+                                     value.contains('^') ||
+                                     value.contains('&') ||
+                                     value.contains('*'))) {
                                 controller.approvePwd();
                               } else {
                                 controller.disapprovePwd();
@@ -121,35 +120,34 @@ class EnterCertPwdPage extends GetView<CertPwdController> {
                           width: Get.width,
                           height: 48,
                           child: controller.isPwd.value
-                              ? ElevatedButton(
-                                  onPressed: () async {
-                                    controller.switchLoading();
-                                    await Future.delayed(
-                                      const Duration(seconds: 2),
-                                    );
-                                    controller.switchLoading();
-                                  },
-                                  child: Text('건강정보불러오기'),
-                                  style: ElevatedButton.styleFrom(
-                                    elevation: 0,
-                                    primary: theme.primaryColor,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(0),
-                                    ),
-                                  ),
-                                )
-                              : TextButton(
-                                  onPressed: () {},
-                                  child: Text('건강정보불러오기'),
-                                  style: TextButton.styleFrom(
-                                    elevation: 0,
-                                    primary: Colors.white,
-                                    backgroundColor: Colors.black12,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(0),
-                                    ),
+                            ? ElevatedButton(
+                                onPressed: () async {
+                                  controller.switchLoading();
+                                  // controller.callHealthApi('apiKey', 'filePath', 'certPass');
+                                  await controller.callTestApi();
+                                  controller.switchLoading();
+                                },
+                                child: Text('건강정보불러오기'),
+                                style: ElevatedButton.styleFrom(
+                                  elevation: 0,
+                                  primary: theme.primaryColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(0),
                                   ),
                                 ),
+                              )
+                            : TextButton(
+                                onPressed: () {},
+                                child: Text('건강정보불러오기'),
+                                style: TextButton.styleFrom(
+                                  elevation: 0,
+                                  primary: Colors.white,
+                                  backgroundColor: Colors.black12,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(0),
+                                  ),
+                                ),
+                              ),
                         ),
                       ),
                     ),
