@@ -26,9 +26,7 @@ class DashBoard extends GetView<NavigationController> {
             children: const [
               HomeView(),
               TreatHistoryView(),
-              DrugView(),
               CheckupView(),
-              MypageView(),
             ],
           ),
         ),
@@ -59,7 +57,7 @@ class DashBoard extends GetView<NavigationController> {
                 (index) => InkWell(
                       onTap: () => _.changeTabIndex(index),
                       child: Container(
-                        width: Get.width / 5,
+                        width: Get.width / 3,
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,

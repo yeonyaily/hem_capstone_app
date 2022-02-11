@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:hem_capstone_app/constant/constant.dart';
 import 'package:hem_capstone_app/controllers/dashboard/cert_copy/cert_copy_controller.dart';
 import 'package:hem_capstone_app/routes/app_pages.dart';
+import 'package:logger/logger.dart';
 
 class CertCopyPage extends GetView<CertCopyController> {
   CertCopyPage({Key? key}) : super(key: key);
@@ -11,6 +12,7 @@ class CertCopyPage extends GetView<CertCopyController> {
   // String frontKey = "    ";
   // String backKey = "    ";
   CertCopyController _controller = Get.put(CertCopyController());
+  final logger = Logger();
 
   @override
   Widget build(BuildContext context) {
@@ -152,6 +154,7 @@ class CertCopyPage extends GetView<CertCopyController> {
                         ),
                       ),
                       space(height: 24.h),
+                      // 방법 1: 더 안정적임.
                       // Center(
                       //   child: ElevatedButton(
                       //     child: Text(
@@ -162,6 +165,8 @@ class CertCopyPage extends GetView<CertCopyController> {
                       //     },
                       //   ),
                       // ),
+                      //--------------------------
+                      // 방법 2: 번거롭지 않지만 불안정.
                       Center(
                         child: ElevatedButton(
                           child: Text(
@@ -171,7 +176,10 @@ class CertCopyPage extends GetView<CertCopyController> {
                             controller.isLoading.value = true;
                             controller.getCertificates().then((value) {
                               controller.isLoading.value = false;
-                              Get.toNamed(Routes.CERTON);
+                              controller.certMap.values.first.length == 0
+                                  ? logger
+                                      .d(controller.certMap.values.first.length)
+                                  : Get.toNamed(Routes.CERTON);
                             });
                           },
                         ),

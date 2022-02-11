@@ -14,16 +14,8 @@ class NavigationController extends GetxController {
       'text': '진료 내역',
     },
     {
-      'icon': Icons.medical_services_outlined,
-      'text': '약먹자',
-    },
-    {
       'icon': Icons.checklist,
       'text': '건강검진',
-    },
-    {
-      'icon': Icons.person,
-      'text': '마이페이지',
     },
   ];
 
