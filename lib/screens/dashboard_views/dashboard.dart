@@ -50,7 +50,7 @@ class DashBoard extends GetView<NavigationController> {
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: List.generate(5,
+            children: List.generate(3,
               (index) => InkWell(
                 onTap: () => _.changeTabIndex(index),
                 child: Container(
