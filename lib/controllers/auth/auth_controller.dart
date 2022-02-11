@@ -33,8 +33,8 @@ class AuthController extends GetxController {
     await getUserInfo();
 
     user == null
-        ? Get.offAllNamed(Routes.START)
-        : Get.offAllNamed(Routes.DASHBOARD);
+      ? Get.offAllNamed(Routes.START)
+      : Get.offAllNamed(Routes.DASHBOARD);
   }
 
   Future<void> getUserInfo() async {
@@ -48,10 +48,10 @@ class AuthController extends GetxController {
           birth: DateTime.now(),
         );
         _userCollection
-            .doc(uid)
-            .set(userModel!.toMap())
-            .then((value) => print('Set User'))
-            .catchError((e) => print(e));
+          .doc(uid)
+          .set(userModel!.toMap())
+          .then((value) => print('Set User'))
+          .catchError((e) => print(e));
       }
       UserUtil.setUser(userModel!);
     } else {

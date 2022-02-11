@@ -193,8 +193,7 @@ class CertCopyPage extends GetView<CertCopyController> {
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 title: Text(controller.certMap['name']![index]),
-                                subtitle:
-                                    Text(controller.certMap['valid']![index]),
+                                subtitle: Text(controller.certMap['valid']![index]),
                                 trailing: TextButton(
                                   child: Text('등록하기'),
                                   onPressed: () {
