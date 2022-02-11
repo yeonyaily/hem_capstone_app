@@ -36,6 +36,11 @@ class EnterBirthPage extends GetView<DatetimePickerController> {
                     ),
                   ),
                   space(height: 46.h),
+                  GetBuilder<DatetimePickerController>(
+                    builder: (_) {
+                      return Text("${controller.selectedDate.toString()}");
+                    },
+                  ),
                   Container(
                     width: 334.w,
                     height: 373.h,
@@ -48,11 +53,6 @@ class EnterBirthPage extends GetView<DatetimePickerController> {
                       },
                       initialDateTime: DateTime.now(),
                     ),
-                  ),
-                  GetBuilder<DatetimePickerController>(
-                    builder: (_) {
-                      return Text("${controller.selectedDate.toString()}");
-                    },
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

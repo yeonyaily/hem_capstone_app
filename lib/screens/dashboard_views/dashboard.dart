@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hem_capstone_app/controllers/dashboard/navigation_controller.dart';
 import 'package:hem_capstone_app/screens/dashboard_views/home/home_view.dart';
-import 'package:hem_capstone_app/screens/dashboard_views/medicine/drug_view.dart';
-import 'package:hem_capstone_app/screens/dashboard_views/mypage/mypage_view.dart';
 import 'package:hem_capstone_app/screens/dashboard_views/physical_check/checkup_view.dart';
 import 'package:hem_capstone_app/screens/dashboard_views/treat_history/treat_history_view.dart';
 
@@ -26,9 +24,7 @@ class DashBoard extends GetView<NavigationController> {
             children: const [
               HomeView(),
               TreatHistoryView(),
-              DrugView(),
               CheckupView(),
-              MypageView(),
             ],
           ),
         ),
@@ -54,42 +50,40 @@ class DashBoard extends GetView<NavigationController> {
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: List.generate(
-              5,
-              (index) => 
-                InkWell( 
-                  onTap: () => _.changeTabIndex(index),
-                  child: Container(
-                    width: Get.width / 5,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          item[index]['icon'],
-                          color: _.tabIndex == index
+            children: List.generate(5,
+              (index) => InkWell(
+                onTap: () => _.changeTabIndex(index),
+                child: Container(
+                  width: Get.width / 3,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        item[index]['icon'],
+                        color: _.tabIndex == index
                             ? Colors.black
                             : Color(0xff898a8d),
-                        ),
-                        Text(
-                          item[index]['text'],
-                          style: TextStyle(
-                            color: _.tabIndex == index
+                      ),
+                      Text(
+                        item[index]['text'],
+                        style: TextStyle(
+                          color: _.tabIndex == index
                               ? Colors.black
                               : Color(0xff898a8d),
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 12,
-                          ),
-                        )
-                      ],
-                    ),
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                        ),
+                      )
+                    ],
                   ),
-                )
+                ),
               ),
+            )
           ),
         ),
-      ),
+      )
     );
   }
 }
