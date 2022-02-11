@@ -5,9 +5,13 @@ import 'package:hem_capstone_app/controllers/signup/signup_controller.dart';
 import 'package:hem_capstone_app/controllers/widgets/timer_controller.dart';
 import 'package:hem_capstone_app/models/user_model.dart';
 import 'package:hem_capstone_app/repository/auth_repository.dart';
+import 'package:hem_capstone_app/repository/health_repository.dart';
 import 'package:hem_capstone_app/routes/app_pages.dart';
+import 'package:hem_capstone_app/utils/user/health_util.dart';
 import 'package:hem_capstone_app/utils/user/user_util.dart';
 import 'package:hem_capstone_app/widgets/custom/custom_dialog/custom_dialog.dart';
+import 'package:public_health_model/inspections_model.dart';
+import 'package:public_health_model/public_health_model.dart';
 import 'package:tilko_plugin/tilko_plugin.dart';
 
 class AuthController extends GetxController {
@@ -31,6 +35,7 @@ class AuthController extends GetxController {
 
   _setInitialView(User? user) async {
     await getUserInfo();
+    await getHealthData();
 
     user == null
       ? Get.offAllNamed(Routes.START)
@@ -56,6 +61,17 @@ class AuthController extends GetxController {
       UserUtil.setUser(userModel!);
     } else {
       return;
+    }
+  }
+
+  Future<void> getHealthData() async {
+    if(auth.currentUser != null){
+      var uid = auth.currentUser!.uid;
+      InspectionModel? inspectionModel = await HealthRepository().findHealthDataByUid(uid);
+      DrugModel? drugModel = await HealthRepository().findMedicalDataByUid(uid);
+
+      HealthUtil.setInspectionData(inspectionModel);
+      HealthUtil.setMedicalData(drugModel);    
     }
   }
 
