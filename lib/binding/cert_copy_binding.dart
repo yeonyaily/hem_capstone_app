@@ -5,6 +5,7 @@ class CertCopyBinding implements Bindings {
   @override
   void dependencies() {
     // TODO: implement dependencies
-    Get.lazyPut(() => CertCopyController());
+    Get.put(CertCopyController());
+    // Get.lazyPut(() => CertCopyController());
   }
 }

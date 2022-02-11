@@ -355,10 +355,10 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: "1621688e6125df054b01479c0ef8709d7080d21c"
+      resolved-ref: "35d01b85ff0b4fc0a2dcb8c925de034b4954d89f"
       url: "https://github.com/Yxxnsu/public_health_model.git"
     source: git
-    version: "0.0.1"
+    version: "1.0.0"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -411,7 +411,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "37691679fb7a2d07d6ddd9b983ef210f07539790"
+      resolved-ref: f1d7afa510e906473fd7b8420146f8c8a69331c5
       url: "https://github.com/yeonyaily/tilko_plugin_capstone.git"
     source: git
     version: "0.0.1"

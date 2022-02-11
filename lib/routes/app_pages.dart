@@ -44,14 +44,15 @@ class AppPages {
       binding: SignUpBinding(),
     ),
     GetPage(
-      name: CERTCOPY,
-      page: () => CertCopyPage(),
-      binding: CertCopyBinding(),
-    ),
+        name: CERTCOPY,
+        page: () => CertCopyPage(),
+        binding: CertCopyBinding(),
+        transition: Transition.downToUp),
     GetPage(
       name: CERTON,
       page: () => CertOnPage(),
       binding: CertCopyBinding(),
+      transition: Transition.fadeIn,
     ),
     GetPage(
       name: HELP,
@@ -61,11 +62,13 @@ class AppPages {
       name: ENTERBIRTH,
       page: () => EnterBirthPage(),
       binding: PersonalInfoBinding(),
+      transition: Transition.native,
     ),
     GetPage(
       name: ENTERPWD,
       page: () => EnterCertPwdPage(),
       binding: PersonalInfoBinding(),
+      transition: Transition.leftToRight,
     ),
   ];
 }
