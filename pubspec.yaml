@@ -51,7 +51,6 @@ dependencies:
   public_health_model: 
     git:
       url: https://github.com/Yxxnsu/public_health_model.git
-      ref: test
   
 
 dev_dependencies:

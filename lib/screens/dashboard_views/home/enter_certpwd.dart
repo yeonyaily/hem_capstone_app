@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hem_capstone_app/constant/constant.dart';
+import 'package:hem_capstone_app/controllers/dashboard/cert_copy/cert_copy_controller.dart';
 import 'package:hem_capstone_app/controllers/dashboard/cert_pwd/cert_pwd_controller.dart';
 import 'package:hem_capstone_app/theme/app_colors.dart';
 
@@ -57,7 +58,7 @@ class EnterCertPwdPage extends GetView<CertPwdController> {
                             ),
                           ),
                           TextFormField(
-                            obscureText: true,
+                            // obscureText: true,
                             autovalidateMode: AutovalidateMode.onUserInteraction,
                             controller: controller.certPwdController,
                             style: theme.textTheme.bodyText1,
@@ -123,8 +124,12 @@ class EnterCertPwdPage extends GetView<CertPwdController> {
                             ? ElevatedButton(
                                 onPressed: () async {
                                   controller.switchLoading();
-                                  // controller.callHealthApi('apiKey', 'filePath', 'certPass');
-                                  await controller.callTestApi();
+                                  await controller.callHealthApi(
+                                    '1b94ed1781e044d385e0f86ec7d29b93', 
+                                    CertCopyController.to.certMap['file']!.first,
+                                    controller.certPwdController.text.trim(),
+                                  );
+                                  // await controller.callTestApi();
                                   controller.switchLoading();
                                 },
                                 child: Text('건강정보불러오기'),
