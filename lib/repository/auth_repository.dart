@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hem_capstone_app/models/user_model.dart';
 
 class AuthRepositroy{
 
-  final _userCollection = FirebaseFirestore.instance.collection('user');
+  final _userCollection = FirebaseFirestore.instance.collection('users');
+  final _auth = FirebaseAuth.instance;
 
   Future<UserModel?> findUserByUid(String uid) async {
     try{
@@ -14,4 +16,6 @@ class AuthRepositroy{
       return null;
     }
   }
+
+  String get userUid => _auth.currentUser!.uid;
 }
