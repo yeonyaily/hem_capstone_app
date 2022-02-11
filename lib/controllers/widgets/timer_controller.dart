@@ -17,7 +17,7 @@ class TimerController extends GetxController {
 
   @override
   void onClose() {
-    _timer!.cancel();
+    _timer == null ? null : _timer!.cancel();
     print('controller 제거');
     super.onClose();
   }
