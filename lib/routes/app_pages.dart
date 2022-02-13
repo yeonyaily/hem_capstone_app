@@ -1,16 +1,15 @@
 import 'package:get/get.dart';
-import 'package:hem_capstone_app/binding/cert_copy_binding.dart';
-import 'package:hem_capstone_app/binding/personal_info_binding.dart';
 import 'package:hem_capstone_app/binding/dashboard_binding.dart';
 import 'package:hem_capstone_app/binding/init_binding.dart';
 import 'package:hem_capstone_app/binding/signup_binding.dart';
+import 'package:hem_capstone_app/controllers/controller.dart';
 import 'package:hem_capstone_app/screens/dashboard_views/dashboard.dart';
-import 'package:hem_capstone_app/screens/dashboard_views/home/cert_copy.dart';
-import 'package:hem_capstone_app/screens/dashboard_views/home/cert_on_page.dart';
-import 'package:hem_capstone_app/screens/dashboard_views/home/enter_birth.dart';
-import 'package:hem_capstone_app/screens/dashboard_views/home/enter_certpwd.dart';
+import 'package:hem_capstone_app/screens/dashboard_views/home/home.dart';
+import 'package:hem_capstone_app/screens/dashboard_views/treat_history/drug_detail_screen.dart';
+import 'package:hem_capstone_app/screens/dashboard_views/treat_history/treat_detail_screen.dart';
 import 'package:hem_capstone_app/screens/login/help_screen.dart';
 import 'package:hem_capstone_app/screens/login/sign_up_screen.dart';
+
 import 'package:hem_capstone_app/start.dart';
 
 part 'app_routes.dart';
@@ -26,6 +25,8 @@ class AppPages {
   static const HELP = Routes.HELP;
   static const ENTERBIRTH = Routes.ENTERBIRTH;
   static const ENTERPWD = Routes.ENTERPWD;
+  static const TREATDETAIL = Routes.TREATDETAIL;
+  static const DRUGDETAIL = Routes.DRUGDETAIL;
 
   static final routes = [
     GetPage(
@@ -44,15 +45,12 @@ class AppPages {
       binding: SignUpBinding(),
     ),
     GetPage(
-        name: CERTCOPY,
-        page: () => CertCopyPage(),
-        binding: CertCopyBinding(),
-        transition: Transition.downToUp),
+      name: CERTCOPY,
+      page: () => CertCopyScreen(),
+    ),
     GetPage(
       name: CERTON,
       page: () => CertOnPage(),
-      binding: CertCopyBinding(),
-      transition: Transition.fadeIn,
     ),
     GetPage(
       name: HELP,
@@ -61,14 +59,21 @@ class AppPages {
     GetPage(
       name: ENTERBIRTH,
       page: () => EnterBirthPage(),
-      binding: PersonalInfoBinding(),
-      transition: Transition.native,
+      binding: BindingsBuilder((){
+        Get.put(DatetimePickerController());
+      }),
     ),
     GetPage(
       name: ENTERPWD,
       page: () => EnterCertPwdPage(),
-      binding: PersonalInfoBinding(),
-      transition: Transition.leftToRight,
     ),
+    GetPage(
+      name: TREATDETAIL, 
+      page: ()=> const TreatDetailScreen(),
+    ),
+    GetPage(
+      name: DRUGDETAIL, 
+      page: ()=> const DrugDetailScreen(),
+    )
   ];
 }
