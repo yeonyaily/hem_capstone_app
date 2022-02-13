@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class UserModel {
   final String? uid;
   final String? phoneNumber;
-  final DateTime? birth;
+  final Timestamp? birth;
   UserModel({
     required this.uid,
     required this.phoneNumber,
@@ -13,7 +13,7 @@ class UserModel {
   UserModel copyWith({
     String? uid,
     String? phoneNumber,
-    DateTime? birth,
+    Timestamp? birth,
   }) {
     return UserModel(
       uid: uid ?? this.uid,
