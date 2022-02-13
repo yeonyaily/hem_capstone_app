@@ -15,16 +15,18 @@ class HealthRepository {
       if(healthData.data() == null) return null;
       return InspectionModel.fromJson(healthData.data()!);
     } catch (e) {
+      print(e);
       return null;
     }
   }
 
   Future<DrugModel?> findMedicalDataByUid(String uid) async {
-     try{
+    try{
       var medicalData = await _medicalCollection.doc(uid).get();
       if(medicalData.data() == null) return null;
       return DrugModel.fromJson(medicalData.data()!);
     } catch (e) {
+      print(e);
       return null;
     }
   }
