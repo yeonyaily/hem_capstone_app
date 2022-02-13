@@ -33,7 +33,10 @@ dependencies:
     sdk: flutter
 
   tilko_plugin:
-    git: https://github.com/yeonyaily/tilko_plugin_capstone.git
+    git: 
+      url: https://github.com/yeonyaily/tilko_plugin_capstone.git
+      ref: yxxnsu
+      
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -51,6 +54,7 @@ dependencies:
   public_health_model: 
     git:
       url: https://github.com/Yxxnsu/public_health_model.git
+      ref: master
   
 
 dev_dependencies:
