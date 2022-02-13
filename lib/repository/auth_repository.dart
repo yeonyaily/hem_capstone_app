@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hem_capstone_app/models/user_model.dart';
 
-class AuthRepositroy{
+class AuthRepository{
 
   final _userCollection = FirebaseFirestore.instance.collection('users');
   final _auth = FirebaseAuth.instance;
@@ -13,6 +13,7 @@ class AuthRepositroy{
       if(user.size == 0) return null;
       return UserModel.fromDocumentSnapshot(user.docs[0]);
     } catch(e) {
+      print(e);
       return null;
     }
   }
