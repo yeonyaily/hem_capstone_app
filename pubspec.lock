@@ -354,8 +354,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: HEAD
-      resolved-ref: da8c4260063ad8e3ff2b7fa05c71bbde2e223819
+      ref: master
+      resolved-ref: db30ee726d98c0fffd6483134d15fd28ac848250
       url: "https://github.com/Yxxnsu/public_health_model.git"
     source: git
     version: "1.0.0"
@@ -410,8 +410,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: HEAD
-      resolved-ref: f1d7afa510e906473fd7b8420146f8c8a69331c5
+      ref: yxxnsu
+      resolved-ref: e80848b239b1c03b8604680fae8c1861355598c6
       url: "https://github.com/yeonyaily/tilko_plugin_capstone.git"
     source: git
     version: "0.0.1"
