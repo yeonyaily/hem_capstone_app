@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hem_capstone_app/utils/user/health_util.dart';
+import 'package:hem_capstone_app/utils/user/util.dart';
 import 'package:public_health_model/public_health_model.dart';
 
 class DrugView extends StatelessWidget {
