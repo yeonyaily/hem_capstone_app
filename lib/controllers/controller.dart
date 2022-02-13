@@ -1,1 +1,9 @@
 export 'auth/auth_controller.dart';
+export 'dashboard/navigation_controller.dart';
+export 'dashboard/home/cert_controller.dart';
+export 'dashboard/home/home_controller.dart';
+export 'signup/signup_controller.dart';
+export 'widgets/datetimepicker_controller.dart';
+export 'widgets/radio_controller.dart';
+export 'widgets/switch_controller.dart';
+export 'widgets/timer_controller.dart';
