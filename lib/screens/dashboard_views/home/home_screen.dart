@@ -88,36 +88,42 @@ class CertExistScreen extends GetView<CertController> {
         children: [
           space(height: 16),
           Text(
-            '안녕하세요 홍길동님 :)',
+            '안녕하세요 ${controller.certMap['name']![0].trim()}님 :)',
             style: theme.textTheme.bodyText2!.copyWith(
               color: Color(0xff979797),
             ),
           ),
-          Text('홍길동님의\n건강정보 입니다',
-              style: theme.textTheme.headline2!.copyWith(
-                color: theme.primaryColor,
-                fontWeight: FontWeight.w400,
-                fontSize: 32,
-              )),
+          Text(
+            '${controller.certMap['name']![0].trim()}님의\n건강정보 입니다',
+            style: theme.textTheme.headline2!.copyWith(
+              color: theme.primaryColor,
+              fontWeight: FontWeight.w400,
+              fontSize: 32,
+            ),
+          ),
           space(height: 32),
           basicInfoBox(theme, age),
           space(height: 24),
           certificateBox(theme),
           space(height: 40),
-          Text.rich(TextSpan(children: [
+          Text.rich(
             TextSpan(
-              text: '의료이용 기록 ',
-              style: theme.textTheme.bodyText1!.copyWith(
-                fontSize: 18,
-              ),
+              children: [
+                TextSpan(
+                  text: '의료이용 기록 ',
+                  style: theme.textTheme.bodyText1!.copyWith(
+                    fontSize: 18,
+                  ),
+                ),
+                TextSpan(
+                  text: '(최근 14개월)',
+                  style: theme.textTheme.caption!.copyWith(
+                    color: Color(0xff979797),
+                  ),
+                ),
+              ],
             ),
-            TextSpan(
-              text: '(최근 14개월)',
-              style: theme.textTheme.caption!.copyWith(
-                color: Color(0xff979797),
-              ),
-            ),
-          ])),
+          ),
           space(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -137,13 +143,15 @@ class CertExistScreen extends GetView<CertController> {
                         ),
                         space(height: 10),
                         Text.rich(TextSpan(children: [
-                          // TextSpan(
-                          //   text:
-                          //       '병원  ${HealthUtil.getMedicalData()!.resultList.length}',
-                          //   style: theme.textTheme.bodyText1!.copyWith(
-                          //     fontSize: 18,
-                          //   ),
-                          // ),
+                          TextSpan(
+                            text: HealthUtil.getMedicalData()!.resultList ==
+                                    null
+                                ? '0'
+                                : '병원  ${HealthUtil.getMedicalData()!.resultList!.where((data) => data.jinRyoHyungTae.contains('외래')).length}',
+                            style: theme.textTheme.bodyText1!.copyWith(
+                              fontSize: 18,
+                            ),
+                          ),
                           TextSpan(
                             text: '회',
                             style: theme.textTheme.caption!,
@@ -167,6 +175,42 @@ class CertExistScreen extends GetView<CertController> {
               Container(
                 width: 172,
                 height: 100,
+                padding: EdgeInsets.fromLTRB(20, 20, 0, 0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Image.asset(
+                          'assets/phi/heart_2.png',
+                        ),
+                        space(height: 10),
+                        Text.rich(TextSpan(children: [
+                          TextSpan(
+                            text: HealthUtil.getMedicalData()!.resultList ==
+                                    null
+                                ? '0'
+                                : '약국  ${HealthUtil.getMedicalData()!.resultList!.where((data) => data.jinRyoHyungTae.contains('조제')).length}',
+                            style: theme.textTheme.bodyText1!.copyWith(
+                              fontSize: 18,
+                            ),
+                          ),
+                          TextSpan(
+                            text: '회',
+                            style: theme.textTheme.caption!,
+                          ),
+                        ])),
+                      ],
+                    ),
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: Image.asset(
+                        'assets/phi/drug.png',
+                      ),
+                    )
+                  ],
+                ),
                 decoration: BoxDecoration(
                   color: Color(0xffFFD2A9),
                   borderRadius: BorderRadius.circular(8),
@@ -212,24 +256,28 @@ class CertExistScreen extends GetView<CertController> {
               ),
               space(height: 12),
               Text(
-                '홍길동님의 공동인증서',
+                '${controller.certMap['name']![0].trim()}님의 공동인증서',
                 style: theme.textTheme.bodyText2,
               ),
               space(height: 8),
-              Text.rich(TextSpan(children: [
+              Text.rich(
                 TextSpan(
-                  text: '사용기간 : ',
-                  style: theme.textTheme.caption!.copyWith(
-                    color: Color(0xff7E7E7E),
-                  ),
+                  children: [
+                    TextSpan(
+                      text: '사용기간 : ',
+                      style: theme.textTheme.caption!.copyWith(
+                        color: Color(0xff7E7E7E),
+                      ),
+                    ),
+                    TextSpan(
+                      text: '${controller.certMap['valid']![0]}',
+                      style: theme.textTheme.caption!.copyWith(
+                        color: theme.primaryColor,
+                      ),
+                    ),
+                  ],
                 ),
-                // TextSpan(
-                //   // text: '${controller.certMap['valid']![0]}',
-                //   style: theme.textTheme.caption!.copyWith(
-                //     color: theme.primaryColor,
-                //   ),
-                // ),
-              ])),
+              ),
             ],
           ),
           Image.asset(

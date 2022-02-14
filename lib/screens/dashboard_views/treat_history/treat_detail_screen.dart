@@ -1,19 +1,19 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:hem_capstone_app/constant/constant.dart';
 import 'package:hem_capstone_app/services/service.dart';
 import 'package:hem_capstone_app/theme/app_colors.dart';
-import 'package:hem_capstone_app/utils/user/util.dart';
+import 'package:public_health_model/drug_model.dart';
 
 class TreatDetailScreen extends StatelessWidget {
   const TreatDetailScreen({ Key? key }) : super(key: key);
-
-  @override 
+  
+  @override
   Widget build(BuildContext context) {
-    int idx = int.parse(Get.parameters['idx']!);
-    final data = HealthUtil.getMedicalData()!.resultList[idx];
+    ResultList data = Get.arguments;
     final theme = Theme.of(context);
     String title = Service.getString(data.byungEuiwonYakGukMyung, '[');
     String subTitle = Service.getString(data.byungEuiwonYakGukMyung, '[',isSubtile: true);
@@ -85,7 +85,7 @@ class TreatDetailScreen extends StatelessWidget {
             ),
             space(height: 28),
             Text(
-              '처방약',
+              data.retrieveTreatmentInjectionInformationPersonDetailList!.length != 0 ? '처방약' : '데이터가 없습니다.',
               style: theme.textTheme.bodyText2!.copyWith(
                 fontWeight: FontWeight.w400,
                 color: basicBlack,
@@ -93,28 +93,34 @@ class TreatDetailScreen extends StatelessWidget {
             ),
             space(height: 16),
             ...List.generate(
-              data.retrieveTreatmentInjectionInformationPersonDetailList.length,
-              (index)=> data.retrieveTreatmentInjectionInformationPersonDetailList.length != 0 ?
+              data.retrieveTreatmentInjectionInformationPersonDetailList!.length,
+              (index)=> data.retrieveTreatmentInjectionInformationPersonDetailList!.length != 0 ?
               InkWell(
-                onTap: ()=> Get.toNamed('/drugDetail/${idx}?second=${index}'),
+                onTap: ()=> Get.toNamed('/drugDetail', arguments: data.retrieveTreatmentInjectionInformationPersonDetailList![index].retrieveMdsupDtlInfo),
                 child: Container(
                   height: 60,
                   margin: EdgeInsets.only(bottom: 24),
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   child: Row(
                     children: [
-                      imageEncoding(data.retrieveTreatmentInjectionInformationPersonDetailList[index].retrieveMdsupDtlInfo.drugImage),
+                      SizedBox(
+                        width: 48,
+                        height: 48,
+                        child: Image.asset(
+                          'assets/phi/pills.png',
+                        ),
+                      ),
                       space(width: 12),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            Service.getString(data.retrieveTreatmentInjectionInformationPersonDetailList[index].choBangYakPumMyung, '('),
+                            Service.getString(data.retrieveTreatmentInjectionInformationPersonDetailList![index].choBangYakPumMyung, '('),
                             style: theme.textTheme.bodyText2,
                           ),
                           Text(
-                            data.retrieveTreatmentInjectionInformationPersonDetailList[index].choBangYakPumHyoneung,
+                            data.retrieveTreatmentInjectionInformationPersonDetailList![index].choBangYakPumHyoneung,
                             style: theme.textTheme.caption!,
                           )
                         ],
@@ -124,7 +130,7 @@ class TreatDetailScreen extends StatelessWidget {
                         child: Align(
                           alignment: Alignment(0, -.1),
                           child: Text(
-                            '${data.retrieveTreatmentInjectionInformationPersonDetailList[index].tuyakIlSoo}일분',
+                            '${data.retrieveTreatmentInjectionInformationPersonDetailList![index].tuyakIlSoo}일분',
                           ),
                         ),
                       ),
@@ -147,8 +153,23 @@ class TreatDetailScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-              ) : SizedBox(),
-            ) 
+              ) 
+              : SizedBox(),
+            ),
+            data.retrieveTreatmentInjectionInformationPersonDetailList!.length != 0 
+              ? SizedBox() 
+              : Column(
+                children: [
+                  space(height: 30),
+                  Center(
+                    child: SvgPicture.asset(
+                      'assets/phi/no_data.svg',
+                      width: 200,
+                      height: 200,
+                    ),
+                  ),
+                ],
+              ),
           ],
         ),
       )

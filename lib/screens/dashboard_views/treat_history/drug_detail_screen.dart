@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hem_capstone_app/constant/constant.dart';
 import 'package:hem_capstone_app/theme/theme.dart';
-import 'package:hem_capstone_app/utils/user/util.dart';
+import 'package:public_health_model/drug_model.dart';
 
 class DrugDetailScreen extends StatelessWidget {
   const DrugDetailScreen({ Key? key }) : super(key: key);
@@ -12,9 +12,7 @@ class DrugDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    int firstIdx = int.parse(Get.parameters['first']!);
-    int secondIdx = int.parse(Get.parameters['second']!);
-    final data = HealthUtil.getMedicalData()!.resultList[firstIdx].retrieveTreatmentInjectionInformationPersonDetailList[secondIdx].retrieveMdsupDtlInfo;
+    RetrieveMdsupDtlInfo data = Get.arguments;
     var drugImage = Uint8List.fromList(data.drugImage.codeUnits);
     return Scaffold(
       appBar:  PreferredSize(
@@ -76,7 +74,7 @@ class DrugDetailScreen extends StatelessWidget {
               space(height: 24),
               basicInfo(theme, data.tmsgGnlSpcd, 56, '총 투약일수'),
               space(height: 8),
-              basicInfo(theme, data.kpicInfo, 69, '약품 효능'),
+              basicInfo(theme, data.mohwClsfNoXplnCnte, 69, '약품 효능'),
               space(height: 8),
               basicInfo(theme, data.cmpnInfo, 56, '성분명 정보'),
               space(height: 8),
