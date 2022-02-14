@@ -354,8 +354,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: master
-      resolved-ref: "61e9f606b2d092e584e935067ec8c98d09843370"
+      ref: HEAD
+      resolved-ref: fb81a768a3233ac2bced62bd5c37e2ff1cbe080c
       url: "https://github.com/Yxxnsu/public_health_model.git"
     source: git
     version: "1.0.0"

@@ -7,18 +7,17 @@ import 'package:hem_capstone_app/routes/app_pages.dart';
 import 'package:hem_capstone_app/theme/app_colors.dart';
 import 'package:hem_capstone_app/utils/user/util.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class HomeScreen extends GetView<AuthController> {
+  HomeScreen({Key? key}) : super(key: key);
 
+  final _controller = Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return GetBuilder<CertController>(
-      init: CertController(),
-      builder: (_) {
-        return Scaffold(
-          appBar: _.certMap.length == 0 
-            ? null 
+    return Obx(
+      () => Scaffold(
+        appBar: !_controller.isCertOn.value
+            ? null
             : AppBar(
                 centerTitle: true,
                 title: Text(
@@ -30,17 +29,45 @@ class HomeScreen extends StatelessWidget {
                 elevation: 0,
                 backgroundColor: Colors.white,
               ),
-          body: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-            ),
-            child: _.certMap.length == 0
+        body: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 16,
+          ),
+          child: !_controller.isCertOn.value
               ? CertNotExistScreen(theme: theme)
               : CertExistScreen(),
-          ),
-        );
-      },
+        ),
+      ),
     );
+
+    // return GetBuilder<AuthController>(
+    //   init: AuthController(),
+    //   builder: (_) {
+    //     return Scaffold(
+    //       appBar: _.isCertOn
+    //           ? null
+    //           : AppBar(
+    //               centerTitle: true,
+    //               title: Text(
+    //                 'Home',
+    //                 style: theme.textTheme.subtitle1!.copyWith(
+    //                   color: basicBlack,
+    //                 ),
+    //               ),
+    //               elevation: 0,
+    //               backgroundColor: Colors.white,
+    //             ),
+    //       body: Padding(
+    //         padding: const EdgeInsets.symmetric(
+    //           horizontal: 16,
+    //         ),
+    //         child: _.isCertOn
+    //             ? CertNotExistScreen(theme: theme)
+    //             : CertExistScreen(),
+    //       ),
+    //     );
+    //   },
+    // );
   }
 }
 
@@ -52,7 +79,8 @@ class CertExistScreen extends GetView<CertController> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final age = DateTime.now().year - UserUtil.getUser()!.birth!.toDate().year + 1;
+    final age =
+        DateTime.now().year - UserUtil.getUser()!.birth!.toDate().year + 1;
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
       child: Column(
@@ -64,38 +92,32 @@ class CertExistScreen extends GetView<CertController> {
             style: theme.textTheme.bodyText2!.copyWith(
               color: Color(0xff979797),
             ),
-          ), 
-          Text(
-            '홍길동님의\n건강정보 입니다',
-            style: theme.textTheme.headline2!.copyWith(
-              color: theme.primaryColor,
-              fontWeight: FontWeight.w400,
-              fontSize: 32,
-            )
           ),
+          Text('홍길동님의\n건강정보 입니다',
+              style: theme.textTheme.headline2!.copyWith(
+                color: theme.primaryColor,
+                fontWeight: FontWeight.w400,
+                fontSize: 32,
+              )),
           space(height: 32),
           basicInfoBox(theme, age),
           space(height: 24),
           certificateBox(theme),
           space(height: 40),
-          Text.rich(
+          Text.rich(TextSpan(children: [
             TextSpan(
-              children: [
-                TextSpan(
-                  text: '의료이용 기록 ',
-                  style: theme.textTheme.bodyText1!.copyWith(
-                    fontSize: 18,
-                  ),                   
-                ),
-                TextSpan(
-                  text: '(최근 14개월)',
-                  style: theme.textTheme.caption!.copyWith(                            
-                    color: Color(0xff979797),
-                  ),      
-                ),
-              ]
-            )
-          ),
+              text: '의료이용 기록 ',
+              style: theme.textTheme.bodyText1!.copyWith(
+                fontSize: 18,
+              ),
+            ),
+            TextSpan(
+              text: '(최근 14개월)',
+              style: theme.textTheme.caption!.copyWith(
+                color: Color(0xff979797),
+              ),
+            ),
+          ])),
           space(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -114,22 +136,19 @@ class CertExistScreen extends GetView<CertController> {
                           'assets/phi/hospital.png',
                         ),
                         space(height: 10),
-                        Text.rich(
+                        Text.rich(TextSpan(children: [
+                          // TextSpan(
+                          //   text:
+                          //       '병원  ${HealthUtil.getMedicalData()!.resultList.length}',
+                          //   style: theme.textTheme.bodyText1!.copyWith(
+                          //     fontSize: 18,
+                          //   ),
+                          // ),
                           TextSpan(
-                            children: [
-                              TextSpan(
-                                text: '병원  ${HealthUtil.getMedicalData()!.resultList.length}',
-                                style: theme.textTheme.bodyText1!.copyWith(
-                                  fontSize: 18,
-                                ),                   
-                              ),
-                              TextSpan(
-                                text: '회',
-                                style: theme.textTheme.caption!,
-                              ),
-                            ]
-                          )
-                        ),
+                            text: '회',
+                            style: theme.textTheme.caption!,
+                          ),
+                        ])),
                       ],
                     ),
                     Align(
@@ -181,7 +200,7 @@ class CertExistScreen extends GetView<CertController> {
       padding: EdgeInsets.fromLTRB(24, 20, 0, 0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [ 
+        children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -189,7 +208,7 @@ class CertExistScreen extends GetView<CertController> {
                 '공동인증서',
                 style: theme.textTheme.bodyText1!.copyWith(
                   fontSize: 18,
-                ),                   
+                ),
               ),
               space(height: 12),
               Text(
@@ -197,24 +216,20 @@ class CertExistScreen extends GetView<CertController> {
                 style: theme.textTheme.bodyText2,
               ),
               space(height: 8),
-              Text.rich(
+              Text.rich(TextSpan(children: [
                 TextSpan(
-                  children: [
-                    TextSpan(
-                      text: '사용기간 : ',
-                      style: theme.textTheme.caption!.copyWith(
-                        color: Color(0xff7E7E7E),
-                      ),      
-                    ),
-                    TextSpan(
-                      text: '${controller.certMap['valid']![0]}',
-                      style: theme.textTheme.caption!.copyWith(                            
-                        color: theme.primaryColor,
-                      ),      
-                    ),
-                  ]
-                )
-              ),
+                  text: '사용기간 : ',
+                  style: theme.textTheme.caption!.copyWith(
+                    color: Color(0xff7E7E7E),
+                  ),
+                ),
+                // TextSpan(
+                //   // text: '${controller.certMap['valid']![0]}',
+                //   style: theme.textTheme.caption!.copyWith(
+                //     color: theme.primaryColor,
+                //   ),
+                // ),
+              ])),
             ],
           ),
           Image.asset(
@@ -244,41 +259,37 @@ class CertExistScreen extends GetView<CertController> {
                 '기본정보',
                 style: theme.textTheme.bodyText1!.copyWith(
                   fontSize: 18,
-                ),                
+                ),
               ),
               space(height: 12),
-              Text.rich(
+              Text.rich(TextSpan(children: [
                 TextSpan(
-                  children: [
-                    TextSpan(
-                      text: '$age',
-                      style: theme.textTheme.bodyText1!.copyWith(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 18,
-                      ),      
-                    ),
-                    TextSpan(
-                      text: '세  ',
-                      style: theme.textTheme.bodyText1!.copyWith(
-                        fontSize: 12,
-                      ),      
-                    ),
-                    TextSpan(
-                      text: '(만 ${age-2}세)',
-                      style: theme.textTheme.bodyText1!.copyWith(
-                        fontSize: 8,
-                        color: Color(0xff898A8D),
-                      ),
-                    ),
-                  ]
-                )
-              ),
+                  text: '$age',
+                  style: theme.textTheme.bodyText1!.copyWith(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 18,
+                  ),
+                ),
+                TextSpan(
+                  text: '세  ',
+                  style: theme.textTheme.bodyText1!.copyWith(
+                    fontSize: 12,
+                  ),
+                ),
+                TextSpan(
+                  text: '(만 ${age - 2}세)',
+                  style: theme.textTheme.bodyText1!.copyWith(
+                    fontSize: 8,
+                    color: Color(0xff898A8D),
+                  ),
+                ),
+              ])),
               Text(
                 '꾸준한 관리로 건강을 지키세요.',
                 style: theme.textTheme.bodyText1!.copyWith(
                   fontSize: 8,
                   color: Color(0xff898A8D),
-                ),      
+                ),
               )
             ],
           ),
