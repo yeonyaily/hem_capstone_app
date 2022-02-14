@@ -16,7 +16,6 @@ class CertPwdController extends GetxController {
   InspectionModel? inspectionModel;
   DrugModel? drugModel;
 
-
   RxBool isPwd = false.obs;
   RxBool isLoading = false.obs;
 
@@ -41,34 +40,40 @@ class CertPwdController extends GetxController {
   }
 
   Future<void> callTestApi() async {
-     final String url = 'https://my.api.mockaroo.com/capstone_my_drug.json?key=cdedf730';
-     final logger = Logger();
-    
+    final String url =
+        'https://my.api.mockaroo.com/capstone_my_drug.json?key=cdedf730';
+    final logger = Logger();
+
     final response = await http.get(Uri.parse(url));
 
-    if(response.statusCode == 200){
-      Map<String,dynamic> body = json.decode(response.body);
+    if (response.statusCode == 200) {
+      Map<String, dynamic> body = json.decode(response.body);
       logger.d(body);
-      
+
       drugModel = DrugModel.fromJson(body);
       String uid = AuthRepositroy().userUid;
 
-      FirebaseFirestore.instance.collection('medicalData').doc(uid).set(
-        drugModel!.toMap(),
-      )
-      .then((value) => print('Add medical data'))
-      .catchError((e)=> print(e));
+      FirebaseFirestore.instance
+          .collection('medicalData')
+          .doc(uid)
+          .set(
+            drugModel!.toMap(),
+          )
+          .then((value) => print('Add medical data'))
+          .catchError((e) => print(e));
 
       HealthUtil.setMedicalData(drugModel);
     } else {
       throw Exception('Failed to load post');
-    }     
+    }
   }
 
-  Future<void> callHealthApi(String apiKey, String filePath, String certPass) async {
-    try{
+  Future<void> callHealthApi(
+      String apiKey, String filePath, String certPass) async {
+    try {
       // Map<String, dynamic> healthData = await TilkoPlugin.callHealthCheckInfo(apiKey, filePath, certPass);
-      Map<String, dynamic> medicalData = await TilkoPlugin.callMedicalTreatment(apiKey, filePath, certPass);
+      Map<String, dynamic> medicalData =
+          await TilkoPlugin.callMedicalTreatment(apiKey, filePath, certPass);
       // inspectionModel = InspectionModel.fromJson(healthData);
       drugModel = DrugModel.fromJson(medicalData);
 
@@ -80,15 +85,17 @@ class CertPwdController extends GetxController {
       // .then((value) => print('Add health data'))
       // .catchError((e)=> print(e));
 
-      FirebaseFirestore.instance.collection('medicalData').doc(uid).set(
-        drugModel!.toMap(),
-      )
-      .then((value) => print('Add medical data'))
-      .catchError((e)=> print(e));
+      FirebaseFirestore.instance
+          .collection('medicalData')
+          .doc(uid)
+          .set(
+            drugModel!.toMap(),
+          )
+          .then((value) => print('Add medical data'))
+          .catchError((e) => print(e));
 
       // HealthUtil.setInspectionData(inspectionModel);
       HealthUtil.setMedicalData(drugModel);
-
     } catch (e) {
       CustomDialog.showDialog(
         title: 'Error',
