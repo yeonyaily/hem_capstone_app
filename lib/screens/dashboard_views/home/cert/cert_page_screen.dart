@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:hem_capstone_app/controllers/dashboard/cert_copy/cert_copy_controller.dart';
+import 'package:hem_capstone_app/controllers/controller.dart';
 import 'package:hem_capstone_app/routes/app_pages.dart';
 
-class CertOnPage extends GetView<CertCopyController> {
+class CertOnPage extends GetView<CertController> {
   CertOnPage({Key? key}) : super(key: key);
 
-  // CertCopyController _controller2 = Get.put(CertCopyController());
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +22,7 @@ class CertOnPage extends GetView<CertCopyController> {
                 height: 240.h,
               ),
               Text(
-                '공동인증서가 등록되었습니다',
+                '공동인증서가 등록되었습니다.',
                 style: theme.textTheme.subtitle1,
               ),
               SizedBox(
@@ -60,7 +59,7 @@ class CertOnPage extends GetView<CertCopyController> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              '${controller.certMap['name']![0]}' + '님의 공동인증서',
+                              '${controller.certMap['name']![0].trim()}' + '님의 공동인증서',
                               style: theme.textTheme.bodyText1,
                             ),
                             SizedBox(
@@ -91,9 +90,9 @@ class CertOnPage extends GetView<CertCopyController> {
               SizedBox(
                 height: 244.h,
               ),
-              Container(
+              SizedBox(
                 width: 342.w,
-                height: 48.h,
+                height: 48,
                 child: ElevatedButton(
                   onPressed: () {
                     Get.toNamed(Routes.ENTERBIRTH);
@@ -102,6 +101,11 @@ class CertOnPage extends GetView<CertCopyController> {
                     '건강 정보 불러오기',
                     style: theme.textTheme.bodyText1!
                         .copyWith(color: Colors.white),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    )
                   ),
                 ),
               ),

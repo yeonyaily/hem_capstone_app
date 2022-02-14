@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:hem_capstone_app/constant/constant.dart';
@@ -10,7 +11,6 @@ import 'package:hem_capstone_app/routes/app_pages.dart';
 import 'package:hem_capstone_app/utils/user/health_util.dart';
 import 'package:hem_capstone_app/utils/user/user_util.dart';
 import 'package:hem_capstone_app/widgets/custom/custom_dialog/custom_dialog.dart';
-import 'package:public_health_model/inspections_model.dart';
 import 'package:public_health_model/public_health_model.dart';
 import 'package:tilko_plugin/tilko_plugin.dart';
 
@@ -19,7 +19,7 @@ class AuthController extends GetxController {
 
   final _userCollection = firebase.collection('users');
   final signup = SignUpController.to;
-
+  
   UserModel? userModel;
 
   late Rxn<User?> _user;
@@ -45,12 +45,14 @@ class AuthController extends GetxController {
   Future<void> getUserInfo() async {
     if (auth.currentUser != null) {
       var uid = auth.currentUser!.uid;
-      userModel = await AuthRepositroy().findUserByUid(uid);
+      userModel = await AuthRepository().findUserByUid(uid);
       if (userModel == null) {
+        DateTime currentPhoneDate = DateTime.now();
+        Timestamp myTimeStamp = Timestamp.fromDate(currentPhoneDate);
         userModel = UserModel(
           uid: uid,
           phoneNumber: auth.currentUser!.phoneNumber,
-          birth: DateTime.now(),
+          birth: myTimeStamp,
         );
         _userCollection
           .doc(uid)
@@ -69,9 +71,8 @@ class AuthController extends GetxController {
       var uid = auth.currentUser!.uid;
       InspectionModel? inspectionModel = await HealthRepository().findHealthDataByUid(uid);
       DrugModel? drugModel = await HealthRepository().findMedicalDataByUid(uid);
-
       HealthUtil.setInspectionData(inspectionModel);
-      HealthUtil.setMedicalData(drugModel);    
+      HealthUtil.setMedicalData(drugModel); 
     }
   }
 
@@ -113,10 +114,9 @@ class AuthController extends GetxController {
 
   Future<UserCredential> signInWithPhoneNumber() async {
     PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.credential(
-        verificationId: signup.verificationId!,
-        smsCode: signup.phoneAuthNumberController.text);
-    final userCredential =
-        await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
+      verificationId: signup.verificationId!,
+      smsCode: signup.phoneAuthNumberController.text);
+    final userCredential = await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
     try {
       if (userCredential.user != null) {
         signup.isLoading.value = false;

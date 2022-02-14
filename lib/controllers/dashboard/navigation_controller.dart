@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class NavigationController extends GetxController {
+
+  static NavigationController get to => Get.find();
+
   int tabIndex = 0;
 
   final List<Map<String, dynamic>> _item = [
@@ -16,6 +19,15 @@ class NavigationController extends GetxController {
     {
       'icon': Icons.checklist,
       'text': '건강검진',
+    },
+  ];
+
+  final List<Map<String, dynamic>> tabBaritem = [
+    {
+      'text': '병원',
+    },
+    {
+      'text': '약국',
     },
   ];
 

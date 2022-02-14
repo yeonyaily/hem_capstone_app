@@ -63,10 +63,10 @@ class AppTheme {
       fontWeight: _medium,
       fontSize: 20.sp,
     ),
-    subtitle2: const TextStyle(
+    subtitle2: TextStyle(
       fontFamily: 'NotoSansKR',
       fontWeight: _medium,
-      fontSize: 14.0,
+      fontSize: 18.sp,
     ),
     bodyText1: TextStyle(
       fontFamily: 'NotoSansKR',

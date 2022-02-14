@@ -1,3 +1,4 @@
 {
-    "java.configuration.updateBuildConfiguration": "interactive"
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "dart.flutterSdkPath": "/Users/im-yeonsu/fvm/versions/2.8.1"
 }

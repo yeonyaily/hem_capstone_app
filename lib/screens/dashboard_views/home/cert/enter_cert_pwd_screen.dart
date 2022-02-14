@@ -2,14 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hem_capstone_app/constant/constant.dart';
-import 'package:hem_capstone_app/controllers/dashboard/cert_copy/cert_copy_controller.dart';
-import 'package:hem_capstone_app/controllers/dashboard/cert_pwd/cert_pwd_controller.dart';
+import 'package:hem_capstone_app/controllers/controller.dart';
 import 'package:hem_capstone_app/theme/app_colors.dart';
 
-class EnterCertPwdPage extends GetView<CertPwdController> {
+class EnterCertPwdPage extends GetView<CertController> {
   EnterCertPwdPage({Key? key}) : super(key: key);
-
-  // CertPwdController _controller = Get.put(CertPwdController());
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +17,35 @@ class EnterCertPwdPage extends GetView<CertPwdController> {
         child: Obx(
           () => controller.isLoading.value
               ? Center(
-                  child: Column(
-                    children: [
-                      Text(
-                        '건강 정보를 불러오고 있어요',
+                  child: Container(
+                    width: Get.width * 0.3,
+                    height: Get.width * 0.3,
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(20),
                       ),
-                      space(height: 24),
-                      LinearProgressIndicator(),
-                    ],
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: const [
+                        CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            Color.fromARGB(255, 0, 61, 165),
+                          ),
+                        ),
+                        SizedBox(height: 16),
+                        Text(
+                          '건강정보를\n불러오는 중입니다.',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.black,
+                            decoration: TextDecoration.none,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 )
               : Column(
@@ -94,9 +112,9 @@ class EnterCertPwdPage extends GetView<CertPwdController> {
                                      value.contains('^') ||
                                      value.contains('&') ||
                                      value.contains('*'))) {
-                                controller.approvePwd();
+                                controller.isPwd.value = true;
                               } else {
-                                controller.disapprovePwd();
+                                controller.isPwd.value = false;
                               }
                             },
                             validator: (value) {
@@ -122,16 +140,12 @@ class EnterCertPwdPage extends GetView<CertPwdController> {
                           height: 48,
                           child: controller.isPwd.value
                             ? ElevatedButton(
-                                onPressed: () async {
-                                  controller.switchLoading();
-                                  await controller.callHealthApi(
+                                onPressed: ()=>
+                                  controller.callHealthApi(
                                     '1b94ed1781e044d385e0f86ec7d29b93', 
-                                    CertCopyController.to.certMap['file']!.first,
+                                    CertController.to.certMap['file']!.first,
                                     controller.certPwdController.text.trim(),
-                                  );
-                                  // await controller.callTestApi();
-                                  controller.switchLoading();
-                                },
+                                  ),                                
                                 child: Text('건강정보불러오기'),
                                 style: ElevatedButton.styleFrom(
                                   elevation: 0,

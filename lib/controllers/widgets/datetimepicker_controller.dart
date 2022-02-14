@@ -5,7 +5,7 @@ import 'package:hem_capstone_app/constant/constant.dart';
 class DatetimePickerController extends GetxController {
   static DatetimePickerController get to => Get.find();
 
-  DateTime selectedDate = DateTime.now();
+  DateTime selectedDate = DateTime(2000,01,01);
   final _userCollection = FirebaseFirestore.instance.collection('users');
   var uid = auth.currentUser!.uid;
 
@@ -15,7 +15,8 @@ class DatetimePickerController extends GetxController {
   }
 
   void addBirthInfo() {
-    _userCollection.doc(uid).update({'birth': selectedDate});
+    Timestamp birth = Timestamp.fromDate(selectedDate);
+    _userCollection.doc(uid).update({'birth': birth});
   }
 
   @override
