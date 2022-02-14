@@ -51,7 +51,7 @@ class CertPwdController extends GetxController {
       logger.d(body);
 
       drugModel = DrugModel.fromJson(body);
-      String uid = AuthRepositroy().userUid;
+      String uid = AuthRepository().userUid;
 
       FirebaseFirestore.instance
           .collection('medicalData')
@@ -77,7 +77,7 @@ class CertPwdController extends GetxController {
       // inspectionModel = InspectionModel.fromJson(healthData);
       drugModel = DrugModel.fromJson(medicalData);
 
-      String uid = AuthRepositroy().userUid;
+      String uid = AuthRepository().userUid;
 
       // FirebaseFirestore.instance.collection('healthData').doc(uid).set(
       //   inspectionModel!.toMap(),

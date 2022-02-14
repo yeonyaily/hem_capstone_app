@@ -35,7 +35,7 @@ dependencies:
   tilko_plugin:
     git: 
       url: https://github.com/yeonyaily/tilko_plugin_capstone.git
-      ref: yxxnsu
+      ref: master
       
 
 

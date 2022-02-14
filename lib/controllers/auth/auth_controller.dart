@@ -19,14 +19,13 @@ class AuthController extends GetxController {
 
   final _userCollection = firebase.collection('users');
   final signup = SignUpController.to;
-  
+
   UserModel? userModel;
 
   late Rxn<User?> _user;
 
   @override
   void onInit() {
-    TilkoPlugin.requestPermission();
     _user = Rxn<User?>(auth.currentUser);
     _user.bindStream(auth.userChanges());
     ever(_user, _setInitialView);
@@ -38,8 +37,8 @@ class AuthController extends GetxController {
     await getHealthData();
 
     user == null
-      ? Get.offAllNamed(Routes.START)
-      : Get.offAllNamed(Routes.DASHBOARD);
+        ? Get.offAllNamed(Routes.START)
+        : Get.offAllNamed(Routes.DASHBOARD);
   }
 
   Future<void> getUserInfo() async {
@@ -55,10 +54,10 @@ class AuthController extends GetxController {
           birth: myTimeStamp,
         );
         _userCollection
-          .doc(uid)
-          .set(userModel!.toMap())
-          .then((value) => print('Set User'))
-          .catchError((e) => print(e));
+            .doc(uid)
+            .set(userModel!.toMap())
+            .then((value) => print('Set User'))
+            .catchError((e) => print(e));
       }
       UserUtil.setUser(userModel!);
     } else {
@@ -67,12 +66,13 @@ class AuthController extends GetxController {
   }
 
   Future<void> getHealthData() async {
-    if(auth.currentUser != null){
+    if (auth.currentUser != null) {
       var uid = auth.currentUser!.uid;
-      InspectionModel? inspectionModel = await HealthRepository().findHealthDataByUid(uid);
+      InspectionModel? inspectionModel =
+          await HealthRepository().findHealthDataByUid(uid);
       DrugModel? drugModel = await HealthRepository().findMedicalDataByUid(uid);
       HealthUtil.setInspectionData(inspectionModel);
-      HealthUtil.setMedicalData(drugModel); 
+      HealthUtil.setMedicalData(drugModel);
     }
   }
 
@@ -114,9 +114,10 @@ class AuthController extends GetxController {
 
   Future<UserCredential> signInWithPhoneNumber() async {
     PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.credential(
-      verificationId: signup.verificationId!,
-      smsCode: signup.phoneAuthNumberController.text);
-    final userCredential = await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
+        verificationId: signup.verificationId!,
+        smsCode: signup.phoneAuthNumberController.text);
+    final userCredential =
+        await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
     try {
       if (userCredential.user != null) {
         signup.isLoading.value = false;
