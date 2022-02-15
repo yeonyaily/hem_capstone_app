@@ -411,7 +411,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "6fec7ed66f7afab45e47ccaa69a1b1986fb6a871"
+      resolved-ref: caa7dea191cb9398fe3f0c5514c0f0024e8841eb
       url: "https://github.com/yeonyaily/tilko_plugin_capstone.git"
     source: git
     version: "0.0.1"
@@ -435,7 +435,7 @@ packages:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.3.11"
+    version: "2.4.0"
   xdg_directories:
     dependency: transitive
     description:
