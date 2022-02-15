@@ -13,10 +13,8 @@ class CertController extends GetxController{
 
   late TextEditingController certPwdController;
 
-
   final isLoading = false.obs;
   final isPwd = false.obs;  
-
 
   final frontKey = "    ".obs; 
   final backKey = "    ".obs;
@@ -26,7 +24,6 @@ class CertController extends GetxController{
   InspectionModel? inspectionModel;
   DrugModel? drugModel;
   
-
   @override
   void onInit() async {
     await getKey();
