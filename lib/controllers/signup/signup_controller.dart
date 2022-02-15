@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SignUpController extends GetxController{
-
+class SignUpController extends GetxController {
   static SignUpController get to => Get.find();
 
   RxBool isLoading = false.obs;
@@ -12,13 +11,13 @@ class SignUpController extends GetxController{
   RxBool isPhoneAuthNumber = false.obs;
 
   RxBool isSendAuthNumber = false.obs;
-  
+
   RxBool isPhoneNumberVaild = false.obs;
 
   String? verificationId;
 
   late FocusNode focusNode;
-   
+
   // TextEditingController
   late TextEditingController phoneNumberController;
   late TextEditingController phoneAuthNumberController;
@@ -36,7 +35,7 @@ class SignUpController extends GetxController{
     update();
   }
 
-  clear(){
+  clear() {
     phoneAuthNumberController.clear();
     phoneNumberController.clear();
     isSendAuthNumber.value = false;
