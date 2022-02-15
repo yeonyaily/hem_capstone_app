@@ -151,7 +151,7 @@ class EnterCertPwdPage extends GetView<CertController> {
                                   elevation: 0,
                                   primary: theme.primaryColor,
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(0),
+                                    borderRadius: BorderRadius.circular(8),
                                   ),
                                 ),
                               )
@@ -163,7 +163,7 @@ class EnterCertPwdPage extends GetView<CertController> {
                                   primary: Colors.white,
                                   backgroundColor: Colors.black12,
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(0),
+                                    borderRadius: BorderRadius.circular(8),
                                   ),
                                 ),
                               ),
