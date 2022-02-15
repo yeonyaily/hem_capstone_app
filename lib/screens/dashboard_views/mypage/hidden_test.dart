@@ -3,12 +3,14 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hem_capstone_app/constant/constant.dart';
+import 'package:hem_capstone_app/controllers/dashboard/home/cert_controller.dart';
 import 'package:hem_capstone_app/widgets/custom/custom_dialog/custom_dialog.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:logger/logger.dart';
 import 'package:public_health_model/public_health_model.dart';
+import 'package:tilko_plugin/tilko_plugin.dart';
 
 class HiddenTestMode extends StatelessWidget {
   const HiddenTestMode({ Key? key }) : super(key: key);
@@ -63,6 +65,7 @@ class _ModelTestingScreenState extends State<ModelTestingScreen> {
   // Future<DrugModel>? drugModel;
   Future<InspectionModel>? healthModel;
   Future<DrugModel>? drugModel;
+  InspectionModel? test;
   bool isGetHealth = false;
   bool isGetDrug = false;
 
@@ -117,11 +120,29 @@ class _ModelTestingScreenState extends State<ModelTestingScreen> {
                     }
                   )
                 : const Text('Drug Model is empty'),
+              Text(
+                test == null ? 'null' : test!.status,
+              ),
+              ElevatedButton(
+                onPressed: ()=> getInspection(
+                  '1b94ed1781e044d385e0f86ec7d29b93', 
+                  CertController.to.certMap['file']!.first, 
+                  'younhong135!',
+                ),
+                child: Text('윤횽'),
+              ),
             ],
           ),
         ),
       )
     );
+  }
+
+  void getInspection(String api, String filePath, String certPass) async {
+    Map<String,dynamic> healthData = await TilkoPlugin.callHealthCheckInfo(api, filePath, certPass);
+    setState(() {
+      test = InspectionModel.fromJson(healthData);
+    });
   }
 
   void getTest() async {
