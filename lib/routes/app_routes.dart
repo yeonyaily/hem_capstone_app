@@ -25,6 +25,6 @@ abstract class _Paths {
   static const HELP = '/help';
   static const ENTERBIRTH = '/enterbirth';
   static const ENTERPWD = '/enterpwd';
-  static const TREATDETAIL = '/treatDetail/:idx';
-  static const DRUGDETAIL = '/drugDetail/:first';
+  static const TREATDETAIL = '/treatDetail';
+  static const DRUGDETAIL = '/drugDetail';
 }
