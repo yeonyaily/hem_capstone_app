@@ -5,6 +5,11 @@ class Service{
     String subTitle = input.getSubTitle(charIdx);
     return isSubtile ? subTitle : title;
   }
+
+  // <p></p>
+  static String removeHtml(String input){
+    return input.replaceAll('<P></P>','');
+  }
 }
 
 extension E on String {
