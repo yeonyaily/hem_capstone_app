@@ -35,7 +35,7 @@ dependencies:
   tilko_plugin:
     git: 
       url: https://github.com/yeonyaily/tilko_plugin_capstone.git
-      ref: yxxnsu
+      ref: master
       
 
 
@@ -50,11 +50,13 @@ dependencies:
   flutter_screenutil: 5.0.2
   flutter_svg: ^1.0.3
   logger: ^1.1.0
+  flutter_html: ^3.0.0-alpha.2
 
   public_health_model: 
     git:
       url: https://github.com/Yxxnsu/public_health_model.git
-      ref: master
+
+      # ref: master
   
 
 dev_dependencies:

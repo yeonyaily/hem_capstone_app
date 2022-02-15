@@ -71,6 +71,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1"
+  csslib:
+    dependency: transitive
+    description:
+      name: csslib
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.17.1"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -146,6 +153,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_html:
+    dependency: "direct main"
+    description:
+      name: flutter_html
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.0-alpha.2"
   flutter_localizations:
     dependency: "direct main"
     description: flutter
@@ -189,6 +203,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.3.0"
+  html:
+    dependency: transitive
+    description:
+      name: html
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.15.0"
   http:
     dependency: transitive
     description:
@@ -238,6 +259,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.7.0"
+  numerus:
+    dependency: transitive
+    description:
+      name: numerus
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.1"
   path:
     dependency: transitive
     description:
@@ -354,8 +382,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: master
-      resolved-ref: db30ee726d98c0fffd6483134d15fd28ac848250
+      ref: HEAD
+      resolved-ref: fb81a768a3233ac2bced62bd5c37e2ff1cbe080c
       url: "https://github.com/Yxxnsu/public_health_model.git"
     source: git
     version: "1.0.0"
@@ -410,8 +438,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: yxxnsu
-      resolved-ref: e80848b239b1c03b8604680fae8c1861355598c6
+      ref: master
+      resolved-ref: "6fec7ed66f7afab45e47ccaa69a1b1986fb6a871"
       url: "https://github.com/yeonyaily/tilko_plugin_capstone.git"
     source: git
     version: "0.0.1"
