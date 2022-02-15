@@ -23,21 +23,22 @@ class AuthController extends GetxController {
   UserModel? userModel;
 
   late Rxn<User?> _user;
-  RxBool isCertOn = false.obs;
+  // RxBool isCertOn = false.obs;
 
   @override
   void onInit() {
-    FirebaseFirestore.instance
-        .collection('users')
-        .doc(auth.currentUser!.uid)
-        .get()
-        .then((DocumentSnapshot documentSnapshot) {
-      if (documentSnapshot.exists) isCertOn(documentSnapshot['certOnOff']);
-    });
-
     _user = Rxn<User?>(auth.currentUser);
     _user.bindStream(auth.userChanges());
     ever(_user, _setInitialView);
+
+    // FirebaseFirestore.instance
+    //     .collection('users')
+    //     .doc(auth.currentUser!.uid)
+    //     .get()
+    //     .then((DocumentSnapshot documentSnapshot) {
+    //   if (documentSnapshot.exists) isCertOn(documentSnapshot['certOnOff']);
+    // });
+
     super.onInit();
   }
 

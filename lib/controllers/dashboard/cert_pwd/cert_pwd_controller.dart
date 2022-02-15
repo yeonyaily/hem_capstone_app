@@ -71,31 +71,35 @@ class CertPwdController extends GetxController {
   Future<void> callHealthApi(
       String apiKey, String filePath, String certPass) async {
     try {
-      // Map<String, dynamic> healthData = await TilkoPlugin.callHealthCheckInfo(apiKey, filePath, certPass);
-      Map<String, dynamic> medicalData =
-          await TilkoPlugin.callMedicalTreatment(apiKey, filePath, certPass);
-      // inspectionModel = InspectionModel.fromJson(healthData);
-      drugModel = DrugModel.fromJson(medicalData);
+      Map<String, dynamic> healthData =
+          await TilkoPlugin.callHealthCheckInfo(apiKey, filePath, certPass);
+      // Map<String, dynamic> medicalData =
+      //     await TilkoPlugin.callMedicalTreatment(apiKey, filePath, certPass);
+      inspectionModel = InspectionModel.fromJson(healthData);
+      // drugModel = DrugModel.fromJson(medicalData);
 
       String uid = AuthRepository().userUid;
 
-      // FirebaseFirestore.instance.collection('healthData').doc(uid).set(
-      //   inspectionModel!.toMap(),
-      // )
-      // .then((value) => print('Add health data'))
-      // .catchError((e)=> print(e));
-
       FirebaseFirestore.instance
-          .collection('medicalData')
+          .collection('healthData')
           .doc(uid)
           .set(
-            drugModel!.toMap(),
+            inspectionModel!.toMap(),
           )
-          .then((value) => print('Add medical data'))
+          .then((value) => print('Add health data'))
           .catchError((e) => print(e));
 
-      // HealthUtil.setInspectionData(inspectionModel);
-      HealthUtil.setMedicalData(drugModel);
+      // FirebaseFirestore.instance
+      //     .collection('medicalData')
+      //     .doc(uid)
+      //     .set(
+      //       drugModel!.toMap(),
+      //     )
+      //     .then((value) => print('Add medical data'))
+      //     .catchError((e) => print(e));
+
+      HealthUtil.setInspectionData(inspectionModel);
+      // HealthUtil.setMedicalData(drugModel);
     } catch (e) {
       CustomDialog.showDialog(
         title: 'Error',

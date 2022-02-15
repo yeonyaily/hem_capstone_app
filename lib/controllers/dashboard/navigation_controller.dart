@@ -1,13 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hem_capstone_app/constant/constant.dart';
 
 class NavigationController extends GetxController {
-
   static NavigationController get to => Get.find();
 
-  int tabIndex = 0;
+  RxInt tabIndex = 0.obs;
 
-  final List<Map<String, dynamic>> _item = [
+  final RxList<Map<String, dynamic>> _item = [
     {
       'icon': Icons.home_rounded,
       'text': '홈',
@@ -20,7 +21,7 @@ class NavigationController extends GetxController {
       'icon': Icons.checklist,
       'text': '건강검진',
     },
-  ];
+  ].obs;
 
   final List<Map<String, dynamic>> tabBaritem = [
     {
@@ -34,7 +35,12 @@ class NavigationController extends GetxController {
   List<Map<String, dynamic>> get item => _item;
 
   void changeTabIndex(int index) {
-    tabIndex = index;
-    update();
+    tabIndex(index);
+    // update();
+  }
+
+  @override
+  void onInit() {
+    super.onInit();
   }
 }

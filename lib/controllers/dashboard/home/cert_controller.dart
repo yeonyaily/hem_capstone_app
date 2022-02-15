@@ -5,6 +5,7 @@ import 'package:hem_capstone_app/constant/constant.dart';
 import 'package:hem_capstone_app/repository/auth_repository.dart';
 import 'package:hem_capstone_app/utils/user/health_util.dart';
 import 'package:hem_capstone_app/widgets/custom/custom_dialog/custom_dialog.dart';
+import 'package:logger/logger.dart';
 import 'package:public_health_model/public_health_model.dart';
 import 'package:tilko_plugin/tilko_plugin.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -22,20 +23,16 @@ class CertController extends GetxController {
 
   var certMap = Map<String, List<dynamic>>();
   var certLength = 0;
-  // var isCertOn = false;
+
+  RxBool isCertOn = false.obs;
+  final logger = Logger();
 
   InspectionModel? inspectionModel;
   DrugModel? drugModel;
 
   @override
   void onInit() async {
-    // FirebaseFirestore.instance
-    //     .collection('users')
-    //     .doc(auth.currentUser!.uid)
-    //     .get()
-    //     .then((DocumentSnapshot documentSnapshot) {
-    //   if (documentSnapshot.exists) isCertOn = documentSnapshot['certOnOff'];
-    // });
+    detectCert();
 
     getKey();
     // await getCertificates();
@@ -58,10 +55,12 @@ class CertController extends GetxController {
     Map<String, List<String>> val = await TilkoPlugin.getCertificate();
     certMap = val;
     certLength = certMap.values.first.length;
-    FirebaseFirestore.instance
-        .collection('users')
-        .doc(auth.currentUser!.uid)
-        .update({'certOnOff': true});
+    if (certLength != 0) {
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(auth.currentUser!.uid)
+          .update({'certOnOff': true});
+    }
     update();
   }
 
@@ -69,23 +68,23 @@ class CertController extends GetxController {
       String apiKey, String filePath, String certPass) async {
     isLoading.toggle();
     try {
-      Map<String, dynamic> healthData =
-          await TilkoPlugin.callHealthCheckInfo(apiKey, filePath, certPass);
+      // Map<String, dynamic> healthData =
+      //     await TilkoPlugin.callHealthCheckInfo(apiKey, filePath, certPass);
       Map<String, dynamic> medicalData =
           await TilkoPlugin.callMedicalTreatment(apiKey, filePath, certPass);
-      inspectionModel = InspectionModel.fromJson(healthData);
+      // inspectionModel = InspectionModel.fromJson(healthData);
       drugModel = DrugModel.fromJson(medicalData);
 
       String uid = AuthRepository().userUid;
 
-      FirebaseFirestore.instance
-          .collection('healthData')
-          .doc(uid)
-          .set(
-            inspectionModel!.toMap(),
-          )
-          .then((value) => print('Add health data'))
-          .catchError((e) => print(e));
+      // FirebaseFirestore.instance
+      //     .collection('healthData')
+      //     .doc(uid)
+      //     .set(
+      //       inspectionModel!.toMap(),
+      //     )
+      //     .then((value) => print('Add health data'))
+      //     .catchError((e) => print(e));
 
       firebase
           .collection('medicalData')
@@ -96,7 +95,7 @@ class CertController extends GetxController {
           .then((value) => print('Add medical data'))
           .catchError((e) => print(e));
 
-      HealthUtil.setInspectionData(inspectionModel);
+      // HealthUtil.setInspectionData(inspectionModel);
       HealthUtil.setMedicalData(drugModel);
     } catch (e) {
       CustomDialog.showDialog(
@@ -106,6 +105,18 @@ class CertController extends GetxController {
     } finally {
       isLoading.toggle();
     }
+  }
+
+  void detectCert() {
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(auth.currentUser!.uid)
+        .get()
+        .then((DocumentSnapshot documentSnapshot) {
+      if (documentSnapshot.exists) isCertOn(documentSnapshot['certOnOff']);
+      logger.d(documentSnapshot['certOnOff']);
+      logger.d(isCertOn);
+    });
   }
 
   // Future<void> callTestApi() async {
