@@ -438,8 +438,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: HEAD
-      resolved-ref: "6fec7ed66f7afab45e47ccaa69a1b1986fb6a871"
+      ref: yxxnsu
+      resolved-ref: e80848b239b1c03b8604680fae8c1861355598c6
       url: "https://github.com/yeonyaily/tilko_plugin_capstone.git"
     source: git
     version: "0.0.1"
