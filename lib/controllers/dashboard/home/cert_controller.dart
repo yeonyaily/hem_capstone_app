@@ -2,8 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hem_capstone_app/constant/constant.dart';
+import 'package:hem_capstone_app/models/user_model.dart';
 import 'package:hem_capstone_app/repository/auth_repository.dart';
-import 'package:hem_capstone_app/utils/user/health_util.dart';
+import 'package:hem_capstone_app/utils/user/util.dart';
 import 'package:hem_capstone_app/widgets/custom/custom_dialog/custom_dialog.dart';
 import 'package:logger/logger.dart';
 import 'package:public_health_model/public_health_model.dart';
@@ -43,8 +44,8 @@ class CertController extends GetxController {
     String key;
     try {
       key = await TilkoPlugin.getKey();
-      frontKey(key.substring(0, 4));
-      backKey(key.substring(4, 8));
+      frontKey.value = key.substring(0, 4);
+      backKey.value = key.substring(4, 8);
     } catch (e) {
       print(e);
     }
@@ -52,13 +53,24 @@ class CertController extends GetxController {
 
   Future<void> getCertificates() async {
     Map<String, List<String>> val = await TilkoPlugin.getCertificate();
+    UserModel? userModel;
     certMap = val;
     certLength = certMap.values.first.length;
     if (certLength != 0) {
       FirebaseFirestore.instance
-          .collection('users')
-          .doc(auth.currentUser!.uid)
-          .update({'certOnOff': true});
+        .collection('users')
+        .doc(auth.currentUser!.uid)
+        .update({
+          'certOnOff': true,
+          'name': certMap['name']![0].trim(),
+          'validDate': certMap['valid']![0],
+        })
+        .then((value) async {
+          userModel = await AuthRepository().findUserByUid(AuthRepository().userUid);
+          if(userModel != null) UserUtil.setUser(userModel!); 
+          print('set User');
+        })
+        .catchError((e)=> print(e));
     }
     update();
   }
@@ -66,30 +78,34 @@ class CertController extends GetxController {
   Future<void> callHealthApi(String apiKey, String filePath, String certPass) async {
     isLoading.toggle();
     try {
-      // Map<String, dynamic> healthData = await TilkoPlugin.callHealthCheckInfo(apiKey, filePath, certPass);
+      Map<String, dynamic> healthData = await TilkoPlugin.callHealthCheckInfo(apiKey, filePath, certPass);
       Map<String, dynamic> medicalData = await TilkoPlugin.callMedicalTreatment(apiKey, filePath, certPass);
-      // inspectionModel = InspectionModel.fromJson(healthData);
+      inspectionModel = InspectionModel.fromJson(healthData);
       drugModel = DrugModel.fromJson(medicalData);
 
       String uid = AuthRepository().userUid;
 
-      // FirebaseFirestore.instance
-      //     .collection('healthData')
-      //     .doc(uid)
-      //     .set(
-      //       inspectionModel!.toMap(),
-      //     )
-      //     .then((value) => print('Add health data'))
-      //     .catchError((e) => print(e));
+      firebase
+        .collection('healthData')
+        .doc(uid)
+        .set(
+          inspectionModel!.toMap(),
+        )
+        .then((value) => print('Add health data'))
+        .catchError((e) => print(e));
 
-      firebase.collection('medicalData').doc(uid).set(
-        drugModel!.toMap(),
-      )
-      .then((value) => print('Add medical data'))
-      .catchError((e) => print(e));
+      firebase
+        .collection('medicalData')
+        .doc(uid)
+        .set(
+          drugModel!.toMap(),
+        )
+        .then((value) => print('Add medical data'))
+        .catchError((e) => print(e));
 
-      // HealthUtil.setInspectionData(inspectionModel);
+      HealthUtil.setInspectionData(inspectionModel);
       HealthUtil.setMedicalData(drugModel);
+      
     } catch (e) {
       CustomDialog.showDialog(
         title: 'Error',
@@ -101,7 +117,8 @@ class CertController extends GetxController {
   }
 
   void detectCert() {
-    FirebaseFirestore.instance
+    if(auth.currentUser != null){
+      FirebaseFirestore.instance
       .collection('users')
       .doc(auth.currentUser!.uid)
       .get()
@@ -110,6 +127,7 @@ class CertController extends GetxController {
         logger.d(documentSnapshot['certOnOff']);
         logger.d(isCertOn);
       });
+    }
   }
 
   // Future<void> callTestApi() async {
