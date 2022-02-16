@@ -16,8 +16,7 @@ class TreatDetailScreen extends StatelessWidget {
     ResultList data = Get.arguments;
     final theme = Theme.of(context);
     String title = Service.getString(data.byungEuiwonYakGukMyung, '[');
-    String subTitle =
-        Service.getString(data.byungEuiwonYakGukMyung, '[', isSubtile: true);
+    String subTitle = Service.getString(data.byungEuiwonYakGukMyung, '[', isSubtile: true);
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: Size(390, 72),
