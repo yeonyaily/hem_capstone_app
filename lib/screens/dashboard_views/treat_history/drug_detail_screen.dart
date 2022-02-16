@@ -1,9 +1,11 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 import 'package:hem_capstone_app/constant/constant.dart';
+import 'package:hem_capstone_app/services/service.dart';
 import 'package:hem_capstone_app/theme/theme.dart';
 import 'package:public_health_model/drug_model.dart';
 
@@ -14,7 +16,6 @@ class DrugDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     RetrieveMdsupDtlInfo data = Get.arguments;
-    var drugImage = Uint8List.fromList(data.drugImage.codeUnits);
     return Scaffold(
       appBar:  PreferredSize(
         preferredSize: Size(390, 72),
@@ -68,7 +69,7 @@ class DrugDetailScreen extends StatelessWidget {
                 width: double.infinity,
                 height: 172,
                 child:  Image.memory(
-                  drugImage,
+                  Service.getImage(data.drugImage),
                   fit: BoxFit.cover,
                 ),
               ),
