@@ -89,64 +89,61 @@ class CertCopyScreen extends GetView<CertController> {
                       ],
                     ),
                     SizedBox(height: 9.h),
-                    Obx(
-                      () => Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Container(
-                              alignment: Alignment.center,
-                              width: 143.w,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  width: 1,
-                                  color: Colors.grey,
-                                ),
+                    Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Container(
+                            alignment: Alignment.center,
+                            width: 143.w,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                width: 1,
+                                color: Colors.grey,
                               ),
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(36, 10, 36, 10),
-                                child: Text(
-                                  "${controller.frontKey.value}",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    color: theme.colorScheme.primary,
-                                  ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(36, 10, 36, 10),
+                              child: Text(
+                                "${controller.frontKey.value}",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: theme.colorScheme.primary,
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              width: 8,
-                            ),
-                            Text(
-                              'ㅡ',
-                              style: TextStyle(fontSize: 20),
-                            ),
-                            SizedBox(
-                              width: 8,
-                            ),
-                            Container(
-                              alignment: Alignment.center,
-                              width: 143.w,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  width: 1,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.fromLTRB(36, 10, 36, 10),
-                                child: Text(
-                                  "${controller.backKey.value}",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    color: theme.colorScheme.primary,
-                                  ),
-                                ),
+                          ),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          Text(
+                            'ㅡ',
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          Container(
+                            alignment: Alignment.center,
+                            width: 143.w,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                width: 1,
+                                color: Colors.grey,
                               ),
                             ),
-                          ],
-                        ),
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(36, 10, 36, 10),
+                              child: Text(
+                                "${controller.backKey.value}",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: theme.colorScheme.primary,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     space(height: 72.h),
