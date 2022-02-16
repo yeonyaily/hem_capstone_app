@@ -30,10 +30,10 @@ class EnterCertPwdPage extends GetView<CertController> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: const [
+                    children: [
                       CircularProgressIndicator(
                         valueColor: AlwaysStoppedAnimation<Color>(
-                          Color.fromARGB(255, 0, 61, 165),
+                          theme.primaryColor,
                         ),
                       ),
                       SizedBox(height: 16),
@@ -44,6 +44,7 @@ class EnterCertPwdPage extends GetView<CertController> {
                           color: Colors.black,
                           decoration: TextDecoration.none,
                         ),
+                        textAlign: TextAlign.center,
                       ),
                     ],
                   ),
