@@ -68,23 +68,23 @@ class CertController extends GetxController {
       String apiKey, String filePath, String certPass) async {
     isLoading.toggle();
     try {
-      // Map<String, dynamic> healthData =
-      //     await TilkoPlugin.callHealthCheckInfo(apiKey, filePath, certPass);
+      Map<String, dynamic> healthData =
+          await TilkoPlugin.callHealthCheckInfo(apiKey, filePath, certPass);
       Map<String, dynamic> medicalData =
           await TilkoPlugin.callMedicalTreatment(apiKey, filePath, certPass);
-      // inspectionModel = InspectionModel.fromJson(healthData);
+      inspectionModel = InspectionModel.fromJson(healthData);
       drugModel = DrugModel.fromJson(medicalData);
 
       String uid = AuthRepository().userUid;
 
-      // FirebaseFirestore.instance
-      //     .collection('healthData')
-      //     .doc(uid)
-      //     .set(
-      //       inspectionModel!.toMap(),
-      //     )
-      //     .then((value) => print('Add health data'))
-      //     .catchError((e) => print(e));
+      FirebaseFirestore.instance
+          .collection('healthData')
+          .doc(uid)
+          .set(
+            inspectionModel!.toMap(),
+          )
+          .then((value) => print('Add health data'))
+          .catchError((e) => print(e));
 
       firebase
           .collection('medicalData')
@@ -95,7 +95,7 @@ class CertController extends GetxController {
           .then((value) => print('Add medical data'))
           .catchError((e) => print(e));
 
-      // HealthUtil.setInspectionData(inspectionModel);
+      HealthUtil.setInspectionData(inspectionModel);
       HealthUtil.setMedicalData(drugModel);
     } catch (e) {
       CustomDialog.showDialog(
@@ -108,15 +108,16 @@ class CertController extends GetxController {
   }
 
   void detectCert() {
-    FirebaseFirestore.instance
-        .collection('users')
-        .doc(auth.currentUser!.uid)
-        .get()
-        .then((DocumentSnapshot documentSnapshot) {
-      if (documentSnapshot.exists) isCertOn(documentSnapshot['certOnOff']);
-      logger.d(documentSnapshot['certOnOff']);
-      logger.d(isCertOn);
-    });
+    if (auth.currentUser != null)
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(auth.currentUser!.uid)
+          .get()
+          .then((DocumentSnapshot documentSnapshot) {
+        if (documentSnapshot.exists) isCertOn(documentSnapshot['certOnOff']);
+        logger.d(documentSnapshot['certOnOff']);
+        logger.d(isCertOn);
+      });
   }
 
   // Future<void> callTestApi() async {
