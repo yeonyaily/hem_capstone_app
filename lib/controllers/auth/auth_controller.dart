@@ -12,7 +12,6 @@ import 'package:hem_capstone_app/utils/user/health_util.dart';
 import 'package:hem_capstone_app/utils/user/user_util.dart';
 import 'package:hem_capstone_app/widgets/custom/custom_dialog/custom_dialog.dart';
 import 'package:public_health_model/public_health_model.dart';
-import 'package:tilko_plugin/tilko_plugin.dart';
 
 class AuthController extends GetxController {
   static AuthController get to => Get.find();
@@ -30,15 +29,6 @@ class AuthController extends GetxController {
     _user = Rxn<User?>(auth.currentUser);
     _user.bindStream(auth.userChanges());
     ever(_user, _setInitialView);
-
-    // FirebaseFirestore.instance
-    //     .collection('users')
-    //     .doc(auth.currentUser!.uid)
-    //     .get()
-    //     .then((DocumentSnapshot documentSnapshot) {
-    //   if (documentSnapshot.exists) isCertOn(documentSnapshot['certOnOff']);
-    // });
-
     super.onInit();
   }
 
