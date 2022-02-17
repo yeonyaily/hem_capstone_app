@@ -8,3 +8,4 @@ export 'widgets/radio_controller.dart';
 export 'widgets/switch_controller.dart';
 export 'widgets/timer_controller.dart';
 export 'dashboard/cert_pwd/cert_pwd_controller.dart';
+export 'health_check/health_check_controller.dart';
