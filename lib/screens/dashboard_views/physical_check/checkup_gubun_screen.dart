@@ -106,7 +106,7 @@ class CheckUpGobunScreen extends StatelessWidget {
                               space(height: 16),
                               ...List.generate(items!.length, (index) {
                                 List<ItemReference>? itemReference = items[index].itemReferences;
-                                int? criteria = itemReference!.isNotEmpty
+                                int? criteria = itemReference!.isNotEmpty && items[index].value.isNotEmpty
                                   ? getCriteria(inspection.gubun, items[index].value, items[index].name)                              
                                   : null;
                                 return Container(
@@ -134,7 +134,7 @@ class CheckUpGobunScreen extends StatelessWidget {
                                           style: theme.textTheme.bodyText1,
                                         ),
                                       ),
-                                      itemReference.length == 0 
+                                      itemReference.length == 0 || items[index].value.isEmpty
                                         ? SizedBox()
                                         : Text(
                                             itemReference[criteria!].name,
