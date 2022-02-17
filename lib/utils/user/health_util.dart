@@ -17,5 +17,4 @@ class HealthUtil {
   static DrugModel? getMedicalData(){
     return _drugModel;
   }
-
 }
