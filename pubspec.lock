@@ -252,6 +252,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.12.11"
+  material_color_utilities:
+    dependency: transitive
+    description:
+      name: material_color_utilities
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.3"
   meta:
     dependency: transitive
     description:
@@ -433,13 +440,13 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.3"
+    version: "0.4.8"
   tilko_plugin:
     dependency: "direct main"
     description:
       path: "."
-      ref: yxxnsu
-      resolved-ref: "1479a1b3c84e5ae662fb1bf8c220a5f88a35a7f8"
+      ref: master
+      resolved-ref: cd36fcb23a1229520118cf7feeca4c8b913caf68
       url: "https://github.com/yeonyaily/tilko_plugin_capstone.git"
     source: git
     version: "0.0.1"
