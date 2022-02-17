@@ -9,7 +9,6 @@ import 'package:hem_capstone_app/routes/app_pages.dart';
 class EnterBirthPage extends GetView<DatetimePickerController> {
   EnterBirthPage({Key? key}) : super(key: key);
 
-  // DatetimePickerController _controller = Get.put(DatetimePickerController());
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
