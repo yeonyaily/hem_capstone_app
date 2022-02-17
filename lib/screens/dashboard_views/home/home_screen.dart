@@ -10,32 +10,31 @@ import 'package:hem_capstone_app/utils/user/util.dart';
 class HomeScreen extends GetView<CertController> {
   HomeScreen({Key? key}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Obx(
       () => Scaffold(
         appBar: !controller.isCertOn.value
-          ? null
-          : AppBar(
-              centerTitle: true,
-              title: Text(
-                'Home',
-                style: theme.textTheme.subtitle1!.copyWith(
-                  color: basicBlack,
+            ? null
+            : AppBar(
+                centerTitle: true,
+                title: Text(
+                  'Home',
+                  style: theme.textTheme.subtitle1!.copyWith(
+                    color: basicBlack,
+                  ),
                 ),
+                elevation: 0,
+                backgroundColor: Colors.white,
               ),
-              elevation: 0,
-              backgroundColor: Colors.white,
-            ),
         body: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 16,
           ),
           child: !controller.isCertOn.value
-            ? CertNotExistScreen(theme: theme)
-            : CertExistScreen(),
+              ? CertNotExistScreen(theme: theme)
+              : CertExistScreen(),
         ),
       ),
     );
@@ -50,7 +49,12 @@ class CertExistScreen extends GetView<CertController> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final age = DateTime.now().year - UserUtil.getUser()!.birth!.toDate().year + 1;
+    // final age =
+    //     DateTime.now().year - UserUtil.getUser()!.birth!.toDate().year + 1;
+
+    final myInt = int.parse(UserUtil.getUser()!.identityNum!.substring(0, 2));
+    final age2 = (DateTime.now().year - 2000) - myInt + 1;
+
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
       child: Column(
@@ -72,7 +76,7 @@ class CertExistScreen extends GetView<CertController> {
             ),
           ),
           space(height: 32),
-          basicInfoBox(theme, age),
+          basicInfoBox(theme, age2),
           space(height: 24),
           certificateBox(theme),
           space(height: 40),
@@ -114,9 +118,10 @@ class CertExistScreen extends GetView<CertController> {
                         space(height: 10),
                         Text.rich(TextSpan(children: [
                           TextSpan(
-                            text: HealthUtil.getMedicalData()!.resultList == null
-                              ? '0'
-                              : '병원  ${HealthUtil.getMedicalData()!.resultList!.where((data) => data.jinRyoHyungTae.contains('외래')).length}',
+                            text: HealthUtil.getMedicalData()!.resultList ==
+                                    null
+                                ? '0'
+                                : '병원  ${HealthUtil.getMedicalData()!.resultList!.where((data) => data.jinRyoHyungTae.contains('외래')).length}',
                             style: theme.textTheme.bodyText1!.copyWith(
                               fontSize: 18,
                             ),
@@ -157,7 +162,8 @@ class CertExistScreen extends GetView<CertController> {
                         space(height: 10),
                         Text.rich(TextSpan(children: [
                           TextSpan(
-                            text: HealthUtil.getMedicalData()!.resultList == null
+                            text: HealthUtil.getMedicalData()!.resultList ==
+                                    null
                                 ? '0'
                                 : '약국  ${HealthUtil.getMedicalData()!.resultList!.where((data) => data.jinRyoHyungTae.contains('조제')).length}',
                             style: theme.textTheme.bodyText1!.copyWith(

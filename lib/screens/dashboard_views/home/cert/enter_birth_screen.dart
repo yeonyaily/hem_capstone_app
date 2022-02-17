@@ -1,112 +1,283 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hem_capstone_app/constant/constant.dart';
 import 'package:hem_capstone_app/controllers/controller.dart';
 import 'package:hem_capstone_app/routes/app_pages.dart';
+import 'package:hem_capstone_app/theme/theme.dart';
+import 'package:logger/logger.dart';
 
-class EnterBirthPage extends GetView<DatetimePickerController> {
+class EnterBirthPage extends GetView<CertController> {
   EnterBirthPage({Key? key}) : super(key: key);
 
-  // DatetimePickerController _controller = Get.put(DatetimePickerController());
+  final logger = Logger();
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: ListView(
-            children: [
-              IntrinsicHeight(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                    minHeight: MediaQuery.of(context).size.height - 50,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  space(height: 48.h),
+                  Text(
+                    '주민등록번호를 입력해주세요:)',
+                    style: theme.textTheme.headline3,
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  space(height: 12),
+                  Text(
+                    '공공 API를 사용하기 위해서 필요합니다.',
+                    style: theme.textTheme.caption!.copyWith(
+                      color: Colors.black26,
+                    ),
+                  ),
+                  space(height: 44.h),
+                  Text(
+                    '주민등록번호',
+                    style: theme.textTheme.caption!.copyWith(
+                      color: Colors.black38,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      space(height: 48.h),
-                      Text(
-                        '생년월일을 입력해주세요:)',
-                        style: theme.textTheme.headline3,
-                      ),
-                      space(height: 12),
-                      Text(
-                        '공공 API를 사용하기 위해서 필요합니다.',
-                        style: theme.textTheme.caption!.copyWith(
-                          color: Colors.black26,
-                        ),
-                      ),
-                      space(height: 46.h),
-                      GetBuilder<DatetimePickerController>(
-                        builder: (_) {
-                          return Text("${controller.selectedDate.toString()}");
-                        },
-                      ),
                       Container(
-                        width: 334.w,
-                        height: 373.h,
-                        child: CupertinoDatePicker(
-                          minimumYear: 1950,
-                          maximumYear: DateTime.now().year,
-                          mode: CupertinoDatePickerMode.date,
-                          onDateTimeChanged: (value) {
-                            controller.onDateTimeChanged(value);
+                        width: 132.w,
+                        child: TextFormField(
+                          // obscureText: true,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          controller: controller.identityHeadNumController,
+                          style: theme.textTheme.bodyText1,
+                          maxLength: 6,
+                          autofocus: true,
+                          cursorColor: basicBlack,
+                          decoration: InputDecoration(
+                            counterText: "",
+                            fillColor: Colors.transparent,
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: basicBlack,
+                              ),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: theme.colorScheme.primary,
+                              ),
+                            ),
+                            border: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: basicBlack,
+                              ),
+                            ),
+                          ),
+                          onChanged: (value) {},
+                          validator: (value) {
+                            if (value!.length < 6) {
+                              return '(주민등록번호 앞6자리)';
+                            }
                           },
-                          initialDateTime: DateTime(2000,01,01),
+                          keyboardType: TextInputType.text,
                         ),
                       ),
-                      Spacer(),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ConstrainedBox(
-                            constraints:
-                                BoxConstraints.tightFor(height: 48.h, width: 155.w),
-                            child: TextButton(
-                              onPressed: () {
-                                Get.back();
-                              },
-                              child: Text(
-                                '이전',
-                                style: theme.textTheme.bodyText2!.copyWith(
-                                  color: Colors.white,
-                                ),
+                      space(width: 16.w),
+                      Text(
+                        '-',
+                        style: TextStyle(
+                            fontSize: 30, fontWeight: FontWeight.normal),
+                      ),
+                      space(width: 16.w),
+                      Container(
+                        width: 132.w,
+                        child: TextFormField(
+                          // obscureText: true,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          controller: controller.identityBackNumController,
+                          style: theme.textTheme.bodyText1,
+                          maxLength: 7,
+                          autofocus: true,
+                          cursorColor: basicBlack,
+                          decoration: InputDecoration(
+                            counterText: "",
+                            fillColor: Colors.transparent,
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: basicBlack,
                               ),
-                              style: TextButton.styleFrom(
-                                backgroundColor: Colors.grey,
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: theme.colorScheme.primary,
+                              ),
+                            ),
+                            border: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: basicBlack,
                               ),
                             ),
                           ),
-                          space(width: 24.w),
-                          ConstrainedBox(
-                            constraints:
-                                BoxConstraints.tightFor(height: 48.h, width: 155.w),
-                            child: ElevatedButton(
-                              onPressed: () {
-                                controller.addBirthInfo();
-                                Get.toNamed(Routes.ENTERPWD);
-                              },
-                              child: Text(
-                                '다음',
-                                style: theme.textTheme.bodyText2!.copyWith(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      )
+                          onChanged: (value) {},
+                          validator: (value) {
+                            if (value!.length < 7) {
+                              return '(주민등록번호 뒷6자리)';
+                            }
+                          },
+                          keyboardType: TextInputType.text,
+                        ),
+                      ),
                     ],
                   ),
+                ],
+              ),
+            ),
+            Spacer(),
+            Padding(
+              padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom,
+              ),
+              child: Container(
+                width: Get.width,
+                child: ElevatedButton(
+                  child: Text('다음'),
+                  onPressed: () {
+                    FirebaseFirestore.instance
+                        .collection('users')
+                        .doc(auth.currentUser!.uid)
+                        .update({
+                      'identityNum':
+                          controller.identityHeadNumController.text.trim() +
+                              controller.identityBackNumController.text.trim(),
+                    });
+
+                    if (controller.identityBackNumController.text
+                            .substring(0, 1) ==
+                        '1') {
+                      logger.d(controller.identityBackNumController.text
+                          .substring(0, 1));
+                      FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(auth.currentUser!.uid)
+                          .update({'gender': '남'});
+                    } else {
+                      logger.d(controller.identityBackNumController.text
+                          .substring(0, 1));
+                      FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(auth.currentUser!.uid)
+                          .update({'gender': '여'});
+                    }
+
+                    Get.toNamed(Routes.ENTERPWD);
+                  },
                 ),
-              )
-            ],
-          ),
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 }
+
+
+// Row(
+//                             mainAxisAlignment: MainAxisAlignment.center,
+//                             children: [
+//                               Container(
+//                                 width: 132.w,
+//                                 child: TextFormField(
+//                                   // obscureText: true,
+//                                   autovalidateMode:
+//                                       AutovalidateMode.onUserInteraction,
+//                                   controller:
+//                                       controller.identityHeadNumController,
+//                                   style: theme.textTheme.bodyText1,
+//                                   maxLength: 6,
+//                                   autofocus: true,
+//                                   cursorColor: basicBlack,
+//                                   decoration: InputDecoration(
+//                                     counterText: "",
+//                                     fillColor: Colors.transparent,
+//                                     enabledBorder: UnderlineInputBorder(
+//                                       borderSide: BorderSide(
+//                                         color: basicBlack,
+//                                       ),
+//                                     ),
+//                                     focusedBorder: UnderlineInputBorder(
+//                                       borderSide: BorderSide(
+//                                         color: theme.colorScheme.primary,
+//                                       ),
+//                                     ),
+//                                     border: UnderlineInputBorder(
+//                                       borderSide: BorderSide(
+//                                         color: basicBlack,
+//                                       ),
+//                                     ),
+//                                   ),
+//                                   onChanged: (value) {},
+//                                   validator: (value) {
+//                                     if (value!.length < 6) {
+//                                       return '(주민등록번호 앞6자리)';
+//                                     }
+//                                   },
+//                                   keyboardType: TextInputType.text,
+//                                 ),
+//                               ),
+//                               space(width: 16.w),
+//                               Text(
+//                                 '-',
+//                                 style: TextStyle(
+//                                     fontSize: 30,
+//                                     fontWeight: FontWeight.normal),
+//                               ),
+//                               space(width: 16.w),
+//                               Container(
+//                                 width: 132.w,
+//                                 child: TextFormField(
+//                                   // obscureText: true,
+//                                   autovalidateMode:
+//                                       AutovalidateMode.onUserInteraction,
+//                                   controller:
+//                                       controller.identityBackNumController,
+//                                   style: theme.textTheme.bodyText1,
+//                                   maxLength: 7,
+//                                   autofocus: true,
+//                                   cursorColor: basicBlack,
+//                                   decoration: InputDecoration(
+//                                     counterText: "",
+//                                     fillColor: Colors.transparent,
+//                                     enabledBorder: UnderlineInputBorder(
+//                                       borderSide: BorderSide(
+//                                         color: basicBlack,
+//                                       ),
+//                                     ),
+//                                     focusedBorder: UnderlineInputBorder(
+//                                       borderSide: BorderSide(
+//                                         color: theme.colorScheme.primary,
+//                                       ),
+//                                     ),
+//                                     border: UnderlineInputBorder(
+//                                       borderSide: BorderSide(
+//                                         color: basicBlack,
+//                                       ),
+//                                     ),
+//                                   ),
+//                                   onChanged: (value) {},
+//                                   validator: (value) {
+//                                     if (value!.length < 7) {
+//                                       return '(주민등록번호 뒷6자리)';
+//                                     }
+//                                   },
+//                                   keyboardType: TextInputType.text,
+//                                 ),
+//                               ),
+//                             ],
+//                           ),

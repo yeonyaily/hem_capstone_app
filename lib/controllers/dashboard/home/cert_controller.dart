@@ -14,6 +14,8 @@ class CertController extends GetxController {
   static CertController get to => Get.find();
 
   late TextEditingController certPwdController;
+  late TextEditingController identityHeadNumController;
+  late TextEditingController identityBackNumController;
 
   final isLoading = false.obs;
   final isPwd = false.obs;
@@ -37,6 +39,8 @@ class CertController extends GetxController {
     getKey();
     // await getCertificates();
     certPwdController = TextEditingController();
+    identityHeadNumController = TextEditingController();
+    identityBackNumController = TextEditingController();
     super.onInit();
   }
 
