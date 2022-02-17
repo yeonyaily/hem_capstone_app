@@ -13,6 +13,7 @@ abstract class Routes {
   static const ENTERPWD = _Paths.ENTERPWD;
   static const TREATDETAIL = _Paths.TREATDETAIL;
   static const DRUGDETAIL = _Paths.DRUGDETAIL;
+  static const CHECKUPDETAIL = _Paths.CHECKUPDETAIL;
 }
 
 abstract class _Paths {
@@ -27,4 +28,5 @@ abstract class _Paths {
   static const ENTERPWD = '/enterpwd';
   static const TREATDETAIL = '/treatDetail';
   static const DRUGDETAIL = '/drugDetail';
+  static const CHECKUPDETAIL = '/checkupDetail';
 }
