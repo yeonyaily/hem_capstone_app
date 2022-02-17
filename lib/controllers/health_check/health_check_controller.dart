@@ -1,11 +1,15 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:hem_capstone_app/routes/app_pages.dart';
+import 'package:hem_capstone_app/utils/user/health_util.dart';
+import 'package:public_health_model/inspections_model.dart';
 
 class HealthCheckController extends GetxController{
 
   double get headingRowHeight => 32;
   
+  InspectionModel? inspectionModel = HealthUtil.getInspectionData();
+
   final dummy = [
     {
       'date':'2018-01-01',
