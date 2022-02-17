@@ -35,20 +35,24 @@ class HealthCheckUpScreen extends GetView<HealthCheckController> {
                 TextSpan(
                   children: [
                     TextSpan(
-                      text: UserUtil.getUser()!.name,
-                      style: theme.textTheme.bodyText1!.copyWith(
-                        color: theme.primaryColor,
-                        fontWeight: FontWeight.w700,
-                      )
-                    ),
-                     TextSpan(
-                      text: '님의 건강검진 결과',
-                      style: theme.textTheme.bodyText1!.copyWith(
-                        fontWeight: FontWeight.w700,                        
-                      )
-                    ),
-                  ]
-                )
+                      children: [
+                        TextSpan(
+                          text: UserUtil.getUser()!.name,
+                          style: theme.textTheme.bodyText1!.copyWith(
+                            color: theme.primaryColor,
+                            fontWeight: FontWeight.w700,
+                          )
+                        ),
+                        TextSpan(
+                          text: '님의 건강검진 결과',
+                          style: theme.textTheme.bodyText1!.copyWith(
+                            fontWeight: FontWeight.w700,                        
+                          )
+                        ),
+                      ]
+                    )
+                  ],
+                ),
               ),
               space(height: 16),
               controller.inspectionModel!.resultList != null
@@ -125,7 +129,7 @@ class HealthCheckUpScreen extends GetView<HealthCheckController> {
                             style: theme.textTheme.caption!.copyWith(
                               fontWeight: FontWeight.w400,
                               color: Color(0xff7E7E7E),
-                            )
+                            ),
                           ),
                         ),
                       ],
@@ -139,7 +143,7 @@ class HealthCheckUpScreen extends GetView<HealthCheckController> {
                     ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -190,9 +194,10 @@ class HealthCheckUpScreen extends GetView<HealthCheckController> {
     });
   }
 
-  List<DataColumn> _buildDataColumn(BuildContext context){
-    return List.generate(controller.dataColumn.length, (index) => 
-      DataColumn(
+  List<DataColumn> _buildDataColumn(BuildContext context) {
+    return List.generate(
+      controller.dataColumn.length,
+      (index) => DataColumn(
         label: Container(
           width: controller.dataColumn[index]['width'] as double,
           height: 32,

@@ -68,9 +68,11 @@ class CertPwdController extends GetxController {
     }
   }
 
-  Future<void> callHealthApi(String apiKey, String filePath, String certPass) async {
+  Future<void> callHealthApi(
+      String apiKey, String filePath, String certPass) async {
     try {
-      Map<String, dynamic> healthData = await TilkoPlugin.callHealthCheckInfo(apiKey, filePath, certPass);
+      Map<String, dynamic> healthData =
+          await TilkoPlugin.callHealthCheckInfo(apiKey, filePath, certPass);
       // Map<String, dynamic> medicalData = await TilkoPlugin.callMedicalTreatment(apiKey, filePath, certPass);
       inspectionModel = InspectionModel.fromJson(healthData);
       // drugModel = DrugModel.fromJson(medicalData);
@@ -78,13 +80,13 @@ class CertPwdController extends GetxController {
       String uid = AuthRepository().userUid;
 
       FirebaseFirestore.instance
-        .collection('healthData')
-        .doc(uid)
-        .set(
-          inspectionModel!.toMap(),
-        )
-        .then((value) => print('Add health data'))
-        .catchError((e) => print(e));
+          .collection('healthData')
+          .doc(uid)
+          .set(
+            inspectionModel!.toMap(),
+          )
+          .then((value) => print('Add health data'))
+          .catchError((e) => print(e));
 
       // FirebaseFirestore.instance
       //   .collection('medicalData')

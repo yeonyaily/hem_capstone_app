@@ -63,8 +63,8 @@ class AppPages {
     GetPage(
       name: ENTERBIRTH,
       page: () => EnterBirthPage(),
-      binding: BindingsBuilder((){
-        Get.put(DatetimePickerController());
+      binding: BindingsBuilder(() {
+        Get.put(CertController());
       }),
     ),
     GetPage(
@@ -72,16 +72,16 @@ class AppPages {
       page: () => EnterCertPwdPage(),
     ),
     GetPage(
-      name: TREATDETAIL, 
-      page: ()=> const TreatDetailScreen(),
+      name: TREATDETAIL,
+      page: () => const TreatDetailScreen(),
     ),
     GetPage(
-      name: DRUGDETAIL, 
-      page: ()=> const DrugDetailScreen(),
+      name: DRUGDETAIL,
+      page: () => const DrugDetailScreen(),
     ),
     GetPage(
-      name: CHECKUPDETAIL, 
-      page: ()=> const CheckUpDetailScreen(),
+      name: CHECKUPDETAIL,
+      page: () => const CheckUpDetailScreen(),
       // binding: BindingsBuilder((){
       //   Get.put(HealthCheckController());
       // })

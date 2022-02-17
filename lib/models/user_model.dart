@@ -7,6 +7,8 @@ class UserModel {
   final String? phoneNumber;
   final Timestamp? birth;
   final bool? certOnOff;
+  final String? identityNum;
+  final String? gender;
   UserModel({
     required this.name,
     required this.validDate,
@@ -14,6 +16,8 @@ class UserModel {
     required this.phoneNumber,
     required this.birth,
     required this.certOnOff,
+    required this.identityNum,
+    required this.gender,
   });
 
   UserModel copyWith({
@@ -29,6 +33,8 @@ class UserModel {
       phoneNumber: phoneNumber ?? this.phoneNumber,
       birth: birth ?? this.birth,
       certOnOff: certOnOff ?? this.certOnOff,
+      identityNum: identityNum ?? this.identityNum,
+      gender: gender ?? this.gender,
     );
   }
 
@@ -51,6 +57,8 @@ class UserModel {
       certOnOff: ds['certOnOff'],
       validDate: ds['validDate'],
       name: ds['name'],
+      identityNum: ds['identityNum'],
+      gender: ds['gender'],
     );
   }
 }
