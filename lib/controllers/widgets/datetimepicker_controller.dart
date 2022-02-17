@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:hem_capstone_app/constant/constant.dart';
+import 'package:hem_capstone_app/models/user_model.dart';
+import 'package:hem_capstone_app/repository/repository.dart';
+import 'package:hem_capstone_app/utils/user/util.dart';
 
 class DatetimePickerController extends GetxController {
   static DatetimePickerController get to => Get.find();
@@ -14,14 +17,15 @@ class DatetimePickerController extends GetxController {
     update();
   }
 
-  void addBirthInfo() {
+  void addBirthInfo() async {
     Timestamp birth = Timestamp.fromDate(selectedDate);
     _userCollection.doc(uid).update({'birth': birth});
+    UserModel? userModel = await AuthRepository().findUserByUid(AuthRepository().userUid);
+    if(userModel != null) UserUtil.setUser(userModel); 
   }
 
   @override
   void onInit() {
-    _userCollection.doc(uid).update({'birth': selectedDate});
     super.onInit();
   }
 }
