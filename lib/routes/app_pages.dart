@@ -6,6 +6,7 @@ import 'package:hem_capstone_app/controllers/controller.dart';
 import 'package:hem_capstone_app/screens/dashboard_views/dashboard.dart';
 import 'package:hem_capstone_app/screens/dashboard_views/home/home.dart';
 import 'package:hem_capstone_app/screens/dashboard_views/physical_check/checkup_detail_screen.dart';
+import 'package:hem_capstone_app/screens/dashboard_views/physical_check/checkup_gubun_screen.dart';
 import 'package:hem_capstone_app/screens/dashboard_views/treat_history/drug_detail_screen.dart';
 import 'package:hem_capstone_app/screens/dashboard_views/treat_history/treat_detail_screen.dart';
 import 'package:hem_capstone_app/screens/login/help_screen.dart';
@@ -29,6 +30,7 @@ class AppPages {
   static const TREATDETAIL = Routes.TREATDETAIL;
   static const DRUGDETAIL = Routes.DRUGDETAIL;
   static const CHECKUPDETAIL = Routes.CHECKUPDETAIL;
+  static const CHECKUPGUBUN = Routes.CHECKUPGUBUN;
 
   static final routes = [
     GetPage(
@@ -80,6 +82,13 @@ class AppPages {
     GetPage(
       name: CHECKUPDETAIL, 
       page: ()=> const CheckUpDetailScreen(),
+      // binding: BindingsBuilder((){
+      //   Get.put(HealthCheckController());
+      // })
+    ),
+    GetPage(
+      name: CHECKUPGUBUN,
+      page: ()=> const CheckUpGobunScreen(),
       // binding: BindingsBuilder((){
       //   Get.put(HealthCheckController());
       // })
