@@ -17,7 +17,7 @@ class TreatHistoryView extends StatelessWidget {
       : data.resultList!.where((element) => element.jinRyoHyungTae.contains('외래'));
     final drug = data.resultList == null 
       ? null
-      :data.resultList!.where((element) => element.jinRyoHyungTae.contains('조제'));
+      : data.resultList!.where((element) => element.jinRyoHyungTae.contains('조제'));
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -50,85 +50,126 @@ class TreatHistoryView extends StatelessWidget {
                   ? [
                       SvgPicture.asset(
                         'assets/phi/no_data.svg',
-                      )
+                      ),                   
                     ] 
-                  : hospital.map((data){
-                      var idx = data.byungEuiwonYakGukMyung.indexOf('[');
-                      String title = data.byungEuiwonYakGukMyung.substring(0,idx);
-                      return ListTile(
-                        horizontalTitleGap: 20,
-                        minLeadingWidth: 24,
-                        dense:true,
-                        visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                        contentPadding: EdgeInsets.symmetric(vertical: 16),
-                        leading: Image.asset(
-                          'assets/phi/health.png',
-                        ),
-                        trailing: Icon(
-                          Icons.arrow_forward_ios_rounded,
-                        ),
-                        title: Text(
-                          title,
-                          style: theme.textTheme.bodyText1!.copyWith(
-                            fontWeight: FontWeight.w400,
+                  : hospital.length == 0 
+                    ? [
+                        Stack(
+                          children: [
+                            SvgPicture.asset(
+                              'assets/phi/no_data.svg',
+                            ),
+                            Positioned.fill(                              
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: _buildNoData(context)
+                              )
+                            )
+                          ],
+                        ), 
+                      ]
+                    : hospital.map((data){
+                        var idx = data.byungEuiwonYakGukMyung.indexOf('[');
+                        String title = data.byungEuiwonYakGukMyung.substring(0,idx);
+                        return ListTile(
+                          horizontalTitleGap: 20,
+                          minLeadingWidth: 24,
+                          dense:true,
+                          visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+                          contentPadding: EdgeInsets.symmetric(vertical: 16),
+                          leading: Image.asset(
+                            'assets/phi/health.png',
                           ),
-                        ),
-                        subtitle: Text(
-                          '${data.jinRyoHyungTae} | ${data.jinRyoGaesiIl}',
-                          style: theme.textTheme.bodyText2!.copyWith(
-                            color: Color(0xff7E7E7E),
+                          trailing: Icon(
+                            Icons.arrow_forward_ios_rounded,
                           ),
-                        ),
-                        onTap: ()=> Get.toNamed('/treatDetail', arguments: data),
-                      );
-                    }).toList(),
+                          title: Text(
+                            title,
+                            style: theme.textTheme.bodyText1!.copyWith(
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          subtitle: Text(
+                            '${data.jinRyoHyungTae} | ${data.jinRyoGaesiIl}',
+                            style: theme.textTheme.bodyText2!.copyWith(
+                              color: Color(0xff7E7E7E),
+                            ),
+                          ),
+                          onTap: ()=> Get.toNamed('/treatDetail', arguments: data),
+                        );
+                      }).toList(),                    
               ),
             ),
             SingleChildScrollView(
               physics: BouncingScrollPhysics(),
               padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: drug == null 
                   ? [
                       SvgPicture.asset(
-                        'assets/phi/no_data.svg',
-                      )
+                          'assets/phi/no_data.svg',
+                      ),
                     ] 
-                  : drug.map((data){
-                      var idx = data.byungEuiwonYakGukMyung.indexOf('[');
-                      String title = data.byungEuiwonYakGukMyung.substring(0,idx);
-                      return ListTile(
-                        horizontalTitleGap: 20,
-                        minLeadingWidth: 24,
-                        dense:true,
-                        visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                        contentPadding: EdgeInsets.symmetric(vertical: 16),
-                        leading: Image.asset(
-                          'assets/phi/pill.png',
-                        ),
-                        trailing: Icon(
-                          Icons.arrow_forward_ios_rounded,
-                        ),
-                        title: Text(
-                          title,
-                          style: theme.textTheme.bodyText1!.copyWith(
-                            fontWeight: FontWeight.w400,
+                  : drug.length == 0
+                    ? [
+                        Stack(
+                          children: [
+                            SvgPicture.asset(
+                              'assets/phi/no_data.svg',
+                            ),
+                            Positioned.fill(                              
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: _buildNoData(context)
+                              )
+                            )
+                          ],
+                        ), 
+                      ]
+                    : drug.map((data){
+                        var idx = data.byungEuiwonYakGukMyung.indexOf('[');
+                        String title = data.byungEuiwonYakGukMyung.substring(0,idx);
+                        return ListTile(
+                          horizontalTitleGap: 20,
+                          minLeadingWidth: 24,
+                          dense:true,
+                          visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+                          contentPadding: EdgeInsets.symmetric(vertical: 16),
+                          leading: Image.asset(
+                            'assets/phi/pill.png',
                           ),
-                        ),
-                        subtitle: Text(
-                          '${data.jinRyoHyungTae} | ${data.jinRyoGaesiIl}',
-                          style: theme.textTheme.bodyText2!.copyWith(
-                            color: Color(0xff7E7E7E),
+                          trailing: Icon(
+                            Icons.arrow_forward_ios_rounded,
                           ),
-                        ),
-                        onTap: ()=> Get.toNamed('/treatDetail', arguments: data),
-                      );
-                    }).toList(),
+                          title: Text(
+                            title,
+                            style: theme.textTheme.bodyText1!.copyWith(
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          subtitle: Text(
+                            '${data.jinRyoHyungTae} | ${data.jinRyoGaesiIl}',
+                            style: theme.textTheme.bodyText2!.copyWith(
+                              color: Color(0xff7E7E7E),
+                            ),
+                          ),
+                          onTap: ()=> Get.toNamed('/treatDetail', arguments: data),
+                        );
+                      }).toList(),
               ),
             ),
           ],
         )
       ),
+    );
+  }
+
+  Text _buildNoData(BuildContext context) {
+    return Text(
+      '데이터가 없습니다.',
+      style: Theme.of(context).textTheme.headline3,
+      textAlign: TextAlign.center,
     );
   }
 }

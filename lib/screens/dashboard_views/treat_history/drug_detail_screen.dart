@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
@@ -61,17 +58,24 @@ class DrugDetailScreen extends StatelessWidget {
             children: <Widget>[
               space(height: 24),   
               Text(
-                data.mediPrdcNm,
+                data.mediPrdcNm.contains('(') 
+                  ? Service.getString(data.mediPrdcNm, '(')
+                  : data.mediPrdcNm,
                 style: theme.textTheme.subtitle1,
               ),
               space(height: 20),
               SizedBox(
                 width: double.infinity,
                 height: 172,
-                child:  Image.memory(
-                  Service.getImage(data.drugImage),
-                  fit: BoxFit.cover,
-                ),
+                child: data.drugImage == ''                    
+                  ? Image.asset(
+                      'assets/phi/no_image.png',
+                      fit: BoxFit.cover,
+                    )
+                  : Image.memory(
+                      Service.getImage(data.drugImage),
+                      fit: BoxFit.cover,
+                    )
               ),
               space(height: 24),
               basicInfo(theme, data.tmsgGnlSpcd, 56, '총 투약일수'),

@@ -40,11 +40,13 @@ class TreatDetailScreen extends StatelessWidget {
                   space(width: 28),
                   Align(
                     alignment: Alignment(0, -.1),
-                    child: Text('진료정보',
-                        style: theme.textTheme.subtitle2!.copyWith(
-                          fontWeight: FontWeight.w400,
-                          color: basicBlack,
-                        )),
+                    child: Text(
+                      '진료정보',
+                      style: theme.textTheme.subtitle2!.copyWith(
+                        fontWeight: FontWeight.w400,
+                        color: basicBlack,
+                      ),
+                    ),
                   )
                 ],
               ),
@@ -109,19 +111,22 @@ class TreatDetailScreen extends StatelessWidget {
                             ),
                           ),
                           space(width: 12),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text(
-                                Service.getString(data.retrieveTreatmentInjectionInformationPersonDetailList![index].choBangYakPumMyung, '('),
-                                style: theme.textTheme.bodyText2,
-                              ),
-                              Text(
-                                data.retrieveTreatmentInjectionInformationPersonDetailList![index].choBangYakPumHyoneung,
-                                style: theme.textTheme.caption!,
-                              )
-                            ],
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Text(
+                                  Service.getString(data.retrieveTreatmentInjectionInformationPersonDetailList![index].choBangYakPumMyung, '('),
+                                  style: theme.textTheme.bodyText2,
+                                  overflow: TextOverflow.ellipsis
+                                ),
+                                Text(
+                                  data.retrieveTreatmentInjectionInformationPersonDetailList![index].choBangYakPumHyoneung,
+                                  style: theme.textTheme.caption!,
+                                )
+                              ],
+                            ),
                           ),
                           Spacer(),
                           Center(
