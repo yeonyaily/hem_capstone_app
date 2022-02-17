@@ -144,7 +144,7 @@ class CheckUpDetailScreen extends GetView<HealthCheckController> {
                     '/checkupGubun',
                     arguments: {
                       'inspection': data.inspections![index], 
-                      'description': controller.healthRecordDummy[index]['subtile'],
+                      'description': controller.healthRecordDummy[index]['subTitle']!.replaceAll('\n', ' '),
                     },
                   ),
                   child: Container(
