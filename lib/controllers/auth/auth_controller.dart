@@ -63,12 +63,14 @@ class AuthController extends GetxController {
           phoneNumber: auth.currentUser!.phoneNumber,
           birth: myTimeStamp,
           certOnOff: false,
+          validDate: '',
+          name: '',
         );
         _userCollection
-            .doc(uid)
-            .set(userModel!.toMap())
-            .then((value) => print('Set User'))
-            .catchError((e) => print(e));
+          .doc(uid)
+          .set(userModel!.toMap())
+          .then((value) => print('Set User'))
+          .catchError((e) => print(e));
       }
       UserUtil.setUser(userModel!);
     } else {
@@ -92,8 +94,8 @@ class AuthController extends GetxController {
         '8210 ${signup.phoneNumberController.text.trim().substring(3, 7)} ${signup.phoneNumberController.text.trim().substring(7)}');
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: "+8210" +
-          signup.phoneNumberController.text.substring(3, 7) +
-          signup.phoneNumberController.text.substring(7),
+        signup.phoneNumberController.text.substring(3, 7) +
+        signup.phoneNumberController.text.substring(7),
       verificationCompleted: (phoneAuthCredential) async {
         print("OTP 문자 도착");
       },

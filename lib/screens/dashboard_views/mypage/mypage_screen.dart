@@ -6,6 +6,8 @@ import 'package:hem_capstone_app/controllers/controller.dart';
 import 'package:hem_capstone_app/routes/app_pages.dart';
 import 'package:hem_capstone_app/screens/dashboard_views/mypage/hidden_test.dart';
 import 'package:hem_capstone_app/screens/dashboard_views/mypage/membership_withdraw_screen.dart';
+import 'package:hem_capstone_app/utils/user/util.dart';
+import 'package:intl/intl.dart';
 
 class MypageView extends StatelessWidget {
   const MypageView({Key? key}) : super(key: key);
@@ -13,6 +15,8 @@ class MypageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final birth = UserUtil.getUser()!.birth!.toDate();
+    String formatDate = DateFormat('yy.MM.dd').format(birth);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -97,14 +101,14 @@ class MypageView extends StatelessWidget {
                         children: <Widget>[
                           space(height: 21),
                           Text(
-                            '홍길동님',
+                            '${UserUtil.getUser()!.name}님',
                             style: theme.textTheme.bodyText2!.copyWith(
                               color: Colors.white,
                               fontWeight: FontWeight.w700,
                             ),
                           ),
                           Text(
-                            '1998.01.23',
+                            formatDate,
                             style: theme.textTheme.bodyText2!.copyWith(
                               color: Colors.white,
                               fontWeight: FontWeight.w400,

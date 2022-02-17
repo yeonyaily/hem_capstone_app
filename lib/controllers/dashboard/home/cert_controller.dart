@@ -2,13 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hem_capstone_app/constant/constant.dart';
+import 'package:hem_capstone_app/models/user_model.dart';
 import 'package:hem_capstone_app/repository/auth_repository.dart';
-import 'package:hem_capstone_app/utils/user/health_util.dart';
+import 'package:hem_capstone_app/utils/user/util.dart';
 import 'package:hem_capstone_app/widgets/custom/custom_dialog/custom_dialog.dart';
 import 'package:logger/logger.dart';
 import 'package:public_health_model/public_health_model.dart';
 import 'package:tilko_plugin/tilko_plugin.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CertController extends GetxController {
   static CertController get to => Get.find();
@@ -44,8 +44,8 @@ class CertController extends GetxController {
     String key;
     try {
       key = await TilkoPlugin.getKey();
-      frontKey(key.substring(0, 4));
-      backKey(key.substring(4, 8));
+      frontKey.value = key.substring(0, 4);
+      backKey.value = key.substring(4, 8);
     } catch (e) {
       print(e);
     }
@@ -53,13 +53,23 @@ class CertController extends GetxController {
 
   Future<void> getCertificates() async {
     Map<String, List<String>> val = await TilkoPlugin.getCertificate();
+    UserModel? userModel;
     certMap = val;
     certLength = certMap.values.first.length;
     if (certLength != 0) {
       FirebaseFirestore.instance
           .collection('users')
           .doc(auth.currentUser!.uid)
-          .update({'certOnOff': true});
+          .update({
+        'certOnOff': true,
+        'name': certMap['name']![0].trim(),
+        'validDate': certMap['valid']![0],
+      }).then((value) async {
+        userModel =
+            await AuthRepository().findUserByUid(AuthRepository().userUid);
+        if (userModel != null) UserUtil.setUser(userModel!);
+        print('set User');
+      }).catchError((e) => print(e));
     }
     update();
   }
@@ -77,7 +87,7 @@ class CertController extends GetxController {
 
       String uid = AuthRepository().userUid;
 
-      FirebaseFirestore.instance
+      firebase
           .collection('healthData')
           .doc(uid)
           .set(
@@ -108,7 +118,7 @@ class CertController extends GetxController {
   }
 
   void detectCert() {
-    if (auth.currentUser != null)
+    if (auth.currentUser != null) {
       FirebaseFirestore.instance
           .collection('users')
           .doc(auth.currentUser!.uid)
@@ -118,6 +128,7 @@ class CertController extends GetxController {
         logger.d(documentSnapshot['certOnOff']);
         logger.d(isCertOn);
       });
+    }
   }
 
   // Future<void> callTestApi() async {

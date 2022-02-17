@@ -2,10 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserModel {
   final String? uid;
+  final String? name;
+  final String? validDate;
   final String? phoneNumber;
   final Timestamp? birth;
   final bool? certOnOff;
   UserModel({
+    required this.name,
+    required this.validDate,
     required this.uid,
     required this.phoneNumber,
     required this.birth,
@@ -19,6 +23,8 @@ class UserModel {
     bool? certOnOff,
   }) {
     return UserModel(
+      name: name ?? this.name,
+      validDate: validDate ?? this.validDate,
       uid: uid ?? this.uid,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       birth: birth ?? this.birth,
@@ -28,6 +34,8 @@ class UserModel {
 
   Map<String, dynamic> toMap() {
     return {
+      'name': name,
+      'validDate': validDate,
       'uid': uid,
       'phoneNumber': phoneNumber,
       'birth': birth,
@@ -41,6 +49,8 @@ class UserModel {
       phoneNumber: ds['phoneNumber'],
       birth: ds['birth'],
       certOnOff: ds['certOnOff'],
+      validDate: ds['validDate'],
+      name: ds['name'],
     );
   }
 }
