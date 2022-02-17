@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hem_capstone_app/constant/constant.dart';
 import 'package:hem_capstone_app/controllers/controller.dart';
+import 'package:hem_capstone_app/routes/app_pages.dart';
 import 'package:hem_capstone_app/theme/theme.dart';
+import 'package:hem_capstone_app/utils/user/util.dart';
 
 class HealthCheckUpScreen extends GetView<HealthCheckController> {
   const HealthCheckUpScreen({Key? key}) : super(key: key);
@@ -33,7 +35,7 @@ class HealthCheckUpScreen extends GetView<HealthCheckController> {
                 TextSpan(
                   children: [
                     TextSpan(
-                      text: '홍길동',
+                      text: UserUtil.getUser()!.name,
                       style: theme.textTheme.bodyText1!.copyWith(
                         color: theme.primaryColor,
                         fontWeight: FontWeight.w700,
@@ -49,26 +51,40 @@ class HealthCheckUpScreen extends GetView<HealthCheckController> {
                 )
               ),
               space(height: 16),
-              DataTable(
-                headingTextStyle: theme.textTheme.caption!.copyWith(
-                  fontWeight: FontWeight.w700,
-                ),
-                columnSpacing: 0,
-                horizontalMargin: 0,
-                headingRowHeight: controller.headingRowHeight,
-                showBottomBorder: true,
-                dataRowHeight: 50,
-                decoration: BoxDecoration(
-                  border: Border(
-                    top: BorderSide(
-                      color: theme.primaryColor,
-                      width: 3,
-                    ),
+              controller.inspectionModel!.resultList != null
+                ? controller.inspectionModel!.resultList!.length != 0 
+                  ? DataTable(
+                      headingTextStyle: theme.textTheme.caption!.copyWith(
+                        fontWeight: FontWeight.w700,
+                      ),
+                      columnSpacing: 0,
+                      horizontalMargin: 0,
+                      headingRowHeight: controller.headingRowHeight,
+                      showBottomBorder: true,
+                      dataRowHeight: 50,
+                      decoration: BoxDecoration(
+                        border: Border(
+                          top: BorderSide(
+                            color: theme.primaryColor,
+                            width: 3,
+                          ),
+                          bottom: BorderSide(
+                            color: theme.primaryColor,
+                            width: 1,
+                          ),
+                        ),
+                      ),
+                      columns: _buildDataColumn(context),
+                      rows: _buildDataRow(context),
+                    )
+                  : Image.asset(
+                    'assets/phi/no_image.png',
+                    fit: BoxFit.cover,
+                  )
+                : Image.asset(
+                    'assets/phi/no_image.png',
+                    fit: BoxFit.cover,
                   ),
-                ),
-                columns: _buildDataColumn(context),
-                rows: _buildDataRow(context),
-              ),
               space(height: 20),
               Row(
                 children: [
@@ -132,24 +148,46 @@ class HealthCheckUpScreen extends GetView<HealthCheckController> {
   }
   
   List<DataRow> _buildDataRow(BuildContext context){
-    return List.generate(controller.dummy.length, (index) => DataRow(
-      cells: controller.dummy[index].entries.map((e) => 
-        DataCell(
-          e.key == 'result' 
-            ? Center(
-                child: e.value as IconButton,
-              )
-            : Center(
+    final data = controller.inspectionModel!.resultList!;
+    return List.generate(data.length, (index){
+      String date = '${data[index].year}.${data[index].checkUpDate.split('/')[0]}.${data[index].checkUpDate.split('/')[1]}'; 
+      return DataRow(
+        cells: [
+          DataCell(
+            Center(
               child: Text(
-                  e.value.toString(),
-                  style: Theme.of(context).textTheme.caption!.copyWith(
-                    fontWeight: FontWeight.w400,
-                  ),
+                date,
+                style: Theme.of(context).textTheme.caption!.copyWith(
+                  fontWeight: FontWeight.w400,
+                )
+              )             
+            ),
+          ),
+           DataCell(
+            Center(
+              child: Text(
+                data[index].location,
+                style: Theme.of(context).textTheme.caption!.copyWith(
+                  fontWeight: FontWeight.w400,
+                )
+              )             
+            ),
+          ),
+          DataCell(
+            Center(
+              child: IconButton(
+                onPressed: ()=> Get.toNamed(Routes.CHECKUPDETAIL, arguments: data[index]),
+                icon: Image.asset(
+                  'assets/phi/result.png',
+                  width: 20,
+                  height: 20,
                 ),
-            )
-        )
-      ).toList(),
-    ));
+              ),
+            ),
+          ),
+        ],
+      );
+    });
   }
 
   List<DataColumn> _buildDataColumn(BuildContext context){
@@ -165,15 +203,18 @@ class HealthCheckUpScreen extends GetView<HealthCheckController> {
                 : BorderSide(
                     color: Theme.of(context).primaryColor,
                   ),
-              ),
+              bottom: BorderSide(
+                color: Theme.of(context).primaryColor,
+              )
             ),
-            child: Center(
-              child: Text(
-                controller.dataColumn[index]['text'].toString(),
-              ),
+          ),
+          child: Center(
+            child: Text(
+              controller.dataColumn[index]['text'].toString(),
             ),
           ),
         ),
-      );
+      ),
+    );
   }
 }
