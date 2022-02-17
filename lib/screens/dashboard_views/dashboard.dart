@@ -24,7 +24,7 @@ class DashBoard extends GetView<NavigationController> {
             children: [
               HomeScreen(),
               !_controller.isCertOn.value ? EmptyPage() : TreatHistoryView(),
-              !_controller.isCertOn.value ? HealthCheckUpScreen() : HealthCheckUpScreen(),
+              !_controller.isCertOn.value ? EmptyPage() : HealthCheckUpScreen(),
             ],
           ),
         ),
