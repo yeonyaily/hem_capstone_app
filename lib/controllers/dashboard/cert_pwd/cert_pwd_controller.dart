@@ -40,8 +40,7 @@ class CertPwdController extends GetxController {
   }
 
   Future<void> callTestApi() async {
-    final String url =
-        'https://my.api.mockaroo.com/capstone_my_drug.json?key=cdedf730';
+    final String url = 'https://my.api.mockaroo.com/capstone_my_drug.json?key=cdedf730';
     final logger = Logger();
 
     final response = await http.get(Uri.parse(url));
@@ -54,13 +53,13 @@ class CertPwdController extends GetxController {
       String uid = AuthRepository().userUid;
 
       FirebaseFirestore.instance
-          .collection('medicalData')
-          .doc(uid)
-          .set(
-            drugModel!.toMap(),
-          )
-          .then((value) => print('Add medical data'))
-          .catchError((e) => print(e));
+        .collection('medicalData')
+        .doc(uid)
+        .set(
+          drugModel!.toMap(),
+        )
+        .then((value) => print('Add medical data'))
+        .catchError((e) => print(e));
 
       HealthUtil.setMedicalData(drugModel);
     } else {
@@ -68,11 +67,9 @@ class CertPwdController extends GetxController {
     }
   }
 
-  Future<void> callHealthApi(
-      String apiKey, String filePath, String certPass) async {
+  Future<void> callHealthApi(String apiKey, String filePath, String certPass) async {
     try {
-      Map<String, dynamic> healthData =
-          await TilkoPlugin.callHealthCheckInfo(apiKey, filePath, certPass);
+      Map<String, dynamic> healthData = await TilkoPlugin.callHealthCheckInfo(apiKey, filePath, certPass);
       // Map<String, dynamic> medicalData = await TilkoPlugin.callMedicalTreatment(apiKey, filePath, certPass);
       inspectionModel = InspectionModel.fromJson(healthData);
       // drugModel = DrugModel.fromJson(medicalData);
@@ -80,13 +77,13 @@ class CertPwdController extends GetxController {
       String uid = AuthRepository().userUid;
 
       FirebaseFirestore.instance
-          .collection('healthData')
-          .doc(uid)
-          .set(
-            inspectionModel!.toMap(),
-          )
-          .then((value) => print('Add health data'))
-          .catchError((e) => print(e));
+        .collection('healthData')
+        .doc(uid)
+        .set(
+          inspectionModel!.toMap(),
+        )
+        .then((value) => print('Add health data'))
+        .catchError((e) => print(e));
 
       // FirebaseFirestore.instance
       //   .collection('medicalData')
