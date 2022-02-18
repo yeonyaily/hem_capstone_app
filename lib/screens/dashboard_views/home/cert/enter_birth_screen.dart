@@ -4,8 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hem_capstone_app/constant/constant.dart';
 import 'package:hem_capstone_app/controllers/controller.dart';
+import 'package:hem_capstone_app/models/user_model.dart';
+import 'package:hem_capstone_app/repository/repository.dart';
 import 'package:hem_capstone_app/routes/app_pages.dart';
 import 'package:hem_capstone_app/theme/theme.dart';
+import 'package:hem_capstone_app/utils/user/util.dart';
 import 'package:logger/logger.dart';
 
 class EnterBirthPage extends GetView<CertController> {
@@ -151,37 +154,33 @@ class EnterBirthPage extends GetView<CertController> {
                     )
                   ),
                   child: Text('다음'),
-                  onPressed: () {
-                    controller.identityNum =
-                        controller.identityHeadNumController.text.trim() +
-                            controller.identityBackNumController.text.trim();
+                  onPressed: () async {
+                    controller.identityNum = controller.identityHeadNumController.text.trim() + controller.identityBackNumController.text.trim();
                     FirebaseFirestore.instance
+                      .collection('users')
+                      .doc(auth.currentUser!.uid)
+                      .update({
+                        'identityNum': controller.identityHeadNumController.text.trim() + controller.identityBackNumController.text.trim(),
+                      });
+                    if(controller.identityBackNumController.text.substring(0, 1) == '1') {
+                      logger.d(controller.identityBackNumController.text.substring(0, 1));
+                      FirebaseFirestore.instance
                         .collection('users')
                         .doc(auth.currentUser!.uid)
-                        .update({
-                      'identityNum':
-                          controller.identityHeadNumController.text.trim() +
-                              controller.identityBackNumController.text.trim(),
-                    });
-
-                    if (controller.identityBackNumController.text
-                            .substring(0, 1) ==
-                        '1') {
-                      logger.d(controller.identityBackNumController.text
-                          .substring(0, 1));
-                      FirebaseFirestore.instance
-                          .collection('users')
-                          .doc(auth.currentUser!.uid)
-                          .update({'gender': '남'});
+                        .update({'gender': '남'});
                     } else {
-                      logger.d(controller.identityBackNumController.text
-                          .substring(0, 1));
+                      logger.d(controller.identityBackNumController.text.substring(0, 1));
                       FirebaseFirestore.instance
-                          .collection('users')
-                          .doc(auth.currentUser!.uid)
-                          .update({'gender': '여'});
+                        .collection('users')
+                        .doc(auth.currentUser!.uid)
+                        .update({'gender': '여'});
                     }
-
+                    UserModel? userModel = await AuthRepository().findUserByUid(AuthRepository().userUid);
+                    if(userModel != null) {
+                      UserUtil.setUser(userModel); 
+                      print(userModel.gender);
+                      print(userModel.identityNum);
+                    }
                     Get.toNamed(Routes.ENTERPWD);
                   },
                 ),
