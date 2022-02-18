@@ -64,55 +64,56 @@ class CertController extends GetxController {
     certLength = certMap.values.first.length;
     if (certLength != 0) {
       FirebaseFirestore.instance
-          .collection('users')
-          .doc(auth.currentUser!.uid)
-          .update({
-        'certOnOff': true,
-        'name': certMap['name']![0].trim(),
-        'validDate': certMap['valid']![0],
-      }).then((value) async {
-        userModel =
-            await AuthRepository().findUserByUid(AuthRepository().userUid);
-        if (userModel != null) UserUtil.setUser(userModel!);
-        print('set User');
-      }).catchError((e) => print(e));
+        .collection('users')
+        .doc(auth.currentUser!.uid)
+        .update({
+          'certOnOff': true,
+          'name': certMap['name']![0].trim(),
+          'validDate': certMap['valid']![0],
+        }).then((value) async {
+          userModel = await AuthRepository().findUserByUid(AuthRepository().userUid);
+          if (userModel != null) {
+            UserUtil.setUser(userModel!);
+            print('⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿${userModel!.name}⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿');
+            print('⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿${userModel!.validDate}⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿');
+          }
+          print('set User');
+        }).catchError((e) => print('⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿${e}⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿⦿'));
     }
     update();
   }
 
-  Future<void> callHealthApi(
-      String apiKey, String filePath, String certPass) async {
+  Future<void> callHealthApi(String apiKey, String filePath, String certPass) async {
     isLoading.toggle();
     try {
-      Map<String, dynamic> healthData =
-          await TilkoPlugin.callHealthCheckInfo(apiKey, filePath, certPass);
-      Map<String, dynamic> medicalData =
-          await TilkoPlugin.callMedicalTreatment(apiKey, filePath, certPass);
+      Map<String, dynamic> healthData = await TilkoPlugin.callHealthCheckInfo(apiKey, filePath, certPass);
+      Map<String, dynamic> medicalData = await TilkoPlugin.callMedicalTreatment(apiKey, filePath, certPass);
       inspectionModel = InspectionModel.fromJson(healthData);
       drugModel = DrugModel.fromJson(medicalData);
 
       String uid = AuthRepository().userUid;
 
       firebase
-          .collection('healthData')
-          .doc(uid)
-          .set(
-            inspectionModel!.toMap(),
-          )
-          .then((value) => print('Add health data'))
-          .catchError((e) => print(e));
+        .collection('healthData')
+        .doc(uid)
+        .set(
+          inspectionModel!.toMap(),
+        )
+        .then((value) => print('Add health data'))
+        .catchError((e) => print(e));
 
       firebase
-          .collection('medicalData')
-          .doc(uid)
-          .set(
-            drugModel!.toMap(),
-          )
-          .then((value) => print('Add medical data'))
-          .catchError((e) => print(e));
+        .collection('medicalData')
+        .doc(uid)
+        .set(
+          drugModel!.toMap(),
+        )
+        .then((value) => print('Add medical data'))
+        .catchError((e) => print(e));
 
       HealthUtil.setInspectionData(inspectionModel);
       HealthUtil.setMedicalData(drugModel);
+
     } catch (e) {
       CustomDialog.showDialog(
         title: 'Error',
@@ -126,10 +127,10 @@ class CertController extends GetxController {
   void detectCert() {
     if (auth.currentUser != null) {
       FirebaseFirestore.instance
-          .collection('users')
-          .doc(auth.currentUser!.uid)
-          .get()
-          .then((DocumentSnapshot documentSnapshot) {
+        .collection('users')
+        .doc(auth.currentUser!.uid)
+        .get()
+        .then((DocumentSnapshot documentSnapshot) {
         if (documentSnapshot.exists) isCertOn(documentSnapshot['certOnOff']);
         logger.d(documentSnapshot['certOnOff']);
         logger.d(isCertOn);
