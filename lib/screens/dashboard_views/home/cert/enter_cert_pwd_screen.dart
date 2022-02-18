@@ -141,52 +141,47 @@ class EnterCertPwdPage extends GetView<CertController> {
                           bottom: MediaQuery.of(context).viewInsets.bottom,
                         ),
                         child: Container(
-                          // alignment: Alignment.center,
                           width: Get.width,
                           height: 48,
                           child: controller.isPwd.value
-                              ? ElevatedButton(
-                                  onPressed: () async {
-                                    controller
-                                        .callHealthApi(
-                                      '1b94ed1781e044d385e0f86ec7d29b93',
-                                      CertController.to.certMap['file']!.first,
-                                      controller.certPwdController.text.trim(),
-                                    )
-                                        .then((value) {
-                                      controller.detectCert();
-                                      Get.toNamed(Routes.DASHBOARD);
-                                    });
-
-                                    await TilkoPlugin.callCertRegister(
-                                      '1b94ed1781e044d385e0f86ec7d29b93',
-                                      CertController.to.certMap['file']!.first,
-                                      controller.identityNum.trim(),
-                                      controller.certPwdController.text.trim(),
-                                    ).then((value) =>
-                                        logger.d('callCertRegister 호출 완료!'));
-                                  },
-                                  child: Text('건강정보불러오기'),
-                                  style: ElevatedButton.styleFrom(
-                                    elevation: 0,
-                                    primary: theme.primaryColor,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(0),
-                                    ),
-                                  ),
-                                )
-                              : TextButton(
-                                  onPressed: () {},
-                                  child: Text('건강정보불러오기'),
-                                  style: TextButton.styleFrom(
-                                    elevation: 0,
-                                    primary: Colors.white,
-                                    backgroundColor: Colors.black12,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(0),
-                                    ),
+                            ? ElevatedButton(
+                                onPressed: () async {
+                                  controller.callHealthApi(
+                                    '1b94ed1781e044d385e0f86ec7d29b93',
+                                    CertController.to.certMap['file']!.first,
+                                    controller.certPwdController.text.trim(),
+                                  ).then((value) {
+                                    controller.detectCert();
+                                    Get.toNamed(Routes.DASHBOARD);
+                                  });
+                                 await TilkoPlugin.callCertRegister(
+                                    '1b94ed1781e044d385e0f86ec7d29b93',
+                                    CertController.to.certMap['file']!.first,
+                                    controller.identityNum.trim(),
+                                    controller.certPwdController.text.trim(),
+                                  ).then((value) => logger.d('callCertRegister 호출 완료!'));
+                                },
+                                child: Text('건강정보불러오기'),
+                                style: ElevatedButton.styleFrom(
+                                  elevation: 0,
+                                  primary: theme.primaryColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(0),
                                   ),
                                 ),
+                              )
+                            : TextButton(
+                                onPressed: () {},
+                                child: Text('건강정보불러오기'),
+                                style: TextButton.styleFrom(
+                                  elevation: 0,
+                                  primary: Colors.white,
+                                  backgroundColor: Colors.black12,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(0),
+                                  ),
+                                ),
+                              ),
                         ),
                       ),
                     ),
