@@ -16,6 +16,7 @@ class CertController extends GetxController {
   late TextEditingController certPwdController;
   late TextEditingController identityHeadNumController;
   late TextEditingController identityBackNumController;
+  String identityNum = '';
 
   final isLoading = false.obs;
   final isPwd = false.obs;
@@ -41,6 +42,7 @@ class CertController extends GetxController {
     certPwdController = TextEditingController();
     identityHeadNumController = TextEditingController();
     identityBackNumController = TextEditingController();
+
     super.onInit();
   }
 
