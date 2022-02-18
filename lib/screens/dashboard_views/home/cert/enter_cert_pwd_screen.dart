@@ -6,7 +6,6 @@ import 'package:hem_capstone_app/controllers/controller.dart';
 import 'package:hem_capstone_app/routes/app_pages.dart';
 import 'package:hem_capstone_app/theme/app_colors.dart';
 import 'package:logger/logger.dart';
-import 'package:tilko_plugin/tilko_plugin.dart';
 
 class EnterCertPwdPage extends GetView<CertController> {
   EnterCertPwdPage({Key? key}) : super(key: key);
@@ -144,23 +143,22 @@ class EnterCertPwdPage extends GetView<CertController> {
                           width: Get.width,
                           height: 48,
                           child: controller.isPwd.value
-                            ? ElevatedButton(
-                                onPressed: () async {
-                                  controller.certRegister(
-                                    '01021cb079c24a04b28d881c518f7e6f',
-                                    CertController.to.certMap['file']!.first,
-                                    '9601221184724',
-                                    'capstone1451a!'
-                                    // controller.certPwdController.text.trim(),
-                                  ).then((value) {
-                                    controller.callHealthApi(
+                              ? ElevatedButton(
+                                  onPressed: () async {
+                                    controller.certRegister(
                                       '01021cb079c24a04b28d881c518f7e6f',
                                       CertController.to.certMap['file']!.first,
+                                      controller.identityHeadNumController.text.trim() + controller.identityBackNumController.text.trim(),
                                       controller.certPwdController.text.trim(),
                                     ).then((value) {
-                                      controller.detectCert();
-                                      Get.toNamed(Routes.DASHBOARD);
-                                    });
+                                      controller.callHealthApi(
+                                        '01021cb079c24a04b28d881c518f7e6f',
+                                        CertController.to.certMap['file']!.first,
+                                        controller.certPwdController.text.trim(),
+                                      ).then((value) {
+                                        controller.detectCert();
+                                        Get.toNamed(Routes.DASHBOARD);
+                                      });
                                   });
                                   // controller
                                   //     .callHealthApi(
