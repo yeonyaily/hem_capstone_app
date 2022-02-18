@@ -16,25 +16,23 @@ class HomeScreen extends GetView<CertController> {
     return Obx(
       () => Scaffold(
         appBar: !controller.isCertOn.value
-            ? null
-            : AppBar(
-                centerTitle: true,
-                title: Text(
-                  'Home',
-                  style: theme.textTheme.subtitle1!.copyWith(
-                    color: basicBlack,
-                  ),
+          ? null
+          : AppBar(
+              centerTitle: true,
+              title: Text(
+                'Home',
+                style: theme.textTheme.subtitle1!.copyWith(
+                  color: basicBlack,
                 ),
-                elevation: 0,
-                backgroundColor: Colors.white,
               ),
+              elevation: 0,
+              backgroundColor: Colors.white,
+            ),
         body: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 16,),
           child: !controller.isCertOn.value
-              ? CertNotExistScreen(theme: theme)
-              : CertExistScreen(),
+            ? CertNotExistScreen(theme: theme)
+            : CertExistScreen(),
         ),
       ),
     );
@@ -116,21 +114,24 @@ class CertExistScreen extends GetView<CertController> {
                           'assets/phi/hospital.png',
                         ),
                         space(height: 10),
-                        Text.rich(TextSpan(children: [
+                        Text.rich(
                           TextSpan(
-                            text: HealthUtil.getMedicalData()!.resultList ==
-                                    null
-                                ? '0'
-                                : '병원  ${HealthUtil.getMedicalData()!.resultList!.where((data) => data.jinRyoHyungTae.contains('외래')).length}',
-                            style: theme.textTheme.bodyText1!.copyWith(
-                              fontSize: 18,
-                            ),
+                            children: [
+                              TextSpan(
+                                text: HealthUtil.getMedicalData()!.resultList == null
+                                  ? '0'
+                                  : '병원  ${HealthUtil.getMedicalData()!.resultList!.where((data) => data.jinRyoHyungTae.contains('외래')).length}',
+                                style: theme.textTheme.bodyText1!.copyWith(
+                                  fontSize: 18,
+                                ),
+                              ),
+                              TextSpan(
+                                text: '회',
+                                style: theme.textTheme.caption!,
+                              ),
+                            ],
                           ),
-                          TextSpan(
-                            text: '회',
-                            style: theme.textTheme.caption!,
-                          ),
-                        ])),
+                        ),
                       ],
                     ),
                     Align(
@@ -160,21 +161,24 @@ class CertExistScreen extends GetView<CertController> {
                           'assets/phi/heart_2.png',
                         ),
                         space(height: 10),
-                        Text.rich(TextSpan(children: [
+                        Text.rich(
                           TextSpan(
-                            text: HealthUtil.getMedicalData()!.resultList ==
-                                    null
-                                ? '0'
-                                : '약국  ${HealthUtil.getMedicalData()!.resultList!.where((data) => data.jinRyoHyungTae.contains('조제')).length}',
-                            style: theme.textTheme.bodyText1!.copyWith(
-                              fontSize: 18,
-                            ),
+                            children: [
+                              TextSpan(
+                                text: HealthUtil.getMedicalData()!.resultList == null
+                                  ? '0'
+                                  : '약국  ${HealthUtil.getMedicalData()!.resultList!.where((data) => data.jinRyoHyungTae.contains('조제')).length}',
+                                style: theme.textTheme.bodyText1!.copyWith(
+                                  fontSize: 18,
+                                ),
+                              ),
+                              TextSpan(
+                                text: '회',
+                                style: theme.textTheme.caption!,
+                              ),
+                            ],
                           ),
-                          TextSpan(
-                            text: '회',
-                            style: theme.textTheme.caption!,
-                          ),
-                        ])),
+                        ),
                       ],
                     ),
                     Align(
