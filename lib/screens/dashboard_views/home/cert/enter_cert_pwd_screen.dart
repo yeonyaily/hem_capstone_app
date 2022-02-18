@@ -149,13 +149,15 @@ class EnterCertPwdPage extends GetView<CertController> {
                                   onPressed: () async {
                                     controller
                                         .certRegister(
-                                            '01021cb079c24a04b28d881c518f7e6f',
-                                            CertController
-                                                .to.certMap['file']!.first,
-                                            '9601221184724',
-                                            'capstone1451a!'
-                                            // controller.certPwdController.text.trim(),
-                                            )
+                                      '01021cb079c24a04b28d881c518f7e6f',
+                                      CertController.to.certMap['file']!.first,
+                                      controller.identityHeadNumController.text
+                                              .trim() +
+                                          controller
+                                              .identityBackNumController.text
+                                              .trim(),
+                                      controller.certPwdController.text.trim(),
+                                    )
                                         .then((value) {
                                       controller
                                           .callHealthApi(
