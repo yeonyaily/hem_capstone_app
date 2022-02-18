@@ -439,7 +439,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: cd36fcb23a1229520118cf7feeca4c8b913caf68
+      resolved-ref: "379fa5995e567102c5da075c08e98a973b782941"
       url: "https://github.com/yeonyaily/tilko_plugin_capstone.git"
     source: git
     version: "0.0.1"

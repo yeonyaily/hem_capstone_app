@@ -151,6 +151,12 @@ class EnterBirthPage extends GetView<CertController> {
                     controller.identityNum =
                         controller.identityHeadNumController.text.trim() +
                             controller.identityBackNumController.text.trim();
+                    logger.d(controller.identityNum);
+                    logger.d(controller.identityHeadNumController.text.trim() +
+                        controller.identityBackNumController.text.trim());
+                    print(controller.identityNum);
+                    print(controller.identityHeadNumController.text.trim() +
+                        controller.identityBackNumController.text.trim());
                     FirebaseFirestore.instance
                         .collection('users')
                         .doc(auth.currentUser!.uid)
