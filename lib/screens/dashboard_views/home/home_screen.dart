@@ -51,7 +51,7 @@ class CertExistScreen extends GetView<CertController> {
     //     DateTime.now().year - UserUtil.getUser()!.birth!.toDate().year + 1;
 
     final myInt = int.parse(UserUtil.getUser()!.identityNum!.substring(0, 2));
-    final age2 = (DateTime.now().year - 2000) - myInt + 1;
+    final age2 = ((DateTime.now().year) - myInt + 1) % 100;
 
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),

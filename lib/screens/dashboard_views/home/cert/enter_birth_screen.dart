@@ -149,6 +149,9 @@ class EnterBirthPage extends GetView<CertController> {
                 child: ElevatedButton(
                   child: Text('다음'),
                   onPressed: () {
+                    controller.identityNum =
+                        controller.identityHeadNumController.text.trim() +
+                            controller.identityBackNumController.text.trim();
                     FirebaseFirestore.instance
                         .collection('users')
                         .doc(auth.currentUser!.uid)

@@ -70,6 +70,9 @@ class AppPages {
     GetPage(
       name: ENTERPWD,
       page: () => EnterCertPwdPage(),
+      binding: BindingsBuilder(() {
+        Get.put(CertController());
+      }),
     ),
     GetPage(
       name: TREATDETAIL,
