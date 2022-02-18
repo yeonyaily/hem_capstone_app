@@ -58,7 +58,6 @@ class EnterBirthPage extends GetView<CertController> {
                           maxLength: 6,
                           autofocus: true,
                           cursorColor: basicBlack,
-                          textAlign: TextAlign.center,
                           decoration: InputDecoration(
                             counterText: "",
                             fillColor: Colors.transparent,
@@ -101,7 +100,6 @@ class EnterBirthPage extends GetView<CertController> {
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           controller: controller.identityBackNumController,
                           style: theme.textTheme.bodyText1,
-                          textAlign: TextAlign.center,
                           maxLength: 7,
                           autofocus: true,
                           cursorColor: basicBlack,
@@ -127,7 +125,7 @@ class EnterBirthPage extends GetView<CertController> {
                           onChanged: (value) {},
                           validator: (value) {
                             if (value!.length < 7) {
-                              return '(주민등록번호 뒷6자리)';
+                              return '(주민등록번호 뒷7자리)';
                             }
                           },
                           keyboardType: TextInputType.text,
@@ -147,6 +145,11 @@ class EnterBirthPage extends GetView<CertController> {
                 width: Get.width,
                 height: 48,
                 child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(0),
+                    )
+                  ),
                   child: Text('다음'),
                   onPressed: () {
                     controller.identityNum =
