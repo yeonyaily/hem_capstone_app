@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hem_capstone_app/constant/constant.dart';
@@ -60,6 +58,7 @@ class EnterBirthPage extends GetView<CertController> {
                           maxLength: 6,
                           autofocus: true,
                           cursorColor: basicBlack,
+                          textAlign: TextAlign.center,
                           decoration: InputDecoration(
                             counterText: "",
                             fillColor: Colors.transparent,
@@ -102,6 +101,7 @@ class EnterBirthPage extends GetView<CertController> {
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           controller: controller.identityBackNumController,
                           style: theme.textTheme.bodyText1,
+                          textAlign: TextAlign.center,
                           maxLength: 7,
                           autofocus: true,
                           cursorColor: basicBlack,
@@ -145,6 +145,7 @@ class EnterBirthPage extends GetView<CertController> {
               ),
               child: Container(
                 width: Get.width,
+                height: 48,
                 child: ElevatedButton(
                   child: Text('다음'),
                   onPressed: () {
