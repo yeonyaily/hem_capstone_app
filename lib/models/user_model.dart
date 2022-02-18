@@ -25,6 +25,10 @@ class UserModel {
     String? phoneNumber,
     Timestamp? birth,
     bool? certOnOff,
+    String? identityNum,
+    String? name,
+    String? gender,
+    String? validDate,
   }) {
     return UserModel(
       name: name ?? this.name,
@@ -46,6 +50,8 @@ class UserModel {
       'phoneNumber': phoneNumber,
       'birth': birth,
       'certOnOff': certOnOff,
+      'identityNum': identityNum,
+      'gender': gender,
     };
   }
 
