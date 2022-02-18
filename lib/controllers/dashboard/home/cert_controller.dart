@@ -124,6 +124,14 @@ class CertController extends GetxController {
     }
   }
 
+  Future<void> certRegister(String apiKey, String filePath, String identityNum,
+      String certPass) async {
+    await TilkoPlugin.callCertRegister(apiKey, filePath, identityNum, certPass)
+        .then((value) {
+      print('국민건강보험공단 공동인증서 등록 완료');
+    });
+  }
+
   void detectCert() {
     if (auth.currentUser != null) {
       FirebaseFirestore.instance

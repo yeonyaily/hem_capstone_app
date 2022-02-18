@@ -146,20 +146,32 @@ class EnterCertPwdPage extends GetView<CertController> {
                           child: controller.isPwd.value
                             ? ElevatedButton(
                                 onPressed: () async {
-                                  controller.callHealthApi(
-                                    '1b94ed1781e044d385e0f86ec7d29b93',
+                                  controller.certRegister(
+                                    '01021cb079c24a04b28d881c518f7e6f',
                                     CertController.to.certMap['file']!.first,
-                                    controller.certPwdController.text.trim(),
+                                    '9601221184724',
+                                    'capstone1451a!'
+                                    // controller.certPwdController.text.trim(),
                                   ).then((value) {
-                                    controller.detectCert();
-                                    Get.toNamed(Routes.DASHBOARD);
+                                    controller.callHealthApi(
+                                      '01021cb079c24a04b28d881c518f7e6f',
+                                      CertController.to.certMap['file']!.first,
+                                      controller.certPwdController.text.trim(),
+                                    ).then((value) {
+                                      controller.detectCert();
+                                      Get.toNamed(Routes.DASHBOARD);
+                                    });
                                   });
-                                 await TilkoPlugin.callCertRegister(
-                                    '1b94ed1781e044d385e0f86ec7d29b93',
-                                    CertController.to.certMap['file']!.first,
-                                    controller.identityNum.trim(),
-                                    controller.certPwdController.text.trim(),
-                                  ).then((value) => logger.d('callCertRegister 호출 완료!'));
+                                  // controller
+                                  //     .callHealthApi(
+                                  //   '01021cb079c24a04b28d881c518f7e6f',
+                                  //   CertController.to.certMap['file']!.first,
+                                  //   controller.certPwdController.text.trim(),
+                                  // )
+                                  //     .then((value) {
+                                  //   controller.detectCert();
+                                  //   Get.toNamed(Routes.DASHBOARD);
+                                  // });
                                 },
                                 child: Text('건강정보불러오기'),
                                 style: ElevatedButton.styleFrom(
