@@ -59,10 +59,10 @@ class AuthController extends GetxController {
           gender: '',
         );
         _userCollection
-            .doc(uid)
-            .set(userModel!.toMap())
-            .then((value) => print('Set User'))
-            .catchError((e) => print(e));
+          .doc(uid)
+          .set(userModel!.toMap())
+          .then((value) => print('Set User'))
+          .catchError((e) => print(e));
       }
       UserUtil.setUser(userModel!);
     } else {
