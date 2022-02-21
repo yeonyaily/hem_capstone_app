@@ -5,21 +5,22 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class AppTheme {
   static final ThemeData lightThemeBase = ThemeData.light();
   static final ThemeData lightThemeData = themeData(lightColorScheme);
+  // static final ThemeData darkThemeData = themeData(darkColorScheme);
 
   static ThemeData themeData(ColorScheme colorScheme) => ThemeData(
-        colorScheme: colorScheme,
-        textTheme: textTheme.apply(
-          displayColor: basicBlack,
-          bodyColor: basicBlack,
-        ),
-        primaryColor: colorScheme.primary,
-        //appBarTheme:
-        //iconTheme:
-        elevatedButtonTheme: buttonTheme,
-        canvasColor: colorScheme.background,
-        scaffoldBackgroundColor: colorScheme.background,
-        disabledColor: disableColor,
-      );
+    colorScheme: colorScheme,
+    textTheme: textTheme.apply(
+      displayColor: basicBlack,
+      bodyColor: basicBlack,
+    ),
+    primaryColor: colorScheme.primary,
+    //appBarTheme:
+    //iconTheme:
+    elevatedButtonTheme: buttonTheme,
+    canvasColor: colorScheme.background,
+    scaffoldBackgroundColor: colorScheme.background,
+    disabledColor: disableColor,
+  );
 
   static const ColorScheme lightColorScheme = ColorScheme(
     primary: primaryColor,
