@@ -107,23 +107,29 @@ class TreatHistoryView extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: drug == null 
                   ? [
-                      SvgPicture.asset(
-                          'assets/phi/no_data.svg',
+                      Column(
+                        children: [
+                          Image.asset(
+                              'assets/phi/no_image.png',
+                          ),
+                          Text(
+                            '데이터가 존재하지 않습니다.',
+                            style: theme.textTheme.bodyText1,
+                          ),
+                        ],
                       ),
                     ] 
                   : drug.length == 0
                     ? [
-                        Stack(
+                        Column(
                           children: [
-                            SvgPicture.asset(
-                              'assets/phi/no_data.svg',
+                            Image.asset(
+                              'assets/phi/no_image.png',
                             ),
-                            Positioned.fill(                              
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: _buildNoData(context)
-                              )
-                            )
+                            Text(
+                              '데이터가 존재하지 않습니다.',
+                              style: theme.textTheme.bodyText1,
+                            ),
                           ],
                         ), 
                       ]

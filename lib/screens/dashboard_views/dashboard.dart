@@ -16,7 +16,6 @@ class DashBoard extends GetView<NavigationController> {
     final item = controller.item;
     final _controller = Get.put(CertController());
     return Obx(
-      // init: NavigationController(),
       () => Scaffold(
         body: SafeArea(
           child: IndexedStack(
