@@ -4,6 +4,7 @@ import 'package:hem_capstone_app/constant/constant.dart';
 import 'package:hem_capstone_app/controllers/controller.dart';
 import 'package:hem_capstone_app/routes/app_pages.dart';
 import 'package:hem_capstone_app/theme/theme.dart';
+import 'package:hem_capstone_app/utils/user/util.dart';
 
 class HealthCheckUpScreen extends GetView<HealthCheckController> {
   const HealthCheckUpScreen({Key? key}) : super(key: key);
@@ -36,8 +37,7 @@ class HealthCheckUpScreen extends GetView<HealthCheckController> {
                     TextSpan(
                       children: [
                         TextSpan(
-                          // text: UserUtil.getUser()!.name,
-                          text: '홍길동',
+                          text: UserUtil.getUser()!.name,
                           style: theme.textTheme.bodyText1!.copyWith(
                             color: theme.primaryColor,
                             fontWeight: FontWeight.w700,

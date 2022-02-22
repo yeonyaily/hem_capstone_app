@@ -38,7 +38,7 @@ class CheckUpDetailScreen extends GetView<HealthCheckController> {
                 Align(
                   alignment: Alignment(0,-.1),
                   child: Text(
-                    '약 상세정보',
+                    '검진 상세정보',
                     style: theme.textTheme.subtitle2!.copyWith(
                       fontWeight: FontWeight.w400,
                       color: basicBlack,
