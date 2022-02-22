@@ -18,7 +18,7 @@ class HealthCheckUpScreen extends GetView<HealthCheckController> {
         backgroundColor: Colors.white,
         centerTitle: true,
         title: Text(
-          '진료 내역',
+          '검진 내역',
           style: theme.textTheme.subtitle1!.copyWith(
             color: basicBlack,
           ),
