@@ -4,6 +4,7 @@ import 'package:hem_capstone_app/controllers/dashboard/home/cert_controller.dart
 import 'package:hem_capstone_app/controllers/dashboard/navigation_controller.dart';
 import 'package:hem_capstone_app/screens/dashboard_views/empty_view.dart';
 import 'package:hem_capstone_app/screens/dashboard_views/home/home_screen.dart';
+import 'package:hem_capstone_app/screens/dashboard_views/mypage/mypage_screen.dart';
 import 'package:hem_capstone_app/screens/dashboard_views/physical_check/checkup_screen.dart';
 import 'package:hem_capstone_app/screens/dashboard_views/treat_history/treat_history_screen.dart';
 import 'package:hem_capstone_app/theme/theme.dart';
@@ -24,6 +25,7 @@ class DashBoard extends GetView<NavigationController> {
               HomeScreen(),
               !_controller.isCertOn.value ? EmptyPage() : TreatHistoryView(),
               !_controller.isCertOn.value ? EmptyPage() : HealthCheckUpScreen(),
+              !_controller.isCertOn.value ? EmptyPage() : MypageView(),
             ],
           ),
         ),
@@ -44,7 +46,7 @@ class DashBoard extends GetView<NavigationController> {
           child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: List.generate(
-                3,
+                controller.item.length,
                 (index) => InkWell(
                   onTap: () => controller.changeTabIndex(index),
                   child: Container(
