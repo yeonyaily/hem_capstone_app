@@ -129,7 +129,7 @@ class MembershipWithdrawScreen extends StatelessWidget {
                         width: 164,
                         height: 40,
                         child: ElevatedButton(
-                          onPressed: ()=> print('취소'), 
+                          onPressed: ()=> Get.back(),
                           child: Text(
                             '취소',
                             style: theme.textTheme.caption!.copyWith(
@@ -229,7 +229,8 @@ class MembershipWithdrawScreen extends StatelessWidget {
                     ),
                   ),
                   InkWell(
-                    onTap: ()=> [Get.back(),print('확인')],
+                    // onTap: ()=> [Get.back(),print('확인')],
+                    onTap: ()=> [Get.back(), auth.currentUser!.delete(),],
                     child: Container(
                       width: MediaQuery.of(context).size.width / 2 - 2.5,
                       height: 40,
