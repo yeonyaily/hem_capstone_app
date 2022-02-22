@@ -7,7 +7,6 @@ import 'package:hem_capstone_app/routes/app_pages.dart';
 import 'package:hem_capstone_app/screens/dashboard_views/mypage/hidden_test.dart';
 import 'package:hem_capstone_app/screens/dashboard_views/mypage/membership_withdraw_screen.dart';
 import 'package:hem_capstone_app/utils/user/util.dart';
-import 'package:intl/intl.dart';
 
 class MypageView extends StatelessWidget {
   const MypageView({Key? key}) : super(key: key);
@@ -15,8 +14,8 @@ class MypageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final birth = UserUtil.getUser()!.birth!.toDate();
-    String formatDate = DateFormat('yy.MM.dd').format(birth);
+    final identity = UserUtil.getUser()!.identityNum!;
+    final formatDate = '19${identity.substring(0,2)}.${identity.substring(2,4)}.${identity.substring(4,6)}';
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
