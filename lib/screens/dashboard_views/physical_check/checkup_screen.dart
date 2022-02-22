@@ -4,7 +4,6 @@ import 'package:hem_capstone_app/constant/constant.dart';
 import 'package:hem_capstone_app/controllers/controller.dart';
 import 'package:hem_capstone_app/routes/app_pages.dart';
 import 'package:hem_capstone_app/theme/theme.dart';
-import 'package:hem_capstone_app/utils/user/util.dart';
 
 class HealthCheckUpScreen extends GetView<HealthCheckController> {
   const HealthCheckUpScreen({Key? key}) : super(key: key);
@@ -18,7 +17,7 @@ class HealthCheckUpScreen extends GetView<HealthCheckController> {
         backgroundColor: Colors.white,
         centerTitle: true,
         title: Text(
-          '진료 내역',
+          '건강 검진',
           style: theme.textTheme.subtitle1!.copyWith(
             color: basicBlack,
           ),
@@ -37,7 +36,8 @@ class HealthCheckUpScreen extends GetView<HealthCheckController> {
                     TextSpan(
                       children: [
                         TextSpan(
-                          text: UserUtil.getUser()!.name,
+                          // text: UserUtil.getUser()!.name,
+                          text: '홍길동',
                           style: theme.textTheme.bodyText1!.copyWith(
                             color: theme.primaryColor,
                             fontWeight: FontWeight.w700,
@@ -49,14 +49,14 @@ class HealthCheckUpScreen extends GetView<HealthCheckController> {
                             fontWeight: FontWeight.w700,                        
                           )
                         ),
-                      ]
-                    )
+                      ],
+                    ),
                   ],
                 ),
-              ),
+              ), 
               space(height: 16),
               controller.inspectionModel!.resultList != null
-                ? controller.inspectionModel!.resultList!.length != 0 
+                ? controller.inspectionModel!.resultList![0].year != ''
                   ? DataTable(
                       headingTextStyle: theme.textTheme.caption!.copyWith(
                         fontWeight: FontWeight.w700,
