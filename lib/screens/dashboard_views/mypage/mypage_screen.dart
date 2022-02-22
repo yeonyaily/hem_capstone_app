@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hem_capstone_app/constant/constant.dart';
 import 'package:hem_capstone_app/controllers/controller.dart';
@@ -7,7 +6,6 @@ import 'package:hem_capstone_app/routes/app_pages.dart';
 import 'package:hem_capstone_app/screens/dashboard_views/mypage/hidden_test.dart';
 import 'package:hem_capstone_app/screens/dashboard_views/mypage/membership_withdraw_screen.dart';
 import 'package:hem_capstone_app/utils/user/util.dart';
-import 'package:intl/intl.dart';
 
 class MypageView extends StatelessWidget {
   const MypageView({Key? key}) : super(key: key);
@@ -15,8 +13,8 @@ class MypageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final birth = UserUtil.getUser()!.birth!.toDate();
-    String formatDate = DateFormat('yy.MM.dd').format(birth);
+    final identity = UserUtil.getUser()!.identityNum!;
+    final formatDate = '19${identity.substring(0,2)}.${identity.substring(2,4)}.${identity.substring(4,6)}';
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -58,7 +56,7 @@ class MypageView extends StatelessWidget {
                         color: Colors.white,
                         height: 1,
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -101,7 +99,8 @@ class MypageView extends StatelessWidget {
                         children: <Widget>[
                           space(height: 21),
                           Text(
-                            '${UserUtil.getUser()!.name}님',
+                            // '${UserUtil.getUser()!.name}님',
+                            '홍길동님',
                             style: theme.textTheme.bodyText2!.copyWith(
                               color: Colors.white,
                               fontWeight: FontWeight.w700,
@@ -115,7 +114,7 @@ class MypageView extends StatelessWidget {
                             ),
                           )
                         ],
-                      )
+                      ),
                     ],
                   )
                 ),
@@ -153,8 +152,8 @@ class MypageView extends StatelessWidget {
                             width: 32,
                             height: 32,           
                           ),
-                        )
-                      )
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -162,7 +161,7 @@ class MypageView extends StatelessWidget {
             ],
           ),
           Positioned(
-            top: 111.h,
+            top: 87,
             left: 40,
             right: 40,
             child: Row(
@@ -172,8 +171,8 @@ class MypageView extends StatelessWidget {
                 menu(theme, 'assets/phi/heart.png', '복약관리'),
                 menu(theme, 'assets/phi/family.png', '가족계정'),
               ],
-            )
-          )
+            ),
+          ),
         ],
       )
     );
