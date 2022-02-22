@@ -158,7 +158,7 @@ class EnterCertPwdPage extends GetView<CertController> {
                                         controller.certPwdController.text.trim(),
                                       ).then((value) {
                                         controller.detectCert();
-                                        Get.toNamed(Routes.DASHBOARD);
+                                        Get.offAllNamed(Routes.DASHBOARD);
                                       });
                                   });
                                   // controller

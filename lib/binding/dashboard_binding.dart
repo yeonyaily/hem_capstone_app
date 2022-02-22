@@ -6,8 +6,8 @@ class DashBoardBinding extends Bindings {
   @override
   void dependencies() {
     Get.put(NavigationController());
-    Get.lazyPut(() => SwitchController());
-    Get.lazyPut(() => RadioController());
+    Get.put(SwitchController());
+    Get.put(RadioController());
     Get.lazyPut(() => HealthCheckController());
   }
 }
