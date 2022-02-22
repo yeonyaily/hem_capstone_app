@@ -15,6 +15,7 @@ abstract class Routes {
   static const DRUGDETAIL = _Paths.DRUGDETAIL;
   static const CHECKUPDETAIL = _Paths.CHECKUPDETAIL;
   static const CHECKUPGUBUN = _Paths.CHECKUPGUBUN;
+  static const MYPAGE = _Paths.MYPAGE;
 }
 
 abstract class _Paths {
@@ -31,4 +32,5 @@ abstract class _Paths {
   static const DRUGDETAIL = '/drugDetail';
   static const CHECKUPDETAIL = '/checkupDetail';
   static const CHECKUPGUBUN = '/checkupGubun';
+  static const MYPAGE = '/mypage';
 }
