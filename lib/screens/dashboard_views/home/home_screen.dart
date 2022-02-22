@@ -27,6 +27,15 @@ class HomeScreen extends GetView<CertController> {
               ),
               elevation: 0,
               backgroundColor: Colors.white,
+              actions: [
+                IconButton(
+                  onPressed: ()=> Get.toNamed(Routes.MYPAGE),
+                  icon: Icon(
+                    Icons.more_vert_outlined,
+                    color: basicBlack,
+                  ),
+                )
+              ],
             ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16,),
