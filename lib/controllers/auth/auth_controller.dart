@@ -37,8 +37,8 @@ class AuthController extends GetxController {
     await getHealthData();
 
     user == null
-        ? Get.offAllNamed(Routes.START)
-        : Get.offAllNamed(Routes.DASHBOARD);
+      ? Get.offAllNamed(Routes.START)
+      : Get.offAllNamed(Routes.DASHBOARD);
   }
 
   Future<void> getUserInfo() async {
@@ -73,8 +73,7 @@ class AuthController extends GetxController {
   Future<void> getHealthData() async {
     if (auth.currentUser != null) {
       var uid = auth.currentUser!.uid;
-      InspectionModel? inspectionModel =
-          await HealthRepository().findHealthDataByUid(uid);
+      InspectionModel? inspectionModel = await HealthRepository().findHealthDataByUid(uid);
       DrugModel? drugModel = await HealthRepository().findMedicalDataByUid(uid);
       HealthUtil.setInspectionData(inspectionModel);
       HealthUtil.setMedicalData(drugModel);
@@ -82,12 +81,11 @@ class AuthController extends GetxController {
   }
 
   Future<void> sendOTPNumber() async {
-    print(
-        '8210 ${signup.phoneNumberController.text.trim().substring(3, 7)} ${signup.phoneNumberController.text.trim().substring(7)}');
+    print('8210 ${signup.phoneNumberController.text.trim().substring(3, 7)} ${signup.phoneNumberController.text.trim().substring(7)}');
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: "+8210" +
-          signup.phoneNumberController.text.substring(3, 7) +
-          signup.phoneNumberController.text.substring(7),
+        signup.phoneNumberController.text.substring(3, 7) +
+        signup.phoneNumberController.text.substring(7),
       verificationCompleted: (phoneAuthCredential) async {
         print("OTP 문자 도착");
       },
@@ -119,10 +117,9 @@ class AuthController extends GetxController {
 
   Future<UserCredential> signInWithPhoneNumber() async {
     PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.credential(
-        verificationId: signup.verificationId!,
-        smsCode: signup.phoneAuthNumberController.text);
-    final userCredential =
-        await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
+      verificationId: signup.verificationId!,
+      smsCode: signup.phoneAuthNumberController.text);
+    final userCredential = await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
     try {
       if (userCredential.user != null) {
         signup.isLoading.value = false;

@@ -119,8 +119,6 @@ class CertController extends GetxController {
         title: 'Error',
         content: '$e',
       );
-    } finally {
-      isLoading.toggle();
     }
   }
 
