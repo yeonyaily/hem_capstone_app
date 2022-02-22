@@ -47,8 +47,6 @@ class CertExistScreen extends GetView<CertController> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    // final age =
-    //     DateTime.now().year - UserUtil.getUser()!.birth!.toDate().year + 1;
 
     final myInt = int.parse(UserUtil.getUser()!.identityNum!.substring(0, 2));
     final age2 = ((DateTime.now().year) - myInt + 1) % 100;
@@ -60,13 +58,15 @@ class CertExistScreen extends GetView<CertController> {
         children: [
           space(height: 16),
           Text(
-            '안녕하세요 ${UserUtil.getUser()!.name}님 :)',
+            // '안녕하세요 ${UserUtil.getUser()!.name}님 :)',
+            '안녕하세요 홍길동님 :)',
             style: theme.textTheme.bodyText2!.copyWith(
               color: Color(0xff979797),
             ),
           ),
           Text(
-            '${UserUtil.getUser()!.name}님의\n건강정보 입니다',
+            // '${UserUtil.getUser()!.name}님의\n건강정보 입니다',
+            '홍길동님의\n건강정보 입니다',
             style: theme.textTheme.headline2!.copyWith(
               color: theme.primaryColor,
               fontWeight: FontWeight.w400,
@@ -220,7 +220,8 @@ class CertExistScreen extends GetView<CertController> {
               ),
               space(height: 12),
               Text(
-                '${UserUtil.getUser()!.name}님의 공동인증서',
+                // '${UserUtil.getUser()!.name}님의 공동인증서',
+                '홍길동님의 공동인증서',
                 style: theme.textTheme.bodyText2,
               ),
               space(height: 8),
