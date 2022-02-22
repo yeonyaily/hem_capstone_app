@@ -1,7 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hem_capstone_app/constant/constant.dart';
 
 class NavigationController extends GetxController {
   static NavigationController get to => Get.find();
@@ -21,6 +19,10 @@ class NavigationController extends GetxController {
       'icon': Icons.checklist,
       'text': '건강검진',
     },
+    {
+      'icon': Icons.person,
+      'text': '마이페이지',
+    }
   ].obs;
 
   final List<Map<String, dynamic>> tabBaritem = [
