@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:hem_capstone_app/constant/constant.dart';
 import 'package:hem_capstone_app/controllers/controller.dart';
 import 'package:hem_capstone_app/theme/theme.dart';
-import 'package:hem_capstone_app/utils/user/util.dart';
 import 'package:public_health_model/inspections_model.dart';
 
 class CheckUpDetailScreen extends GetView<HealthCheckController> {
@@ -38,7 +37,7 @@ class CheckUpDetailScreen extends GetView<HealthCheckController> {
                 Align(
                   alignment: Alignment(0,-.1),
                   child: Text(
-                    '약 상세정보',
+                    '검진 상세정보',
                     style: theme.textTheme.subtitle2!.copyWith(
                       fontWeight: FontWeight.w400,
                       color: basicBlack,
@@ -62,7 +61,8 @@ class CheckUpDetailScreen extends GetView<HealthCheckController> {
                 TextSpan(
                   children:[
                     TextSpan(
-                      text: UserUtil.getUser()!.name,
+                      // text: UserUtil.getUser()!.name,
+                      text: '홍길동',
                       style: theme.textTheme.bodyText1!.copyWith(
                         color: theme.primaryColor,
                         fontWeight: FontWeight.w700,
