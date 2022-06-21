@@ -5,6 +5,7 @@ import 'package:hem_capstone_app/binding/signup_binding.dart';
 import 'package:hem_capstone_app/controllers/controller.dart';
 import 'package:hem_capstone_app/screens/dashboard_views/dashboard.dart';
 import 'package:hem_capstone_app/screens/dashboard_views/home/home.dart';
+import 'package:hem_capstone_app/screens/dashboard_views/mypage/mypage_screen.dart';
 import 'package:hem_capstone_app/screens/dashboard_views/physical_check/checkup_detail_screen.dart';
 import 'package:hem_capstone_app/screens/dashboard_views/physical_check/checkup_gubun_screen.dart';
 import 'package:hem_capstone_app/screens/dashboard_views/treat_history/drug_detail_screen.dart';
@@ -31,6 +32,7 @@ class AppPages {
   static const DRUGDETAIL = Routes.DRUGDETAIL;
   static const CHECKUPDETAIL = Routes.CHECKUPDETAIL;
   static const CHECKUPGUBUN = Routes.CHECKUPGUBUN;
+  static const MYPAGE = Routes.MYPAGE;
 
   static final routes = [
     GetPage(
@@ -95,6 +97,10 @@ class AppPages {
       // binding: BindingsBuilder((){
       //   Get.put(HealthCheckController());
       // })
+    ),
+    GetPage(
+      name: MYPAGE,
+      page: ()=> const MypageView(),
     )
   ];
 }

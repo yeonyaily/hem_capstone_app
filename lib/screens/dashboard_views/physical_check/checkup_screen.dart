@@ -49,14 +49,14 @@ class HealthCheckUpScreen extends GetView<HealthCheckController> {
                             fontWeight: FontWeight.w700,                        
                           )
                         ),
-                      ]
-                    )
+                      ],
+                    ),
                   ],
                 ),
-              ),
+              ), 
               space(height: 16),
               controller.inspectionModel!.resultList != null
-                ? controller.inspectionModel!.resultList!.length != 0 
+                ? controller.inspectionModel!.resultList![0].year != ''
                   ? DataTable(
                       headingTextStyle: theme.textTheme.caption!.copyWith(
                         fontWeight: FontWeight.w700,

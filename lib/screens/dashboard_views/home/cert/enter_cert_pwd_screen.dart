@@ -145,6 +145,7 @@ class EnterCertPwdPage extends GetView<CertController> {
                           child: controller.isPwd.value
                               ? ElevatedButton(
                                   onPressed: () async {
+                                    FocusScope.of(context).unfocus();
                                     controller.certRegister(
                                       '01021cb079c24a04b28d881c518f7e6f',
                                       CertController.to.certMap['file']!.first,
@@ -157,7 +158,7 @@ class EnterCertPwdPage extends GetView<CertController> {
                                         controller.certPwdController.text.trim(),
                                       ).then((value) {
                                         controller.detectCert();
-                                        Get.toNamed(Routes.DASHBOARD);
+                                        Get.offAllNamed(Routes.DASHBOARD);
                                       });
                                   });
                                   // controller

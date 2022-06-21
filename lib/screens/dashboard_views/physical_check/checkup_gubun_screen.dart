@@ -42,9 +42,9 @@ class CheckUpGobunScreen extends StatelessWidget {
                     style: theme.textTheme.subtitle2!.copyWith(
                       fontWeight: FontWeight.w400,
                       color: basicBlack,
-                    )
+                    ),
                   ),
-                )
+                ),
               ],
             ),
           ),
